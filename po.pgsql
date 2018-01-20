@@ -42,7 +42,8 @@ CREATE TABLE packages (
     year integer,
     month integer,
     day integer,
-    sname character(10),
+    slast character(10),
+    sfirst character(10),
     trackno character(30) NOT NULL,
     carrier integer NOT NULL,
     signed integer
@@ -56,8 +57,9 @@ ALTER TABLE packages OWNER TO youcao;
 --
 
 CREATE TABLE students (
-    sname character(10) NOT NULL,
-    email character(20),
+    sid character(10),
+    slast character(10),
+    sfirst character(10),
     phone character(10)
 );
 
@@ -68,7 +70,8 @@ ALTER TABLE students OWNER TO youcao;
 -- Data for Name: packages; Type: TABLE DATA; Schema: public; Owner: youcao
 --
 
-COPY packages (year, month, day, sname, trackno, carrier, signed) FROM stdin;
+<<<<<<< HEAD
+COPY packages (year, month, day, slast, sfirst, trackno, carrier, signed) FROM stdin;
 \.
 
 
@@ -76,7 +79,7 @@ COPY packages (year, month, day, sname, trackno, carrier, signed) FROM stdin;
 -- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: youcao
 --
 
-COPY students (sname, email, phone) FROM stdin;
+COPY students (sid, slast, sfirst, phone) FROM stdin;
 \.
 
 
@@ -86,30 +89,6 @@ COPY students (sname, email, phone) FROM stdin;
 
 ALTER TABLE ONLY packages
     ADD CONSTRAINT packages_pkey PRIMARY KEY (trackno);
-
-
---
--- Name: packages packages_sname_trackno_key; Type: CONSTRAINT; Schema: public; Owner: youcao
---
-
-ALTER TABLE ONLY packages
-    ADD CONSTRAINT packages_sname_trackno_key UNIQUE (sname, trackno);
-
-
---
--- Name: students students_pkey; Type: CONSTRAINT; Schema: public; Owner: youcao
---
-
-ALTER TABLE ONLY students
-    ADD CONSTRAINT students_pkey PRIMARY KEY (sname);
-
-
---
--- Name: packages packages_sname_fkey; Type: FK CONSTRAINT; Schema: public; Owner: youcao
---
-
-ALTER TABLE ONLY packages
-    ADD CONSTRAINT packages_sname_fkey FOREIGN KEY (sname) REFERENCES students(sname);
 
 
 --
