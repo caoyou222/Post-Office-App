@@ -70,6 +70,7 @@ ALTER TABLE students OWNER TO youcao;
 -- Data for Name: packages; Type: TABLE DATA; Schema: public; Owner: youcao
 --
 
+<<<<<<< HEAD
 COPY packages (year, month, day, slast, sfirst, trackno, carrier, signed) FROM stdin;
 \.
 
