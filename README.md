@@ -1,6 +1,6 @@
-#Post Office Team
-###Alina, Annie, Thong Vo
+# Team POST OFFICE APP
+### Annie, Alina, Thong Vo
 
-##Quick Start
+## Quick Start
 You need to setup by installing postgresql first,
 After that: To add database: psql -U <username> <databasename> > po.psql
