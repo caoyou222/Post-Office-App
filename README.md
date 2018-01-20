@@ -1,1 +1,6 @@
-po	Post Office Team	cao1,ge1,vo4,	Post Office App
+#Post Office Team
+###Alina, Annie, Thong Vo
+
+##Quick Start
+You need to setup by installing postgresql first,
+After that: To add database: psql -U <username> <databasename> > po.psql
