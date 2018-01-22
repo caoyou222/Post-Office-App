@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
+//import android.widget.ListView;
+import android.widget.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,12 +15,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PackageAdapter teacherAdapter = new PackageAdapter(this, R.layout.package_item, Package.getAllPackages());
+        PackageAdapter packageAdapter = new PackageAdapter(this, R.layout.package_item, Package.getAllPackages());
 
         ListView listView = (ListView) findViewById(R.id.package_listView);
 
-        listView.setAdapter(teacherAdapter);
+        listView.setAdapter(packageAdapter);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

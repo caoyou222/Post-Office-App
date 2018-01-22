@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 import java.util.Calendar;
+import android.widget.*;
+import android.widget.TextView;
+
+
 /**
  * Created by youcao on 1/20/18.
  */
@@ -18,6 +22,9 @@ import java.util.Calendar;
         private String first;
         private String carrier;
         private int signed = 0;
+
+        private TextView textview;
+        private Button button_filter;
 
         public Package(String trackingNo, String last, String first, String carrier) {
             this.trackingNo = trackingNo;
