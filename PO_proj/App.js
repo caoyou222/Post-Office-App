@@ -1,23 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import {Image, Text, StyleSheet, Button, View, Dimensions, Vibrationm, Platform, BackHandler} from 'react-native';
+import {StackNavigator} from 'react-navigation'
+import home from './screens/home'
+import student from './screens/student';
+import worker from './screens/worker';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+const Navi = StackNavigator({
+  HM: {screen: home},
+  WK: {screen: worker},
+  ST: {screen: student},
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 });
+
+export default class TestApp extends React.Component{
+  render(){
+    return <Navi/>;
+  }
+};
