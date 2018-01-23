@@ -12,6 +12,32 @@ export default class worker extends React.Component {
  static navigationOptions = {
  header: null
  }
+
+function addPackage {
+  fetch('url', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstParam: 'aaa',
+    })
+  }).then((response) => response.json())
+    .then((responseJson) => {
+      return responseJson.Message;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+
+
+
+
+
+
  render(){
  const { navigate } = this.props.navigation;
  return (
