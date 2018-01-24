@@ -64,7 +64,7 @@ export default class student extends Component {
             <View style={styles.sectionHeader}>
                 <Text>{pack.trackno}</Text>
             </View>
-            //</TouchableOpacity>
+            </TouchableOpacity>
         );
         }
         
