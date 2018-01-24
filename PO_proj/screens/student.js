@@ -4,16 +4,16 @@ import {StackNavigator} from 'react-navigation'
 
 
 let sourceData = [
-    {trackno: '0000000000', carrier: 'DHL'},
-    {trackno: '1111111111', carrier: 'DHL'},
-    {trackno: '2222222222', carrier: 'UPS'},
-    {trackno: '3333333333', carrier: 'DHL'},
-    {trackno: '4444444444', carrier: 'UPS'},
-    {trackno: '5555555555', carrier: 'UPS'},
-    {trackno: '6666666666', carrier: 'UPS'},
-    {trackno: '7777777777', carrier: 'DHL'},
-    {trackno: '8888888888', carrier: 'DHL'},
-    {trackno: '9999999999', carrier: 'UPS'},
+    {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '1399674570', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'signed'},
+    {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'signed'},
+    {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '5555555555', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '1Z11Y9790211025413', carrier: 'UPS', name:'Annie', year:'2017', month: '12', day:'12', status: 'signed'},
+    {trackno: '7777777777', carrier: 'DHL', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '9999999999', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
 ]
 
 export default class student extends Component {
@@ -56,7 +56,7 @@ export default class student extends Component {
         if(pack !== undefined){
           return (
              <TouchableOpacity
-              onPress={()=>navigate('DT')}
+              onPress={()=>navigate('DT', {trackno: pack.trackno, carrier: pack.carrier, name: pack.name, year: pack.year, month: pack.month, day: pack.day, status: pack.status})}
             >
             <View style={styles.sectionHeader}>
                 <Text>{pack.trackno}</Text>
