@@ -31,6 +31,7 @@ export default class home extends React.Component {
           onPress={()=> navigate('ST')}
           />
         </View>
+
  </View>
  );
 }

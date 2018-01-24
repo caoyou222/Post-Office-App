@@ -16,21 +16,11 @@ export default class Detail extends React.Component {
  const { navigate } = this.props.navigation;
  return (
  <View style={styles.container}>
-  <View style={styles.buttonContainer}>
-          <Button
-          title = "Worker"
-          color = "white"
-          onPress={()=> navigate('WK')}
-          />
-        </View>
-
-  <View style={styles.buttonContainer}>
-          <Button
-          title = "Student"
-          color = "white"
-          onPress={()=> navigate('ST')}
-          />
-        </View>
+      <Text> Tracking No: 00000000 </Text>
+      <Text> Name: Annie </Text>
+      <Text> Date: 1/24/2018 </Text>
+      <Text> Status: Unsigned </Text>
+      
  </View>
  );
 }
@@ -49,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   buttonContainer: {
     margin: 20

@@ -56,7 +56,7 @@ export default class student extends Component {
         if(pack !== undefined){
           return (
              <TouchableOpacity
-              onPress={()=>navigate('Detail')}
+              onPress={()=>navigate('DT')}
             >
             <View style={styles.sectionHeader}>
                 <Text>{pack.trackno}</Text>
