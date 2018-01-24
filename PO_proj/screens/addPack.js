@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Alert, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import { Divider, FormLabel, FormInput } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
@@ -50,7 +51,9 @@ export default class addPack extends React.Component {
  render(){
  const { navigate } = this.props.navigation;
  return (
+
   <View style={styles.container}>
+
     <View style={styles.inputContainer}>
     <TextInput
     style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
@@ -118,7 +121,7 @@ export default class addPack extends React.Component {
     <View style={styles.inputContainer}>
       <Button
       title = "Submit"
-      color = "black"
+      color = 'black'
       onPress={ () => {
         Alert.alert("Date: "+this.state.monthText+"/"+this.state.dayText+"/"+this.state.yearText+'\n'+"Traking num:"+this.state.trackText);
       } 

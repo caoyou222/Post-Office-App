@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, CheckBox } from 'react-native-elements';
 
 export default class filter extends React.Component {
  constructor(props){
@@ -18,13 +18,15 @@ export default class filter extends React.Component {
  const { navigate } = this.props.navigation;
  return (
   <View style={styles.container}>
-  <SearchBar
-  lightTheme
-  // onChangeText={someMethod}
-  // onClearText={someMethod}
-  icon={{ type: 'font-awesome', name: 'search' }}
+  <View style={styles.searchbar}>
+	  <SearchBar
+	  lightTheme
+	  // onChangeText={someMethod}
+	  // onClearText={someMethod}
+	  icon={{ type: 'font-awesome', name: 'search' }}
 
-  placeholder='Enter tracking number, student name ...' />
+	  placeholder='Enter tracking number, student name ...' />
+  </View>
 
     <View style={styles.buttonContainer}>
       <Button
@@ -32,6 +34,10 @@ export default class filter extends React.Component {
       color = "black"
       onPress={()=> navigate('WK')}
       />
+      <CheckBox
+		  title='Click Here'
+		  checked={this.state.checked}
+		/>
     </View>
 
     <View style={styles.buttonContainer}>
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonContainer: {
-    margin: 20
+    margin: 10
   },
 
 });
