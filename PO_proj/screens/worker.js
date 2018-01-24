@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
+
 export default class worker extends React.Component {
  constructor(props){
  super(props);
@@ -9,7 +10,9 @@ export default class worker extends React.Component {
  backgroundColor: 'yellow'
  }; 
  }
-
+ static navigationOptions = {
+  title: 'Workers',
+ }
 
 
 
@@ -40,7 +43,7 @@ export default class worker extends React.Component {
 
     <View style={styles.buttonContainer}>
       <Button
-      title = "Filter"
+      title = "Search Package"
       color = "black"
       onPress={()=> navigate('FT')}
       />

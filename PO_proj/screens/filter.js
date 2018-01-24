@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import { SearchBar } from 'react-native-elements';
 
 export default class filter extends React.Component {
  constructor(props){
@@ -10,20 +11,20 @@ export default class filter extends React.Component {
  }; 
  }
  static navigationOptions = {
- header: null
+ title: 'Search Packages'
  }
 
  render(){
  const { navigate } = this.props.navigation;
  return (
   <View style={styles.container}>
- 	  <View style={styles.buttonContainer}>
-      <Button
-      title = "Back"
-      color = "black"
-      onPress={()=> navigate('WK')}
-      />
-    </View>
+  <SearchBar
+  lightTheme
+  // onChangeText={someMethod}
+  // onClearText={someMethod}
+  icon={{ type: 'font-awesome', name: 'search' }}
+
+  placeholder='Enter tracking number, student name ...' />
 
     <View style={styles.buttonContainer}>
       <Button

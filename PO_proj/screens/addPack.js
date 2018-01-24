@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AppRegistry, TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Alert, Vibration} from 'react-native';
+import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Alert, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
 export default class addPack extends React.Component {
@@ -17,7 +17,7 @@ export default class addPack extends React.Component {
  }; 
  }
  static navigationOptions = {
- header: null
+ title: 'Add packages'
  }
 
   // function addPackage() {
@@ -51,13 +51,6 @@ export default class addPack extends React.Component {
  const { navigate } = this.props.navigation;
  return (
   <View style={styles.container}>
- 	  <View style={styles.buttonContainer}>
-      <Button
-      title = "Worker"
-      color = "black"
-      onPress={()=> navigate('WK')}
-      />
-    </View>
     <View style={styles.inputContainer}>
     <TextInput
     style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
