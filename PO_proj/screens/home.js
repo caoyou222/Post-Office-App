@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
 import {StackNavigator} from 'react-navigation'
+
 
 export default class home extends React.Component {
  constructor(props){
