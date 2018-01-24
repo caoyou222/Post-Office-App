@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {TouchableOpacity, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import SearchInput, {createFilter} from 'react-native-search-filter';
+import { SearchBar, CheckBox } from 'react-native-elements';
+
 
 
 let sourceData = [
@@ -122,6 +124,16 @@ for (let sectionID in packagesData) {
 }
 return (
  <View style={styles.container}>
+ <View style={styles.searchbar}>
+    <SearchBar
+    lightTheme
+    // onChangeText={someMethod}
+    // onClearText={someMethod}
+    icon={{ type: 'font-awesome', name: 'search' }}
+
+    placeholder='Enter tracking number or status to search' />
+  </View>
+
    <ListView 
      dataSource={this.state.dataSource.cloneWithRowsAndSections(packagesData, sectionIDs, rowIDs)}
      renderRow={this._renderPackageRow}
