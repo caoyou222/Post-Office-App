@@ -34,10 +34,20 @@ export default class filter extends React.Component {
       color = "black"
       onPress={()=> navigate('WK')}
       />
+      <View style={styles.checkContainer}>
       <CheckBox
-		  title='Click Here'
+		  title='UPS'
 		  checked={this.state.checked}
 		/>
+		<CheckBox
+		  title='Fedex'
+		  checked={this.state.checked}
+		/>
+		<CheckBox
+		  title='DHl'
+		  checked={this.state.checked}
+		/>
+	  </View>
     </View>
 
     <View style={styles.buttonContainer}>
@@ -56,6 +66,14 @@ export default class filter extends React.Component {
       />
     </View>
 
+    <View style={styles.buttonContainer}>
+      <Button
+      title = "Search"
+      color = "black"
+      onPress={()=> navigate('WK')}
+      />
+    </View>
+
   </View>
   );
  }
@@ -68,7 +86,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonContainer: {
-    margin: 10
+    margin: 10,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent:'space-between'
   },
+  checkContainer: {
+  	flex:1,
+  	flexDirection: 'column',
+  	justifyContent: 'space-between'
+  }
 
 });
