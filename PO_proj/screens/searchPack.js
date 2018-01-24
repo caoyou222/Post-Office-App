@@ -61,30 +61,6 @@ export default class addPack extends React.Component {
     <View style={styles.inputContainer}>
     <TextInput
     style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Month"
-    onChangeText={(monthText) => this.setState({monthText})}
-    value={this.state.monthText}
-    />
-    </View>
-    <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Day"
-    onChangeText={(dayText) => this.setState({dayText})}
-    value={this.state.dayText}
-    />
-    </View>
-    <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Year"
-    onChangeText={(yearText) => this.setState({yearText})}
-    value={this.state.yearText}
-    />
-    </View>
-    <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
     placeholder="Traking number"
     onChangeText={(trackText) => this.setState({trackText})}
     value={this.state.trackText}
@@ -115,19 +91,11 @@ export default class addPack extends React.Component {
     />
     </View>
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Signed/Unsigned"
-    onChangeText={(signText) => this.setState({signText})}
-    value={this.state.signText}
-    />
-    </View>
-    <View style={styles.inputContainer}>
       <Button
       title = "Submit"
       color = "black"
       onPress={ () => {
-        Alert.alert("Date: "+this.state.monthText+"/"+this.state.dayText+"/"+this.state.yearText+'\n'+"Traking num:"+this.state.trackText);
+        Alert.alert(this.state.monthText);
       } 
       }
       />

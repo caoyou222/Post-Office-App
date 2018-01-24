@@ -19,24 +19,32 @@ export default class filter extends React.Component {
   <View style={styles.container}>
  	  <View style={styles.buttonContainer}>
       <Button
-      title = "Worker"
-      color = "white"
+      title = "Back"
+      color = "black"
       onPress={()=> navigate('WK')}
       />
     </View>
 
     <View style={styles.buttonContainer}>
       <Button
-      title = "By Carrier"
-      color = "white"
+      title = "Filter By Carrier"
+      color = "black"
       onPress={()=> navigate('WK')}
       />
     </View>
 
-     	  <View style={styles.buttonContainer}>
+    <View style={styles.buttonContainer}>
       <Button
-      title = "By Date"
-      color = "white"
+      title = "Filter By Date"
+      color = "black"
+      onPress={()=> navigate('WK')}
+      />
+    </View>
+
+    <View style={styles.buttonContainer}>
+      <Button
+      title = "Filter By Student ID"
+      color = "black"
       onPress={()=> navigate('WK')}
       />
     </View>
@@ -50,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   buttonContainer: {
     margin: 20

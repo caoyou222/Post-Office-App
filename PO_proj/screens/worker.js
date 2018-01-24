@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {Header, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
 export default class worker extends React.Component {
@@ -9,9 +9,7 @@ export default class worker extends React.Component {
  backgroundColor: 'yellow'
  }; 
  }
- static navigationOptions = {
- header: null
- }
+
 
 
 
@@ -37,35 +35,21 @@ export default class worker extends React.Component {
  render(){
  const { navigate } = this.props.navigation;
  return (
+
   <View style={styles.container}>
- 	  <View style={styles.buttonContainer}>
-      <Button
-      title = "Home"
-      color = "white"
-      onPress={()=> navigate('HM')}
-      />
-    </View>
 
     <View style={styles.buttonContainer}>
       <Button
       title = "Filter"
-      color = "white"
+      color = "black"
       onPress={()=> navigate('FT')}
       />
     </View>
 
     <View style={styles.buttonContainer}>
       <Button
-      title = "GET"
-      color = "white"
-      onPress={()=> navigate('AP')}
-      />
-    </View>
-
-    <View style={styles.buttonContainer}>
-      <Button
-      title = "POST"
-      color = "white"
+      title = "Add Package"
+      color = "black"
       onPress={()=> navigate('AP')}
       />
     </View>
@@ -73,9 +57,14 @@ export default class worker extends React.Component {
  );
 }
 } 
-          // <ModalDropdown
-          // option={['option 1','option 2']}
-          // />
+    // <View style={styles.buttonContainer}>
+    //   <Button
+    //   title = "Home"
+    //   color = "black"
+    //   onPress={()=> navigate('HM')}
+    //   />
+    // </View>
+
 
 // const styles = StyleSheet.create({
 //   container: {
@@ -90,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   buttonContainer: {
     margin: 20
