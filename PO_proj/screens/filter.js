@@ -14,6 +14,8 @@ export default class filter extends React.Component {
  title: 'Search Packages'
  }
 
+
+
  render(){
  const { navigate } = this.props.navigation;
  return (
@@ -37,6 +39,10 @@ export default class filter extends React.Component {
       <View style={styles.checkContainer}>
       <CheckBox
 		  title='UPS'
+		  checked={this.state.checked}
+		/>
+		<CheckBox
+		  title='UPSP'
 		  checked={this.state.checked}
 		/>
 		<CheckBox
@@ -82,7 +88,8 @@ export default class filter extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection:'row',
+    justifyContent: 'space-between',
     backgroundColor: 'white'
   },
   buttonContainer: {

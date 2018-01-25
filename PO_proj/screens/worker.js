@@ -12,6 +12,7 @@ export default class worker extends React.Component {
  }
  static navigationOptions = {
   title: 'Workers',
+  headerRight: <icon name='home' />
  }
 
 
