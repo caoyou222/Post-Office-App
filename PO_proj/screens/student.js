@@ -110,7 +110,9 @@ export default class student extends Component {
       cr = sourceData.filter(function(sd){return sd.carrier === keywords;});
       tn = [];
       tn = sourceData.filter(function(sd){return sd.trackno === keywords;});
-      if(cr.length === 0 && tn.length === 0){
+      st = [];
+      st = sourceData.filter(function(sd){return sd.status === keywords;});
+      if(cr.length === 0 && tn.length === 0 && st.length === 0){
         navigate('NotFound');
       }
       if(cr.length !== 0){
@@ -120,6 +122,10 @@ export default class student extends Component {
       if(tn.length !== 0){
         console.log(tn);
         navigate('DT', {trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
+      }
+      if(st.length !== 0){
+        console.log(st);
+        navigate('search', {pkg: st});
       }
       
 
