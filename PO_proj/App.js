@@ -9,11 +9,9 @@ import addPack from './screens/addPack';
 import Detail from './screens/Detail';
 import SignIn from './screens/SignIn';
 import search from './screens/search';
-
-
+import NotFound from './screens/NotFound';
 
 const Navi = StackNavigator({
- 
   ST: {screen: student},
   search: {screen: search},
   SI: {screen: SignIn},
@@ -21,7 +19,8 @@ const Navi = StackNavigator({
   WK: {screen: worker},
   FT: {screen: filter},
   AP: {screen: addPack},
-  DT: {screen: Detail}
+  DT: {screen: Detail},
+  NotFound: {screen: NotFound}
 })
 
 export default class TestApp extends React.Component{

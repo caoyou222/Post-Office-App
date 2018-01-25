@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import SearchInput, {createFilter} from 'react-native-search-filter';
-import { SearchBar, CheckBox } from 'react-native-elements';
+import { SearchBar, Button} from 'react-native-elements';
 
 let sourceData = [
     {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '1399674570', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
+    {trackno: '1399674572', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
     {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'signed'},
     {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'signed'},
     {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
@@ -106,10 +106,22 @@ export default class student extends Component {
       //comment
       console.log(keywords);
       const { navigate } = this.props.navigation;
-      res = [];
-      res = sourceData.filter(function(sd){return sd.carrier === keywords;});
-      console.log(res);
-      navigate('search', {pkg: res});
+      cr = [];
+      cr = sourceData.filter(function(sd){return sd.carrier === keywords;});
+      tn = [];
+      tn = sourceData.filter(function(sd){return sd.trackno === keywords;});
+      if(cr.length === 0 && tn.length === 0){
+        navigate('NotFound');
+      }
+      if(cr.length !== 0){
+        console.log(cr);
+        navigate('search', {pkg: cr});
+      }
+      if(tn.length !== 0){
+        console.log(tn);
+        navigate('DT', {trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
+      }
+      
 
     }
 
@@ -145,18 +157,23 @@ for (let sectionID in packagesData) {
 }
 return (
  <View style={styles.container}>
-    <SearchBar style={styles.searchBar}
+  <View style={styles.header}>
+    <SearchBar containerStyle={{width: 270, backgroundColor: 'white'}}
+    inputStyle = {{backgroundColor: 'white'}}
     lightTheme
+    placeholderTextColor = '#eae0cd'
     onChangeText={this._changeText.bind(this)}
     // onClearText={someMethod}
-    icon={{ type: 'font-awesome', name: 'search' }}
+    icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
     placeholder='Enter tracking number or status to search' />
-    <Button style={styles.buttonContainer}
-      title = "Search"
-      color = "black"
+    <Button small
+      title='Search'
+      buttonStyle={{backgroundColor: '#eae0cd'}}
+      color = "grey"
       onPress={this._search.bind(this)}
       />
+      </View>
 
    <ListView 
      dataSource={this.state.dataSource.cloneWithRowsAndSections(packagesData, sectionIDs, rowIDs)}
@@ -166,13 +183,6 @@ return (
 
     </ListView>
 
-  <View style = {styles.bottom}>
-          <Button style={styles.buttonContainer}
-          title = "Home"
-          color = "black"
-          onPress={()=> navigate('HM')}
-          />
-        </View>
  </View>
  );
 }
@@ -182,24 +192,9 @@ return (
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: Platform.OS === 'ios' ? 20 : 0,
-    height: Platform.OS === 'ios' ? 68:48,
-    backgroundColor: '#d69523',
-    alignItems:'center'
-  },
-
-  searchBar: {
-    height: 5,
-    flexDirection: 'row',
-    flex: 1,
-    borderRadius: 5,
-    backgroundColor: '#d69523',
-    alignItems: 'center',
-    marginLeft: 8,
-    marginRight: 12
-
+    backgroundColor: '#eae0cd',
+    alignItems:'center',
   },
 
   container: {
@@ -216,7 +211,7 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     margin: 10,
-    resizeMode: 'stretch'
+    resizeMode: 'stretch',
   },
 
   sectionHeader: {

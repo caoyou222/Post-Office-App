@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 
-export default class Detail extends React.Component {
+export default class NotFound extends React.Component {
  constructor(props){
  super(props);
  this.state = {
@@ -10,7 +10,7 @@ export default class Detail extends React.Component {
  }; 
  }
  static navigationOptions = {
-    title: 'Detail Page',
+    title: 'Search Result',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white'},
     headerBackTitleStyle: {color: 'white'},
@@ -21,11 +21,7 @@ export default class Detail extends React.Component {
  const { params } = this.props.navigation.state;
  return (
  <View style={styles.container}>
-      <Text style={{fontSize:15}}> Tracking No: {params.trackno} </Text>
-      <Text style={{fontSize:15}}> Carrier: {params.carrier} </Text>
-      <Text style={{fontSize:15}}> Name: {params.name} </Text>
-      <Text style={{fontSize:15}}> Status: {params.status} </Text>
-      <Text style={{fontSize:15}}> Date: {params.month}/{params.day}/{params.year} </Text>
+      <Text style={{fontSize:30}}> Invalid Information </Text>
  </View>
  );
 }
