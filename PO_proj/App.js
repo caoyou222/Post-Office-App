@@ -8,19 +8,24 @@ import filter from './screens/filter';
 import addPack from './screens/addPack';
 import Detail from './screens/Detail';
 import SignIn from './screens/SignIn';
+import search from './screens/search';
+
+
 
 const Navi = StackNavigator({
+ 
   ST: {screen: student},
+  search: {screen: search},
   SI: {screen: SignIn},
   HM: {screen: home},
   WK: {screen: worker},
   FT: {screen: filter},
   AP: {screen: addPack},
-  DT: {screen: Detail, navigationOptions:({navigation,screenProps}) => ({headerTitle:'Package Detail',})},
-});
-
+  DT: {screen: Detail}
+})
 
 export default class TestApp extends React.Component{
+
   render(){
     return <Navi/>;
   }

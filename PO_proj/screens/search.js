@@ -4,30 +4,21 @@ import {StackNavigator} from 'react-navigation'
 import SearchInput, {createFilter} from 'react-native-search-filter';
 import { SearchBar, CheckBox } from 'react-native-elements';
 
-let sourceData = [
-    {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '1399674570', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'signed'},
-    {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'signed'},
-    {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '5555555555', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '1Z11Y9790211025413', carrier: 'UPS', name:'Annie', year:'2017', month: '12', day:'12', status: 'signed'},
-    {trackno: '7777777777', carrier: 'DHL', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '9999999999', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'unsigned'},
-]
-let keywords = ''
-
-export default class student extends Component {
+let sourceData = [{trackno: '', carrier: 'DHL', name:'', year:'', month: '', day:'', status: ''}]
+export default class search extends Component {
+  
   static navigationOptions = {
-    title: 'Student Page',
+    title: 'Search Result',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white'}
  }
 
     constructor(props) {
         super(props);
-        
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+        //sourceData.push({trackno: params.trackno, carrier: params.carrier, name: params.name, day: params.day, year: params.year, month: params.month, status: params.status});
+        sourceData = params.pkg;
         this._renderSectionHeader = this._renderSectionHeader.bind(this);
         this._renderPackageRow = this._renderPackageRow.bind(this);
 
@@ -48,6 +39,7 @@ export default class student extends Component {
             }),
 
             sourceData: undefined,
+            keywords: '',
         }
     }
 
@@ -97,22 +89,6 @@ export default class student extends Component {
     }
 
 
-    _changeText(val){
-      keywords = val;
-      //console.log(keywords);
-    }
-
-    _search(){
-      //comment
-      console.log(keywords);
-      const { navigate } = this.props.navigation;
-      res = [];
-      res = sourceData.filter(function(sd){return sd.carrier === keywords;});
-      console.log(res);
-      navigate('search', {pkg: res});
-
-    }
-
     _configSourceData(packages) {
         let sourceData = {};
         for (let pack of packages) {
@@ -145,19 +121,7 @@ for (let sectionID in packagesData) {
 }
 return (
  <View style={styles.container}>
-    <SearchBar style={styles.searchBar}
-    lightTheme
-    onChangeText={this._changeText.bind(this)}
-    // onClearText={someMethod}
-    icon={{ type: 'font-awesome', name: 'search' }}
-
-    placeholder='Enter tracking number or status to search' />
-    <Button style={styles.buttonContainer}
-      title = "Search"
-      color = "black"
-      onPress={this._search.bind(this)}
-      />
-
+    
    <ListView 
      dataSource={this.state.dataSource.cloneWithRowsAndSections(packagesData, sectionIDs, rowIDs)}
      renderRow={this._renderPackageRow}
@@ -230,6 +194,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-
-AppRegistry.registerComponent('student', () => student);
