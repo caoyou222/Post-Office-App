@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
-<<<<<<< HEAD
 // import SearchInput, {createFilter} from 'react-native-search-filter';
-
-=======
 import SearchInput, {createFilter} from 'react-native-search-filter';
 import { SearchBar, CheckBox } from 'react-native-elements';
->>>>>>> 73e04727673c2041fcf6556d5e560cd7c5503b52
+
 
 let sourceData = [
     {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'unsigned'},

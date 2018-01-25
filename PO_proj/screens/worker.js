@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-
+import {Icon} from 'react-native-elements';
 
 export default class worker extends React.Component {
  constructor(props){
@@ -12,7 +12,14 @@ export default class worker extends React.Component {
  }
  static navigationOptions = {
   title: 'Workers',
-  headerRight: <icon name='home' />
+  headerRight: <Icon
+                name='home'
+                type='Entypo'
+                color='white'
+                iconStyle={{paddingRight:15}}
+              />,
+  headerStyle: {backgroundColor: '#d69523'},
+  headerTitleStyle: {color:'white'}
  }
 
 
