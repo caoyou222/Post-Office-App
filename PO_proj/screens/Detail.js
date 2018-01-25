@@ -10,36 +10,30 @@ export default class Detail extends React.Component {
  }; 
  }
  static navigationOptions = {
- header: null
+    title: 'Detail Page',
+    headerStyle: {backgroundColor: '#d69523'},
+    headerTitleStyle: {color:'white'}
  }
  render(){
  const { navigate } = this.props.navigation;
  const { params } = this.props.navigation.state;
  return (
  <View style={styles.container}>
-      <Text> Tracking No: {params.trackno} </Text>
-      <Text> Carrier: {params.carrier} </Text>
-      <Text> Name: {params.name} </Text>
-      <Text> Status: {params.status} </Text>
-      <Text> Date: {params.month}/{params.day}/{params.year} </Text>
+      <Text style={{fontSize:15}}> Tracking No: {params.trackno} </Text>
+      <Text style={{fontSize:15}}> Carrier: {params.carrier} </Text>
+      <Text style={{fontSize:15}}> Name: {params.name} </Text>
+      <Text style={{fontSize:15}}> Status: {params.status} </Text>
+      <Text style={{fontSize:15}}> Date: {params.month}/{params.day}/{params.year} </Text>
  </View>
  );
 }
 } 
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'white'
   },
   buttonContainer: {
