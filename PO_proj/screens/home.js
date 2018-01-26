@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
 import {StackNavigator, TabNavigator} from 'react-navigation'
-import {Button} from 'react-native-elements'
+import {Button, Icon} from 'react-native-elements'
 
 
 export default class home extends React.Component {
@@ -22,6 +22,7 @@ export default class home extends React.Component {
  	<View style={styles.buttonContainer}>
           <Button
           title = "Worker"
+          iconRight={{name: 'work', type: 'material-icon', color:'grey'}}
           color = "grey"
           buttonStyle={{backgroundColor: '#eae0cd'}}
           onPress={()=> navigate('WK')}
@@ -31,6 +32,7 @@ export default class home extends React.Component {
   <View style={styles.buttonContainer}>
           <Button
           title = "Student"
+          iconRight={{name: 'user', type: 'font-awesome', color:'grey'}}
           buttonStyle={{backgroundColor: '#eae0cd'}}
           color = "grey"
           onPress={()=> navigate('ST')}
@@ -39,6 +41,7 @@ export default class home extends React.Component {
   <View style={styles.buttonContainer}>
           <Button
           title = "Track Package"
+          iconRight={{name: 'truck', type: 'font-awesome', color:'grey'}}
           buttonStyle={{backgroundColor: '#eae0cd'}}
           color = "grey"
           onPress={()=> navigate('TK')}
@@ -46,7 +49,8 @@ export default class home extends React.Component {
         </View>
   <View style={styles.buttonContainer}>
           <Button
-          title = "Sign Out"
+          title = "Log Out"
+          iconRight={{name: 'log-out', type: 'entypo', color:'grey'}}
           buttonStyle={{backgroundColor: '#eae0cd'}}
           color = "grey"
           onPress={()=> navigate('SI')}
