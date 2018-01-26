@@ -3,7 +3,6 @@ import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableHighlight
 import {StackNavigator, TabNavigator} from 'react-navigation';
 import {Button} from 'react-native-elements';
 
-
 export default class home extends React.Component {
  constructor(props){
  super(props);
@@ -12,7 +11,11 @@ export default class home extends React.Component {
  }; 
  }
  static navigationOptions = {
- header: null
+    title: 'Home',
+    headerStyle: {backgroundColor: '#d69523'},
+    headerTitleStyle: {color:'white'},
+    headerBackTitleStyle: {color: 'white'},
+    headerTintColor: 'white',
  }
  render(){
  const { navigate } = this.props.navigation;
@@ -34,7 +37,8 @@ export default class home extends React.Component {
           textStyle={{fontSize:25, fontWeight:'bold'}}
           buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
           title = "Worker"
-          color = "white"
+          color = "grey"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
           onPress={()=> navigate('WK')}
           />
         </View>
@@ -44,10 +48,28 @@ export default class home extends React.Component {
           textStyle={{fontSize:25, fontWeight:'bold'}}
           buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
           title = "Student"
-          color = "white"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
+          color = "grey"
           onPress={()=> navigate('ST')}
           />
         </View>
+  <View style={styles.buttonContainer}>
+          <Button
+          title = "Track Package"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
+          color = "grey"
+          onPress={()=> navigate('TK')}
+          />
+        </View>
+  <View style={styles.buttonContainer}>
+          <Button
+          title = "Sign Out"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
+          color = "grey"
+          onPress={()=> navigate('SI')}
+          />
+        </View>
+
 
  </View>
  </ImageBackground>

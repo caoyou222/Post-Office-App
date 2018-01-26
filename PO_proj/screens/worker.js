@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
+<<<<<<< HEAD
 import {Icon, Button} from 'react-native-elements';
+=======
+import { SearchBar, CheckBox, List, ListItem, Icon } from 'react-native-elements';
 
 export default class worker extends React.Component {
  constructor(props){
@@ -13,13 +16,6 @@ export default class worker extends React.Component {
 
  static navigationOptions = {
   title: 'Workers',
-  // headerRight: <Icon
-  //               name='home'
-  //               type='Entypo'
-  //               color='white'
-  //               iconStyle={{paddingRight:15}}
-  //               onPress={()=>{this._toHome}}
-  //             />,
   headerStyle: {backgroundColor: '#d69523'},
   headerTitleStyle: {color:'white'},
   headerBackTitleStyle: {color:'white'},
@@ -96,6 +92,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     margin: 20
   },
+<<<<<<< HEAD
   bottomContainer:{
     position:'absolute',
     height: 55,
@@ -104,5 +101,13 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0
   },
+=======
+   bottom:{
+    height: 52,
+    backgroundColor: 'white',
+    alignItems: 'center'
+  },
+
+>>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
 
 });
