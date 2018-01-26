@@ -90,10 +90,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent'
   },
+<<<<<<< HEAD
   buttonContainer: {
     margin: 20,
     backgroundColor:'transparent'
   },
+=======
+>>>>>>> 011abfef236a6b8a7c649b98e8aea6ea25b18770
   bottomContainer:{
     position:'absolute',
     height: 55,

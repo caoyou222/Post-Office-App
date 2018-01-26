@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
-// import SearchInput, {createFilter} from 'react-native-search-filter';
-import SearchInput, {createFilter} from 'react-native-search-filter';
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
 
@@ -28,7 +26,11 @@ export default class student extends Component {
   static navigationOptions = {
     title: 'Packages',
     headerStyle: {backgroundColor: '#d69523'},
+<<<<<<< HEAD
     headerTitleStyle: {color:'white', fontSize:20},
+=======
+    headerTitleStyle: {color:'white'},
+>>>>>>> 011abfef236a6b8a7c649b98e8aea6ea25b18770
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
  }
@@ -94,7 +96,8 @@ return (
     lightTheme
     placeholderTextColor = '#eae0cd'
     onChangeText={this._changeText.bind(this)}
-    // onClearText={someMethod}
+    returnKeyType="search"
+    onSubmitEditing={this._search.bind(this)}
     icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
     placeholder='Enter tracking number or status to search' />
