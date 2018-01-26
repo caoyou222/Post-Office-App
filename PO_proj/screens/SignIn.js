@@ -1,9 +1,10 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation'
-import { StyleSheet, Text, TouchableOpacity, View, Button, Linking, ImageBackground } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Linking, ImageBackground } from 'react-native';
 import Expo from 'expo';
 'use strict';
 import { Component } from 'react';
+import { Button } from 'react-native-elements';
 
 
 var username = '';
@@ -62,8 +63,11 @@ export default class SignIn extends React.Component {
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
           <Button
+          textStyle={{fontSize:25, fontWeight:'bold'}}
+          buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
           title="Sign in"
           color="white"
+          iconRight={{name: 'login', type: 'entypo', color:'white',size:28}}
           onPress={ () =>{
             this._onPress();
           }}

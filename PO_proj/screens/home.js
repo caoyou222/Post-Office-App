@@ -19,13 +19,13 @@ export default class home extends React.Component {
   <ImageBackground 
     source = {{uri: 'https://wp.stolaf.edu/virtual/files/2013/02/campus_51.jpg'}}
     style = {styles.backgroundImage}
-    blurRadius={1}
+    blurRadius={3}
     opacity = {0.8}
     resizeMode='cover'>
   <View style={styles.container}>
-  <View style={{marginTop: -50}}>
-  <Text style={{fontSize: 30, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
-  Welcome to Package Manager!
+  <View style={{marginTop: -50,padding: 20}}>
+  <Text style={{fontFamily: 'ArialRoundedMTBold', fontSize: 40, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
+  Welcome!
   </Text>
   </View>
  	<View style={styles.buttonContainer}>
@@ -34,7 +34,7 @@ export default class home extends React.Component {
     buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
     title = "Worker"
     color = "white"
-    iconRight={{name: 'work', type: 'material-icon', color:'white'}}
+    iconRight={{name: 'work', type: 'material-icon', color:'white', size:24}}
 
     onPress={()=> navigate('WK')}
     />
@@ -46,7 +46,7 @@ export default class home extends React.Component {
     buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
     title = "Student"
     color = "white"
-    iconRight={{name: 'user', type: 'font-awesome', color:'white'}}
+    iconRight={{name: 'user', type: 'font-awesome', color:'white', size:24}}
     onPress={()=> navigate('ST')}
     />
   </View>
@@ -56,7 +56,7 @@ export default class home extends React.Component {
     buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
     title = "Track Package"
     color = "white"
-    iconRight={{name: 'truck', type: 'font-awesome', color:'white'}}
+    iconRight={{name: 'truck', type: 'font-awesome', color:'white', size:24}}
     onPress={()=> navigate('TK')}
     />
   </View>
@@ -65,7 +65,7 @@ export default class home extends React.Component {
     title = "Sign Out"
     buttonStyle={{backgroundColor: 'transparent'}}
     color = "white"
-    iconRight={{name: 'log-out', type: 'entypo', color:'white'}}
+    iconRight={{name: 'log-out', type: 'entypo', color:'white', size:24}}
     onPress={()=> navigate('SI')}
     />
   </View>
