@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
-// import SearchInput, {createFilter} from 'react-native-search-filter';
-import SearchInput, {createFilter} from 'react-native-search-filter';
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
 

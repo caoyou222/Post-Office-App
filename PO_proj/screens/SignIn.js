@@ -36,7 +36,7 @@ export default class SignIn extends React.Component {
       if (this.isLogin === true){
         username = e.user.name;
         console.log( "Welcome " + username);
-        navigate('HM');
+        navigate('HM', {user:username});
       }
     })
     .catch( (e) => {

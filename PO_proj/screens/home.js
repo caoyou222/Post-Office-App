@@ -16,6 +16,7 @@ export default class home extends React.Component {
  }
  render(){
  const { navigate } = this.props.navigation;
+ const { params } = this.props.navigation.state;
  return (
   <ImageBackground 
     source = {{uri: 'https://wp.stolaf.edu/virtual/files/2013/02/campus_51.jpg'}}
@@ -26,7 +27,7 @@ export default class home extends React.Component {
   <View style={styles.container}>
   <View style={{marginTop: -50}}>
   <Text style={{fontSize: 30, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
-  Welcome to Package Manager!
+  Welcome, {params.user}! 
   </Text>
   </View>
  	<View style={styles.buttonContainer}>
