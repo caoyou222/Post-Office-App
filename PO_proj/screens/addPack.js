@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Alert, Vibration} from 'react-native';
+import {TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { Button, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
@@ -105,6 +105,7 @@ headerTintColor: 'white'
       <Button
       title = "Submit"
       color = 'black'
+      backgroundColor = '#eae0cd'
       onPress={ () => {
         Alert.alert("Date: "+this.state.monthText+"/"+this.state.dayText+"/"+this.state.yearText+'\n'+"Traking num:"+this.state.trackText);
       } 

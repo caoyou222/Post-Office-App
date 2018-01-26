@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Header, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {Header, Image, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import {Icon} from 'react-native-elements';
+import {Icon, Button} from 'react-native-elements';
 
 export default class worker extends React.Component {
  constructor(props){
@@ -54,6 +54,8 @@ export default class worker extends React.Component {
   <View style={styles.container}>
     <View style={styles.buttonContainer}>
       <Button
+      textStyle={{fontSize:20, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 2, borderColor: 'black', borderRadius: 30}}
       title = "Search Package"
       color = "black"
       onPress={()=> navigate('FT')}
@@ -62,6 +64,8 @@ export default class worker extends React.Component {
 
     <View style={styles.buttonContainer}>
       <Button
+      textStyle={{fontSize:20, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 2, borderColor: 'black', borderRadius: 30}}
       title = "Add Package"
       color = "black"
       onPress={()=> navigate('AP')}
@@ -69,9 +73,10 @@ export default class worker extends React.Component {
     </View>
 
 
-    <View style={styles.bottom}>
-      <Icon large
-      name='home'
+    <View style={styles.bottomContainer}>
+      <Icon 
+      size = {35}
+      name = 'home'
       color = '#D69523'
       onPress={()=>navigate('HM')}
       />
@@ -91,10 +96,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     margin: 20
   },
-  bottom:{
-    height: 50,
-    backgroundColor: 'black',
-    alignItems:'center'
+  bottomContainer:{
+    position:'absolute',
+    height: 55,
+    justifyContent:'center',
+    bottom: 0,
+    right: 0,
+    left: 0
   },
 
 });

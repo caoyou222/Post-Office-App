@@ -13,11 +13,13 @@ import search from './screens/search';
 
 const Navi = StackNavigator({
  
-  WK: {screen: worker},
+  
+    HM: {screen: home},
+    WK: {screen: worker},
   ST: {screen: student},
   search: {screen: search},
   SI: {screen: SignIn},
-  HM: {screen: home},
+
   
   ST: {screen: student},
   FT: {screen: filter},
