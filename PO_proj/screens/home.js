@@ -31,15 +31,9 @@ export default class home extends React.Component {
     opacity = {0.8}
     resizeMode='cover'>
   <View style={styles.container}>
-<<<<<<< HEAD
   <View style={{marginTop: -50,padding: 20}}>
   <Text style={{fontFamily: 'ArialRoundedMTBold', fontSize: 40, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
-  Welcome!
-=======
-  <View style={{marginTop: -50}}>
-  <Text style={{fontSize: 30, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
-  Welcome, {params.user}! 
->>>>>>> 011abfef236a6b8a7c649b98e8aea6ea25b18770
+  Welcome,{params.user}!
   </Text>
   </View>
  	<View style={styles.buttonContainer}>

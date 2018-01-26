@@ -26,11 +26,7 @@ export default class student extends Component {
   static navigationOptions = {
     title: 'Packages',
     headerStyle: {backgroundColor: '#d69523'},
-<<<<<<< HEAD
     headerTitleStyle: {color:'white', fontSize:20},
-=======
-    headerTitleStyle: {color:'white'},
->>>>>>> 011abfef236a6b8a7c649b98e8aea6ea25b18770
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
  }
