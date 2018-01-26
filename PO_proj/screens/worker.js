@@ -49,8 +49,8 @@ export default class worker extends React.Component {
       <Button
       activeOpacity={0.4}
       icon={{name:'search', type:'FontAwesome', size:26}}
-      textStyle={{fontSize:20, fontWeight:'bold'}}
-      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
+      textStyle={{fontSize:22, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#f2b243',borderWidth: 2, borderColor: '#f2b243', borderRadius: 30}}
       title = "Search Package"
       color = "white"
       onPress={()=> navigate('FT')}
@@ -61,8 +61,8 @@ export default class worker extends React.Component {
       <Button
       activeOpacity={0.4}
       icon={{name:'add-circle-outline', type:'Ionicons', size:26}}
-      textStyle={{fontSize:20, fontWeight:'bold'}}
-      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
+      textStyle={{fontSize:22, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#f2b243',borderWidth: 2, borderColor: '#f2b243', borderRadius: 30}}
       title = "Add Package"
       color = "white"
       onPress={()=> navigate('AP')}
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
   buttonContainer: {
     margin: 20,

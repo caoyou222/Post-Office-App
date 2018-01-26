@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   },
 
   bottom:{
-    height: 52,
+    height: 55,
     backgroundColor: 'white',
     alignItems: 'center'
   },

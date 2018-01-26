@@ -60,10 +60,10 @@ export default class addPack extends React.Component {
 
     <View style={styles.inputContainer}>
     <FormLabel>Month</FormLabel>
-    <FormInput onChangeText={(monthText) => this.setState({monthText})}/>
-    <FormValidationMessage>
-      'This field is required.'
-    </FormValidationMessage>
+    <FormInput 
+    onChangeText={(monthText) => this.setState({monthText})}
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.inputContainer}>
@@ -73,7 +73,10 @@ export default class addPack extends React.Component {
 
     <View style={styles.inputContainer}>
     <FormLabel>Year</FormLabel>
-    <FormInput onChangeText={(yearText) => this.setState({yearText})}/>
+    <FormInput 
+    onChangeText={(yearText) => this.setState({yearText})}
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.inputContainer}>

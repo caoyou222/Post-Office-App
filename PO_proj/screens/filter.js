@@ -83,7 +83,7 @@ export default class filter extends React.Component {
       onPress={()=> navigate('WK')}
       />
     </View>
-    
+
     <View style={styles.bottomContainer}>
       <Icon 
       size = {35}
@@ -101,7 +101,7 @@ export default class filter extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
   searchbar: {
     flexDirection: 'row',
