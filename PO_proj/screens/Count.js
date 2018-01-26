@@ -6,9 +6,9 @@ import {StackNavigator} from 'react-navigation'
 //CY: 28425-28427
 export default class Count extends React.Component {
   _getCount(){
-    fetch("http://rns202-5.cs.stolaf.edu:28425")
+    fetch("http://rns202-5.cs.stolaf.edu:28425/")
  .then((res) => {
- // console.log(res)
+  //console.log(res)
  return res.json()
  })
  .then((data) => {

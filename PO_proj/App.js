@@ -11,8 +11,10 @@ import SignIn from './screens/SignIn';
 import search from './screens/search';
 import NotFound from './screens/NotFound';
 import Tracking from './screens/Tracking';
+import Count from './screens/Count';
 
 const Navi = StackNavigator({
+  CT: {screen: Count},
   SI: {screen: SignIn},
 	AP: {screen: addPack},
   WK: {screen: worker},
@@ -20,7 +22,6 @@ const Navi = StackNavigator({
   ST: {screen: student},
   search: {screen: search}, 
   FT: {screen: filter},
-  
   DT: {screen: Detail},
   NotFound: {screen: NotFound},
   TK: {screen: Tracking}
