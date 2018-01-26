@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-<<<<<<< HEAD
-import {Icon, Button} from 'react-native-elements';
-=======
-import { SearchBar, CheckBox, List, ListItem, Icon } from 'react-native-elements';
+import { SearchBar, CheckBox, List, ListItem, Icon, Button } from 'react-native-elements';
 
 export default class worker extends React.Component {
  constructor(props){
@@ -50,6 +47,7 @@ export default class worker extends React.Component {
   <View style={styles.container}>
     <View style={styles.buttonContainer}>
       <Button
+      icon={{name:'search', type:'FontAwesome', size:26}}
       textStyle={{fontSize:20, fontWeight:'bold'}}
       buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
       title = "Search Package"
@@ -60,6 +58,7 @@ export default class worker extends React.Component {
 
     <View style={styles.buttonContainer}>
       <Button
+      icon={{name:'add-circle-outline', type:'Ionicons', size:26}}
       textStyle={{fontSize:20, fontWeight:'bold'}}
       buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
       title = "Add Package"
@@ -90,9 +89,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonContainer: {
-    margin: 20
+    margin: 20,
+    backgroundColor:'transparent'
   },
-<<<<<<< HEAD
   bottomContainer:{
     position:'absolute',
     height: 55,
@@ -101,13 +100,4 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0
   },
-=======
-   bottom:{
-    height: 52,
-    backgroundColor: 'white',
-    alignItems: 'center'
-  },
-
->>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
-
 });

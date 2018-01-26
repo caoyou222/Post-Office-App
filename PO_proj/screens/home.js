@@ -11,11 +11,7 @@ export default class home extends React.Component {
  }; 
  }
  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {backgroundColor: '#d69523'},
-    headerTitleStyle: {color:'white'},
-    headerBackTitleStyle: {color: 'white'},
-    headerTintColor: 'white',
+    header: null,
  }
  render(){
  const { navigate } = this.props.navigation;
@@ -33,43 +29,45 @@ export default class home extends React.Component {
   </Text>
   </View>
  	<View style={styles.buttonContainer}>
-          <Button
-          textStyle={{fontSize:25, fontWeight:'bold'}}
-          buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
-          title = "Worker"
-          color = "grey"
-          buttonStyle={{backgroundColor: '#eae0cd'}}
-          onPress={()=> navigate('WK')}
-          />
-        </View>
+    <Button
+    textStyle={{fontSize:25, fontWeight:'bold'}}
+    buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
+    title = "Worker"
+    color = "white"
+    iconRight={{name: 'work', type: 'material-icon', color:'white'}}
+
+    onPress={()=> navigate('WK')}
+    />
+  </View>
 
   <View style={styles.buttonContainer}>
-          <Button
-          textStyle={{fontSize:25, fontWeight:'bold'}}
-          buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
-          title = "Student"
-          buttonStyle={{backgroundColor: '#eae0cd'}}
-          color = "grey"
-          onPress={()=> navigate('ST')}
-          />
-        </View>
+    <Button
+    textStyle={{fontSize:25, fontWeight:'bold'}}
+    buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
+    title = "Student"
+    color = "white"
+    iconRight={{name: 'user', type: 'font-awesome', color:'white'}}
+    onPress={()=> navigate('ST')}
+    />
+  </View>
   <View style={styles.buttonContainer}>
-          <Button
-          title = "Track Package"
-          buttonStyle={{backgroundColor: '#eae0cd'}}
-          color = "grey"
-          onPress={()=> navigate('TK')}
-          />
-        </View>
+    <Button
+    title = "Track Package"
+    buttonStyle={{backgroundColor: 'transparent'}}
+    color = "white"
+    iconRight={{name: 'truck', type: 'font-awesome', color:'white'}}
+    onPress={()=> navigate('TK')}
+    />
+  </View>
   <View style={styles.buttonContainer}>
-          <Button
-          title = "Sign Out"
-          buttonStyle={{backgroundColor: '#eae0cd'}}
-          color = "grey"
-          onPress={()=> navigate('SI')}
-          />
-        </View>
-
+    <Button
+    title = "Sign Out"
+    buttonStyle={{backgroundColor: 'transparent'}}
+    color = "white"
+    iconRight={{name: 'log-out', type: 'entypo', color:'white'}}
+    onPress={()=> navigate('SI')}
+    />
+  </View>
 
  </View>
  </ImageBackground>

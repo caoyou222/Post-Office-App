@@ -29,12 +29,8 @@ export default class student extends Component {
     title: 'Packages',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white'},
-<<<<<<< HEAD
-    headerBackTitleStyle: {color:'white'}
-=======
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
->>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
  }
 
     constructor(props) {
