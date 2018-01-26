@@ -12,8 +12,8 @@ export default class filter extends React.Component {
  }
  static navigationOptions = {
  title: 'Search Packages',
- headerStyle: {backgroundColor: '#d69523',fontSize:20},
- headerTitleStyle: {color:'white'},
+ headerStyle: {backgroundColor: '#d69523'},
+ headerTitleStyle: {color:'white', fontSize:20},
  headerBackTitleStyle: {color:'white'},
  headerTintColor: 'white'
  }

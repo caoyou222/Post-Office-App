@@ -14,13 +14,13 @@ export default class addPack extends React.Component {
  carrierText: '',
  firstText: '',
  lastText: '',
- signText: ''
+ signText: '',
  }; 
  }
  static navigationOptions = {
   title: 'Add packages',
-  headerStyle: {backgroundColor: '#d69523', fontSize:20},
-  headerTitleStyle: {color:'white'},
+  headerStyle: {backgroundColor: '#d69523'},
+  headerTitleStyle: {color:'white',, fontSize:20},
   headerBackTitleStyle: {color:'white'},
   headerTintColor: 'white'
  }
@@ -75,7 +75,6 @@ export default class addPack extends React.Component {
     <FormLabel>Year</FormLabel>
     <FormInput 
     onChangeText={(yearText) => this.setState({yearText})}
-    errorMessage='This field is required'
     />
     </View>
 
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   buttonContainer: {
-    margin: 20
+    margin: 30
   },
   inputContainer: {
     margin: 20,
