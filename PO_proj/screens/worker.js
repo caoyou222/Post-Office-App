@@ -21,7 +21,9 @@ export default class worker extends React.Component {
   //               onPress={()=>{this._toHome}}
   //             />,
   headerStyle: {backgroundColor: '#d69523'},
-  headerTitleStyle: {color:'white'}
+  headerTitleStyle: {color:'white'},
+  headerBackTitleStyle: {color:'white'},
+  headerTintColor: 'white'
  }
 
 

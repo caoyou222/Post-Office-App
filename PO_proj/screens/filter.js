@@ -11,7 +11,11 @@ export default class filter extends React.Component {
  }; 
  }
  static navigationOptions = {
- title: 'Search Packages'
+ title: 'Search Packages',
+ headerStyle: {backgroundColor: '#d69523'},
+ headerTitleStyle: {color:'white'},
+ headerBackTitleStyle: {color:'white'},
+ headerTintColor: 'white'
  }
 
 

@@ -18,7 +18,11 @@ export default class addPack extends React.Component {
  }; 
  }
  static navigationOptions = {
- title: 'Add packages'
+ title: 'Add packages',
+ headerStyle: {backgroundColor: '#d69523'},
+headerTitleStyle: {color:'white'},
+headerBackTitleStyle: {color:'white'},
+headerTintColor: 'white'
  }
 
   //  addPackage() {

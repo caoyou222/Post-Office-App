@@ -24,7 +24,8 @@ export default class student extends Component {
   static navigationOptions = {
     title: 'Student Page',
     headerStyle: {backgroundColor: '#d69523'},
-    headerTitleStyle: {color:'white'}
+    headerTitleStyle: {color:'white'},
+    headerBackTitleStyle: {color:'white'}
  }
 
     constructor(props) {
