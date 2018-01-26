@@ -18,10 +18,20 @@ export default class filter extends React.Component {
  headerTintColor: 'white'
  }
 
-
-
  render(){
  const { navigate } = this.props.navigation;
+ state = {
+ 	ups:false,
+ 	usps:false,
+ 	fedex:false,
+ 	dhl:false,
+ 	today:false,
+ 	week:false,
+ 	month:false,
+ 	tmonth:false,
+ 	sign:false,
+ 	unsign:false,
+ };
  return (
   <View style={styles.container}>
   	<View style={styles.searchbar}>
@@ -51,19 +61,31 @@ export default class filter extends React.Component {
       <ScrollView style={styles.checkContainer}>
       <CheckBox
 		  title='UPS'
-		  checked={this.state.checked}
+		  checked={this.state.ups}
+		  onPress={(checked)=> this.setState({
+		  	ups: !this.state.ups,
+		  })}
 		/>
 		<CheckBox
-		  title='UPSP'
-		  checked={this.state.checked}
+		  title='USPS'
+		  checked={this.state.usps}
+		  onPress={(checked)=> this.setState({
+		  	usps: !this.state.usps,
+		  })}
 		/>
 		<CheckBox
 		  title='Fedex'
-		  checked={this.state.checked}
+		  checked={this.state.fedex}
+		  onPress={(checked)=> this.setState({
+		  	fedex: !this.state.fedex,
+		  })}
 		/>
 		<CheckBox
 		  title='DHl'
-		  checked={this.state.checked}
+		  checked={this.state.dhl}
+		  onPress={(checked)=> this.setState({
+		  	dhl: !this.state.dhl,
+		  })}
 		/>
 	  </ScrollView>
     </View>
@@ -74,14 +96,60 @@ export default class filter extends React.Component {
       color = "black"
       onPress={()=> navigate('WK')}
       />
+      <ScrollView style={styles.checkContainer}>
+      <CheckBox
+		  title='Today'
+		  checked={this.state.today}
+		  onPress={(checked)=> this.setState({
+		  	today: !this.state.today,
+		  })}
+		/>
+		<CheckBox
+		  title='Last week'
+		  checked={this.state.week}
+		  onPress={(checked)=> this.setState({
+		  	week: !this.state.week,
+		  })}
+		/>
+		<CheckBox
+		  title='Last month'
+		  checked={this.state.month}
+		  onPress={(checked)=> this.setState({
+		  	month: !this.state.month,
+		  })}
+		/>
+		<CheckBox
+		  title='Last 3 month'
+		  checked={this.state.tmonth}
+		  onPress={(checked)=> this.setState({
+		  	tmonth: !this.state.tmonth,
+		  })}
+		/>
+	  </ScrollView>
     </View>
 
     <View style={styles.buttonContainer}>
       <Button
-      title = "Filter By Student ID"
+      title = "Filter By Status"
       color = "black"
       onPress={()=> navigate('WK')}
       />
+      <ScrollView style={styles.checkContainer}>
+      <CheckBox
+		  title='Signed'
+		  checked={this.state.sign}
+		  onPress={(checked)=> this.setState({
+		  	sign: !this.state.sign,
+		  })}
+		/>
+		<CheckBox
+		  title='Unsigned'
+		  checked={this.state.unsign}
+		  onPress={(checked)=> this.setState({
+		  	unsign: !this.state.unsign,
+		  })}
+		/>
+	  </ScrollView>
     </View>
 
     <View style={styles.bottomContainer}>
@@ -113,7 +181,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   checkContainer: {
-  	height: 100
+  	height: 150
   },
   bottomContainer:{
     position:'absolute',
