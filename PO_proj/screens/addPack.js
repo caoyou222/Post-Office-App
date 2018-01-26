@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration} from 'react-native';
+import {TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Icon, Button, Divider, FormLabel, FormInput, FormValidationMessage, Input } from 'react-native-elements'
 
@@ -65,6 +65,7 @@ export default class addPack extends React.Component {
 
   <View style={styles.container}>
 
+    <ScrollView style={styles.inputContainer}>
     <View style={styles.inputContainer}>
     <FormLabel>Month</FormLabel>
     <FormInput 
@@ -135,6 +136,7 @@ export default class addPack extends React.Component {
       }
       />
     </View>
+    </ScrollView>
 
     <View style={styles.bottomContainer}>
       <Icon 

@@ -82,6 +82,7 @@ _search(){
       />
       </View>
 
+    <ScrollView style={styles.buttonContainer}>
     <View style={styles.buttonContainer}>
       <Button
       title = "Filter By Carrier"
@@ -181,6 +182,7 @@ _search(){
 		/>
 	  </ScrollView>
     </View>
+    </ScrollView>
 
     <View style={styles.bottomContainer}>
       <Icon 
