@@ -55,9 +55,9 @@ export default class worker extends React.Component {
     <View style={styles.buttonContainer}>
       <Button
       textStyle={{fontSize:20, fontWeight:'bold'}}
-      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 2, borderColor: 'black', borderRadius: 30}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
       title = "Search Package"
-      color = "black"
+      color = "white"
       onPress={()=> navigate('FT')}
       />
     </View>
@@ -65,9 +65,9 @@ export default class worker extends React.Component {
     <View style={styles.buttonContainer}>
       <Button
       textStyle={{fontSize:20, fontWeight:'bold'}}
-      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 2, borderColor: 'black', borderRadius: 30}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
       title = "Add Package"
-      color = "black"
+      color = "white"
       onPress={()=> navigate('AP')}
       />
     </View>

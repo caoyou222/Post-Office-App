@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { SearchBar, CheckBox } from 'react-native-elements';
+import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
 export default class filter extends React.Component {
  constructor(props){
@@ -24,7 +24,7 @@ export default class filter extends React.Component {
  const { navigate } = this.props.navigation;
  return (
   <View style={styles.container}>
-  <View style={styles.searchbar}>
+  	<View style={styles.searchbar}>
 	  <SearchBar
 	  lightTheme
 	  // onChangeText={someMethod}
@@ -32,7 +32,7 @@ export default class filter extends React.Component {
 	  icon={{ type: 'font-awesome', name: 'search' }}
 
 	  placeholder='Enter tracking number, student name ...' />
-  </View>
+ 	 </View>
 
     <View style={styles.buttonContainer}>
       <Button
@@ -84,6 +84,15 @@ export default class filter extends React.Component {
       />
     </View>
 
+    <View style={styles.bottomContainer}>
+      <Icon 
+      size = {35}
+      name = 'home'
+      color = '#D69523'
+      onPress={()=>navigate('HM')}
+      />
+    </View>
+
   </View>
   );
  }
@@ -92,20 +101,20 @@ export default class filter extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection:'row',
-    justifyContent: 'space-between',
     backgroundColor: 'white'
   },
   buttonContainer: {
     margin: 10,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent:'space-between'
   },
   checkContainer: {
-  	flex:1,
-  	flexDirection: 'column',
-  	justifyContent: 'space-between'
-  }
+  },
+  bottomContainer:{
+    position:'absolute',
+    height: 55,
+    justifyContent:'center',
+    bottom: 0,
+    right: 0,
+    left: 0
+  },
 
 });
