@@ -27,7 +27,7 @@ let keywords = ''
 export default class student extends Component {
   static navigationOptions = {
     title: 'Packages',
-    headerStyle: {backgroundColor: '#d69523'},
+    headerStyle: {backgroundColor: '#d69523',fontSize:20},
     headerTitleStyle: {color:'white'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
