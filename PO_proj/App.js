@@ -24,7 +24,6 @@ const Navi = StackNavigator({
 })
 
 export default class TestApp extends React.Component{
-
   render(){
     return <Navi/>;
   }

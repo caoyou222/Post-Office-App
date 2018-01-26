@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import { SearchBar, CheckBox, List, ListItem, Icon } from 'react-native-elements';
 
 
 export default class worker extends React.Component {
@@ -56,6 +57,15 @@ export default class worker extends React.Component {
       onPress={()=> navigate('AP')}
       />
     </View>
+
+    <View style={styles.bottom}>
+    <Icon large
+      name='home'
+      color = '#d69523'
+      onPress={()=>navigate('HM')}
+      />
+      </View>
+
  </View>
  );
 }
@@ -87,5 +97,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     margin: 20
   },
+   bottom:{
+    height: 52,
+    backgroundColor: 'white',
+    alignItems: 'center'
+  },
+
 
 });

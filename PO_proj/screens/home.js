@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
+import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
 import {StackNavigator, TabNavigator} from 'react-navigation'
+import {Button} from 'react-native-elements'
 
 
 export default class home extends React.Component {
  constructor(props){
  super(props);
- this.state = {
- backgroundColor: 'yellow'
- }; 
  }
  static navigationOptions = {
- header: null
+    title: 'Home',
+    headerStyle: {backgroundColor: '#d69523'},
+    headerTitleStyle: {color:'white'},
+    headerBackTitleStyle: {color: 'white'},
+    headerTintColor: 'white',
  }
  render(){
  const { navigate } = this.props.navigation;
@@ -20,7 +22,8 @@ export default class home extends React.Component {
  	<View style={styles.buttonContainer}>
           <Button
           title = "Worker"
-          color = "white"
+          color = "grey"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
           onPress={()=> navigate('WK')}
           />
         </View>
@@ -28,7 +31,8 @@ export default class home extends React.Component {
   <View style={styles.buttonContainer}>
           <Button
           title = "Student"
-          color = "white"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
+          color = "grey"
           onPress={()=> navigate('ST')}
           />
         </View>
@@ -51,7 +55,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'black'
   },
   buttonContainer: {
     margin: 20

@@ -10,7 +10,7 @@ export default class Detail extends React.Component {
  }; 
  }
  static navigationOptions = {
-    title: 'Detail Page',
+    title: 'Package Detail',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white'},
     headerBackTitleStyle: {color: 'white'},
