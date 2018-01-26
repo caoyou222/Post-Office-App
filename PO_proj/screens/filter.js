@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {ScrollView, TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
@@ -38,7 +38,7 @@ export default class filter extends React.Component {
       title='Search'
       buttonStyle={{backgroundColor: '#eae0cd'}}
       color = "grey"
-      // onPress={this._search.bind(this)}
+
       />
       </View>
 
@@ -48,7 +48,7 @@ export default class filter extends React.Component {
       color = "black"
       onPress={()=> navigate('WK')}
       />
-      <View style={styles.checkContainer}>
+      <ScrollView style={styles.checkContainer}>
       <CheckBox
 		  title='UPS'
 		  checked={this.state.checked}
@@ -65,7 +65,7 @@ export default class filter extends React.Component {
 		  title='DHl'
 		  checked={this.state.checked}
 		/>
-	  </View>
+	  </ScrollView>
     </View>
 
     <View style={styles.buttonContainer}>
@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   checkContainer: {
+  	height: 100
   },
   bottomContainer:{
     position:'absolute',

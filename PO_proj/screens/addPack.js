@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { Button, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { Icon, Button, Divider, FormLabel, FormInput, FormValidationMessage, Input } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
@@ -17,10 +17,11 @@ export default class addPack extends React.Component {
  signText: '',
  }; 
  }
+
  static navigationOptions = {
   title: 'Add packages',
   headerStyle: {backgroundColor: '#d69523'},
-  headerTitleStyle: {color:'white',, fontSize:20},
+  headerTitleStyle: {color:'white', fontSize:20},
   headerBackTitleStyle: {color:'white'},
   headerTintColor: 'white'
  }
@@ -52,8 +53,10 @@ export default class addPack extends React.Component {
   //     });
   // }
 
+
  render(){
  const { navigate } = this.props.navigation;
+ const {monthText,dayText} = this.state;
  return (
 
   <View style={styles.container}>
@@ -68,7 +71,9 @@ export default class addPack extends React.Component {
 
     <View style={styles.inputContainer}>
     <FormLabel>Day</FormLabel>
-    <FormInput onChangeText={(dayText) => this.setState({dayText})}/>
+    <FormInput 
+    onChangeText={(dayText) => this.setState({dayText})}
+    />
     </View>
 
     <View style={styles.inputContainer}>
@@ -105,13 +110,24 @@ export default class addPack extends React.Component {
 
     <View style={styles.buttonContainer}>
       <Button
+      rounded
+      textStyle={{fontSize:22}}
       title = "Submit"
-      color = 'black'
-      backgroundColor = '#eae0cd'
+      color = 'white'
+      backgroundColor = '#f2b243'
       onPress={ () => {
         Alert.alert("Date: "+this.state.monthText+"/"+this.state.dayText+"/"+this.state.yearText+'\n'+"Traking num:"+this.state.trackText);
       } 
       }
+      />
+    </View>
+
+    <View style={styles.bottomContainer}>
+      <Icon 
+      size = {35}
+      name = 'home'
+      color = '#D69523'
+      onPress={()=>navigate('HM')}
       />
     </View>
   </View>
@@ -123,15 +139,24 @@ export default class addPack extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
+
     backgroundColor: 'white'
   },
   buttonContainer: {
-    margin: 30
+    margin: 20,
+    marginTop:35
   },
   inputContainer: {
-    margin: 20,
+    margin: 15,
     height: 40,
-  }
+  },
+  bottomContainer:{
+    position:'absolute',
+    height: 55,
+    justifyContent:'center',
+    bottom: 0,
+    right: 0,
+    left: 0
+  },
 
 });
