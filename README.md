@@ -7,6 +7,7 @@ After that: To add database: psql -U <username> <databasename> > po.psql
 
 ## Setting Up
 For developers, please do following commands:
-npm install react-native-elements
-npm install react-native-navigation
-npm install expo
+npm install react-native-elements --save
+npm install react-native-navigation --save
+npm install expo --save
+npm install react-native-router-flux --save
