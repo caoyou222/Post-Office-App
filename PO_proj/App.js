@@ -13,9 +13,9 @@ import NotFound from './screens/NotFound';
 import Tracking from './screens/Tracking';
 
 const Navi = StackNavigator({
-	AP: {screen: addPack},
-  SI: {screen: SignIn},
 
+  SI: {screen: SignIn},
+  AP: {screen: addPack},
   WK: {screen: worker},
   HM: {screen: home},
   ST: {screen: student},

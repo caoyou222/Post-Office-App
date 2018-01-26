@@ -26,7 +26,7 @@ export default class home extends React.Component {
   <View style={styles.container}>
   <View style={{marginTop: -50,padding: 20}}>
   <Text style={{fontFamily: 'ArialRoundedMTBold', fontSize: 40, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
-  Welcome,{params.user}!
+  Welcome!
   </Text>
   </View>
  	<View style={styles.buttonContainer}>
