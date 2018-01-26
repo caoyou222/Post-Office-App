@@ -14,7 +14,7 @@ export default class worker extends React.Component {
  static navigationOptions = {
   title: 'Workers',
   headerStyle: {backgroundColor: '#d69523'},
-  headerTitleStyle: {color:'white'},
+  headerTitleStyle: {color:'white', fontSize:20},
   headerBackTitleStyle: {color:'white'},
   headerTintColor: 'white'
  }
@@ -47,6 +47,7 @@ export default class worker extends React.Component {
   <View style={styles.container}>
     <View style={styles.buttonContainer}>
       <Button
+      activeOpacity={0.4}
       icon={{name:'search', type:'FontAwesome', size:26}}
       textStyle={{fontSize:20, fontWeight:'bold'}}
       buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
@@ -58,6 +59,7 @@ export default class worker extends React.Component {
 
     <View style={styles.buttonContainer}>
       <Button
+      activeOpacity={0.4}
       icon={{name:'add-circle-outline', type:'Ionicons', size:26}}
       textStyle={{fontSize:20, fontWeight:'bold'}}
       buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}

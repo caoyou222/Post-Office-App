@@ -63,10 +63,12 @@ export default class SignIn extends React.Component {
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
           <Button
+          activeOpacity={0.4}
           textStyle={{fontSize:25, fontWeight:'bold'}}
           buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
           title="Sign in"
           color="white"
+          overflow= 'hidden'
           iconRight={{name: 'login', type: 'entypo', color:'white',size:28}}
           onPress={ () =>{
             this._onPress();
@@ -103,6 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     padding: 10,
+    overflow: 'hidden'
   },
   middleButton: {
     borderLeftWidth: 1,

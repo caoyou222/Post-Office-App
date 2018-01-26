@@ -30,6 +30,7 @@ export default class home extends React.Component {
   </View>
  	<View style={styles.buttonContainer}>
     <Button
+    activeOpacity={0.4}
     textStyle={{fontSize:25, fontWeight:'bold'}}
     buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
     title = "Worker"
@@ -42,8 +43,9 @@ export default class home extends React.Component {
 
   <View style={styles.buttonContainer}>
     <Button
+    activeOpacity={0.4}
     textStyle={{fontSize:25, fontWeight:'bold'}}
-    buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
+    buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30, overflow:'hidden'}}
     title = "Student"
     color = "white"
     iconRight={{name: 'user', type: 'font-awesome', color:'white', size:24}}
@@ -52,6 +54,7 @@ export default class home extends React.Component {
   </View>
   <View style={styles.buttonContainer}>
     <Button
+    activeOpacity={0.4}
     textStyle={{fontSize:25, fontWeight:'bold'}}
     buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
     title = "Track Package"
@@ -62,6 +65,7 @@ export default class home extends React.Component {
   </View>
   <View style={styles.buttonContainer}>
     <Button
+    activeOpacity={0.4}
     title = "Sign Out"
     buttonStyle={{backgroundColor: 'transparent'}}
     color = "white"
@@ -83,7 +87,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     margin: 20,
-    backgroundColor:'transparent'
+    backgroundColor:'transparent',
+    overflow:'hidden',
   },
   backgroundImage:{
     flex: 1,

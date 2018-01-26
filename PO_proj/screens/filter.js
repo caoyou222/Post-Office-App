@@ -12,7 +12,7 @@ export default class filter extends React.Component {
  }
  static navigationOptions = {
  title: 'Search Packages',
- headerStyle: {backgroundColor: '#d69523'},
+ headerStyle: {backgroundColor: '#d69523',fontSize:20},
  headerTitleStyle: {color:'white'},
  headerBackTitleStyle: {color:'white'},
  headerTintColor: 'white'
@@ -25,14 +25,22 @@ export default class filter extends React.Component {
  return (
   <View style={styles.container}>
   	<View style={styles.searchbar}>
-	  <SearchBar
-	  lightTheme
-	  // onChangeText={someMethod}
-	  // onClearText={someMethod}
-	  icon={{ type: 'font-awesome', name: 'search' }}
+	<SearchBar containerStyle={{width: 270, backgroundColor: 'white'}}
+    inputStyle = {{backgroundColor: 'white'}}
+    lightTheme
+    placeholderTextColor = '#eae0cd'
+    // onChangeText={this._changeText.bind(this)}
+    // onClearText={someMethod}
+    icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
-	  placeholder='Enter tracking number, student name ...' />
- 	 </View>
+    placeholder='Enter tracking number or status to search' />
+    <Button small
+      title='Search'
+      buttonStyle={{backgroundColor: '#eae0cd'}}
+      color = "grey"
+      // onPress={this._search.bind(this)}
+      />
+      </View>
 
     <View style={styles.buttonContainer}>
       <Button
@@ -75,15 +83,7 @@ export default class filter extends React.Component {
       onPress={()=> navigate('WK')}
       />
     </View>
-
-    <View style={styles.buttonContainer}>
-      <Button
-      title = "Search"
-      color = "black"
-      onPress={()=> navigate('WK')}
-      />
-    </View>
-
+    
     <View style={styles.bottomContainer}>
       <Icon 
       size = {35}
@@ -102,6 +102,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white'
+  },
+  searchbar: {
+    flexDirection: 'row',
+    paddingRight: 10,
+    backgroundColor: '#eae0cd',
+    alignItems:'center',
   },
   buttonContainer: {
     margin: 10,
