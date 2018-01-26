@@ -14,11 +14,11 @@ import Tracking from './screens/Tracking';
 import Count from './screens/Count';
 
 const Navi = StackNavigator({
+  HM: {screen: home},
   CT: {screen: Count},
   SI: {screen: SignIn},
 	AP: {screen: addPack},
   WK: {screen: worker},
-  HM: {screen: home},
   ST: {screen: student},
   search: {screen: search}, 
   FT: {screen: filter},

@@ -4,22 +4,23 @@ import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
 
-let sourceData = [
-    {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1399674572', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'Signed'},
-    {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'Signed'},
-    {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '5555555555', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z11Y9790211025413', carrier: 'UPS', name:'Annie', year:'2017', month: '12', day:'12', status: 'Signed'},
-    {trackno: '7777777777', carrier: 'DHL', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '9999999999', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Signed'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-]
+// let sourceData = [
+//     {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '1399674572', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'Signed'},
+//     {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'Signed'},
+//     {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '5555555555', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '1Z11Y9790211025413', carrier: 'UPS', name:'Annie', year:'2017', month: '12', day:'12', status: 'Signed'},
+//     {trackno: '7777777777', carrier: 'DHL', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '9999999999', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Signed'},
+//     {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+//     {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+// ]
+//let sourceData = []
 let keywords = ''
 
 export default class student extends Component {
@@ -43,9 +44,8 @@ export default class student extends Component {
                     return data[sectionID];
                 }
             }),
-
+            isLoading: true,
             sourceData: undefined,
-            keywords: '',
         }
     }
 
@@ -53,6 +53,25 @@ export default class student extends Component {
       keywords = val;
       //console.log(keywords);
     }
+
+
+    componentDidMount=()=> {
+    return fetch("http://rns202-5.cs.stolaf.edu:28425/packages")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          isLoading: false,
+          sourceData: data.packages,
+          //dataSource: this.state.dataSource.cloneWithRows(data.packages),
+        }, function() {
+          
+          //console.log(sourceData);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
     _search(){
       //comment
@@ -82,8 +101,17 @@ export default class student extends Component {
 
     }
 
-render(){
+render=()=>{
 const { navigate } = this.props.navigation;
+if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <Text>sss</Text>
+        </View>
+      );
+}
+
+console.log(this.state.sourceData);
 return (
  <View style={styles.container}>
   <View style={styles.header}>
@@ -106,7 +134,9 @@ return (
       </View>
 
    <ListView 
-     dataSource = {this.state.dataSource.cloneWithRows(sourceData)}
+    
+     dataSource = {this.state.dataSource.cloneWithRows(this.state.sourceData)}
+     //dataSource = {this.state.dataSource}
      renderRow={(rowData, sectionID, rowId)=>{return(
         <TouchableOpacity
               onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
