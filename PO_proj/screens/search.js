@@ -47,9 +47,13 @@ return (
    <ListView 
      dataSource = {this.state.dataSource.cloneWithRows(sourceData)}
      renderRow={(rowData, sectionID, rowId)=>{return(
+        <TouchableOpacity
+              onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
+            >
             <View style={styles.sectionHeader}>
                 <Text>{rowData.trackno}</Text>
             </View>
+            </TouchableOpacity>
         );}
     }
     />
