@@ -52,8 +52,9 @@ export default class home extends React.Component {
   </View>
   <View style={styles.buttonContainer}>
     <Button
+    textStyle={{fontSize:25, fontWeight:'bold'}}
+    buttonStyle = {{alignSelf: 'center', width: 250,backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
     title = "Track Package"
-    buttonStyle={{backgroundColor: 'transparent'}}
     color = "white"
     iconRight={{name: 'truck', type: 'font-awesome', color:'white'}}
     onPress={()=> navigate('TK')}

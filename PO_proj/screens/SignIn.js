@@ -1,9 +1,10 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation'
-import { StyleSheet, Text, TouchableOpacity, View, Button, Linking } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Button, Linking, ImageBackground } from 'react-native';
 import Expo from 'expo';
 'use strict';
 import { Component } from 'react';
+
 
 var username = '';
 export default class SignIn extends React.Component {
@@ -11,6 +12,11 @@ export default class SignIn extends React.Component {
     super(props);
     this.isLogin = false;
   }
+
+  static navigationOptions = {
+    header: null,
+  }
+
   _signInWithGoogleAsync = async() => {
     try {
       const result = await Expo.Google.logInAsync({
@@ -47,17 +53,25 @@ export default class SignIn extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
+    <ImageBackground 
+    source = {{uri: 'https://i0.wp.com/wp.stolaf.edu/wp-content/uploads/2017/10/Natural_Lands_Pak4-3.jpg?ssl=1'}}
+    style = {styles.backgroundImage}
+    opacity = {0.8}
+    resizeMode='cover'>
+      <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
           <Button
           title="Sign in"
-          color="green"
+          color="white"
           onPress={ () =>{
             this._onPress();
           }}
           />
         </View>
       </View>
+      </View>
+      </ImageBackground>
     );
   }
 }
@@ -77,13 +91,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'stretch',
-    marginTop: 15,
+    marginTop: 250,
   },
   button: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eee',
+    backgroundColor: 'transparent',
     padding: 10,
   },
   middleButton: {
@@ -95,4 +109,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     paddingHorizontal: 10,
   },
+  backgroundImage:{
+    flex: 1,
+    width: null,
+    height: null,
+    alignSelf: 'stretch'
+  }
 });
