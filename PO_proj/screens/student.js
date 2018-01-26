@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
+// import SearchInput, {createFilter} from 'react-native-search-filter';
 import SearchInput, {createFilter} from 'react-native-search-filter';
 import { SearchBar, Button, Icon} from 'react-native-elements';
+
 
 let sourceData = [
     {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
@@ -27,8 +29,12 @@ export default class student extends Component {
     title: 'Packages',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white'},
+<<<<<<< HEAD
+    headerBackTitleStyle: {color:'white'}
+=======
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
+>>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
  }
 
     constructor(props) {

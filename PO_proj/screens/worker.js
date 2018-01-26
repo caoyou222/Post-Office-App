@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Header, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {Header, Image, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
+<<<<<<< HEAD
+import {Icon, Button} from 'react-native-elements';
+=======
 import { SearchBar, CheckBox, List, ListItem, Icon } from 'react-native-elements';
-
 
 export default class worker extends React.Component {
  constructor(props){
@@ -11,8 +13,13 @@ export default class worker extends React.Component {
  backgroundColor: 'yellow'
  }; 
  }
+
  static navigationOptions = {
   title: 'Workers',
+  headerStyle: {backgroundColor: '#d69523'},
+  headerTitleStyle: {color:'white'},
+  headerBackTitleStyle: {color:'white'},
+  headerTintColor: 'white'
  }
 
 
@@ -41,52 +48,40 @@ export default class worker extends React.Component {
  return (
 
   <View style={styles.container}>
-
     <View style={styles.buttonContainer}>
       <Button
+      textStyle={{fontSize:20, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
       title = "Search Package"
-      color = "black"
+      color = "white"
       onPress={()=> navigate('FT')}
       />
     </View>
 
     <View style={styles.buttonContainer}>
       <Button
+      textStyle={{fontSize:20, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#eae0cd',borderWidth: 2, borderColor: '#D69523', borderRadius: 30}}
       title = "Add Package"
-      color = "black"
+      color = "white"
       onPress={()=> navigate('AP')}
       />
     </View>
 
-    <View style={styles.bottom}>
-    <Icon large
-      name='home'
-      color = '#d69523'
+
+    <View style={styles.bottomContainer}>
+      <Icon 
+      size = {35}
+      name = 'home'
+      color = '#D69523'
       onPress={()=>navigate('HM')}
       />
-      </View>
-
+    </View>
  </View>
  );
 }
 } 
-    // <View style={styles.buttonContainer}>
-    //   <Button
-    //   title = "Home"
-    //   color = "black"
-    //   onPress={()=> navigate('HM')}
-    //   />
-    // </View>
 
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
 const styles = StyleSheet.create({
   container: {
@@ -97,11 +92,22 @@ const styles = StyleSheet.create({
   buttonContainer: {
     margin: 20
   },
+<<<<<<< HEAD
+  bottomContainer:{
+    position:'absolute',
+    height: 55,
+    justifyContent:'center',
+    bottom: 0,
+    right: 0,
+    left: 0
+  },
+=======
    bottom:{
     height: 52,
     backgroundColor: 'white',
     alignItems: 'center'
   },
 
+>>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
 
 });
