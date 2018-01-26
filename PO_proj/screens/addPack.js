@@ -27,7 +27,7 @@ export default class addPack extends React.Component {
  }
 
   //  addPackage() {
-  //   var package = {
+  //   var pack = {
   //     month = this.state.monthText
   //     day = this.state.dayText
   //     year = this.state.yearText
@@ -37,13 +37,13 @@ export default class addPack extends React.Component {
   //     last = this.state.lastText
   //     sign = this.state.signText
   //   };
-  //   fetch('http://rns202-3.cs.stolaf.edu:28434', {
+  //   fetch('http://rns202-3.cs.stolaf.edu:28434/', {
   //     method: 'POST',
   //     headers: {
   //       Accept: 'application/json',
   //       'Content-Type': 'application/json'
   //     },
-  //     body: JSON.stringify(package)
+  //     body: JSON.stringify(pack)
   //   }).then((response) => response.json())
   //     .then((responseJson) => {
   //       return responseJson.Message;
@@ -52,6 +52,10 @@ export default class addPack extends React.Component {
   //       console.error(error);
   //     });
   // }
+
+  focusDayInput() {
+    this.dayInput.focus();
+  }
 
 
  render(){
@@ -64,15 +68,24 @@ export default class addPack extends React.Component {
     <View style={styles.inputContainer}>
     <FormLabel>Month</FormLabel>
     <FormInput 
+    refInput={input => {this.monthInput = input;}}
     onChangeText={(monthText) => this.setState({monthText})}
+    returnKeyType="next"
     errorMessage='This field is required'
+    onSubmitEditing={this.focusDayInput.bind(this)}
     />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Day</FormLabel>
     <FormInput 
+    refInput={input => {this.dayInput = input;}}
     onChangeText={(dayText) => this.setState({dayText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    onSubmitEditing={() => {
+                  this.dayInput.focus()
+                }}
     />
     </View>
 
@@ -116,6 +129,7 @@ export default class addPack extends React.Component {
       color = 'white'
       backgroundColor = '#f2b243'
       onPress={ () => {
+        this.addPackage();
         Alert.alert("Date: "+this.state.monthText+"/"+this.state.dayText+"/"+this.state.yearText+'\n'+"Traking num:"+this.state.trackText);
       } 
       }

@@ -10,7 +10,7 @@ export default class search extends Component {
   static navigationOptions = {
     title: 'Search Result',
     headerStyle: {backgroundColor: '#d69523'},
-    headerTitleStyle: {color:'white'},
+    headerTitleStyle: {color:'white',fontSize:20},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
  }
