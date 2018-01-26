@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableHighlight, ImageBackground} from 'react-native';
 import {StackNavigator, TabNavigator} from 'react-navigation';
 import {Button} from 'react-native-elements';
-=======
-import {Image, Text, StyleSheet, ImageBackground, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
-import {StackNavigator, TabNavigator} from 'react-navigation'
-import {Button, Icon} from 'react-native-elements'
-
->>>>>>> 011abfef236a6b8a7c649b98e8aea6ea25b18770
 
 export default class home extends React.Component {
  constructor(props){
@@ -33,7 +26,7 @@ export default class home extends React.Component {
   <View style={styles.container}>
   <View style={{marginTop: -50,padding: 20}}>
   <Text style={{fontFamily: 'ArialRoundedMTBold', fontSize: 40, fontWeight: 'bold', color: 'white', backgroundColor: 'transparent', alignSelf:'center'}}>
-  Welcome,{params.user}!
+  Welcome!
   </Text>
   </View>
  	<View style={styles.buttonContainer}>
