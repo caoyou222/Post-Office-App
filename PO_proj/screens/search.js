@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import SearchInput, {createFilter} from 'react-native-search-filter';
-import { SearchBar, CheckBox, List, ListItem, Icon } from 'react-native-elements';
+import { SearchBar, CheckBox, List, ListItem, Icon, Card } from 'react-native-elements';
 
 let sourceData = [{trackno: '', carrier: 'DHL', name:'', year:'', month: '', day:'', status: ''}]
 export default class search extends Component {
@@ -41,7 +41,9 @@ render(){
 const { navigate } = this.props.navigation;
 return (
  <View style={styles.container}>
-  <Text> Result for {key} </Text>
+  <Card>
+    <Text> {key} </Text>
+  </Card>
    <ListView 
      dataSource = {this.state.dataSource.cloneWithRows(sourceData)}
      renderRow={(rowData, sectionID, rowId)=>{return(

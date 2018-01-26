@@ -36,6 +36,23 @@ export default class home extends React.Component {
           onPress={()=> navigate('ST')}
           />
         </View>
+  <View style={styles.buttonContainer}>
+          <Button
+          title = "Track Package"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
+          color = "grey"
+          onPress={()=> navigate('TK')}
+          />
+        </View>
+  <View style={styles.buttonContainer}>
+          <Button
+          title = "Sign Out"
+          buttonStyle={{backgroundColor: '#eae0cd'}}
+          color = "grey"
+          onPress={()=> navigate('SI')}
+          />
+        </View>
+
 
  </View>
  );
