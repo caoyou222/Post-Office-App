@@ -8,6 +8,7 @@ import java.nio.charset.*;
 
 public class Backend {
 	// class variables
+	
   
   	/** A static final int for maxinBuff */
      
@@ -49,6 +50,7 @@ class Worker implements Runnable{
 	/* A Socket*/
 	Socket sock = null;
 	static final int MAXBUFF = 100000;  
+	private static String DEBUG = "DEVEL ";
 
 	//constructors
 	/* A constructor initialzies sock
@@ -77,6 +79,10 @@ class Worker implements Runnable{
 	  
 	  HttpParser parser = new HttpParser(inBuff, 0, count);  
 	  int code = parser.parseRequest();
+
+
+	  // if (DEBUG != null) 
+	  //   dumpParseResults(parser);	
 	  
 	  String reply;
 	  if (code != 200)
@@ -84,7 +90,12 @@ class Worker implements Runnable{
 	  else {
 	    reply = model.handle(parser);
 	  }
-
+	  
+	  if (DEBUG != null) 
+	    System.out.println(DEBUG + "Sending HTTP reply:\n" + reply + 
+			       "\n" + DEBUG + "End of reply");
+	  
+	  
 	  outStream.write(reply.getBytes());
 	  System.out.println("HTTP reply message sent");
 	} catch (IOException e) {

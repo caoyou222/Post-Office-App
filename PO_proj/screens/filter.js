@@ -78,7 +78,6 @@ _search(){
       title='Search'
       buttonStyle={{backgroundColor: '#eae0cd'}}
       color = "grey"
-
       />
       </View>
 
