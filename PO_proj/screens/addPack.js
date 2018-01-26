@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Alert, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { Divider, FormLabel, FormInput } from 'react-native-elements'
+import { Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
@@ -21,7 +21,7 @@ export default class addPack extends React.Component {
  title: 'Add packages'
  }
 
-  // function addPackage() {
+  //  addPackage() {
   //   var package = {
   //     month = this.state.monthText
   //     day = this.state.dayText
@@ -55,70 +55,49 @@ export default class addPack extends React.Component {
   <View style={styles.container}>
 
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Month"
-    onChangeText={(monthText) => this.setState({monthText})}
-    value={this.state.monthText}
-    />
+    <FormLabel>Month</FormLabel>
+    <FormInput onChangeText={(monthText) => this.setState({monthText})}/>
+    <FormValidationMessage>
+      'This field is required.'
+    </FormValidationMessage>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Day"
-    onChangeText={(dayText) => this.setState({dayText})}
-    value={this.state.dayText}
-    />
+    <FormLabel>Day</FormLabel>
+    <FormInput onChangeText={(dayText) => this.setState({dayText})}/>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Year"
-    onChangeText={(yearText) => this.setState({yearText})}
-    value={this.state.yearText}
-    />
+    <FormLabel>Year</FormLabel>
+    <FormInput onChangeText={(yearText) => this.setState({yearText})}/>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Traking number"
-    onChangeText={(trackText) => this.setState({trackText})}
-    value={this.state.trackText}
-    />
+    <FormLabel>Traking number</FormLabel>
+    <FormInput onChangeText={(trackText) => this.setState({trackText})}/>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Carrier"
-    onChangeText={(carrierText) => this.setState({carrierText})}
-    value={this.state.carrierText}
-    />
+    <FormLabel>Carrier</FormLabel>
+    <FormInput onChangeText={(carrierText) => this.setState({carrierText})}/>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="First name"
-    onChangeText={(firstText) => this.setState({firstText})}
-    value={this.state.firstText}
-    />
+    <FormLabel>Last name</FormLabel>
+    <FormInput onChangeText={(lastText) => this.setState({lastText})}/>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Last name"
-    onChangeText={(lastText) => this.setState({lastText})}
-    value={this.state.lastText}
-    />
+    <FormLabel>First name</FormLabel>
+    <FormInput onChangeText={(firstText) => this.setState({firstText})}/>
     </View>
+
     <View style={styles.inputContainer}>
-    <TextInput
-    style={{width: 200, height: 40, borderColor:'gray', borderWidth: 1}}
-    placeholder="Signed/Unsigned"
-    onChangeText={(signText) => this.setState({signText})}
-    value={this.state.signText}
-    />
+    <FormLabel>Signed/Unsigned</FormLabel>
+    <FormInput  onChangeText={(signText) => this.setState({signText})}/>
     </View>
-    <View style={styles.inputContainer}>
+
+    <View style={styles.buttonContainer}>
       <Button
       title = "Submit"
       color = 'black'
@@ -137,14 +116,15 @@ export default class addPack extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: 'white'
   },
   buttonContainer: {
     margin: 20
   },
   inputContainer: {
-    margin: 10
+    margin: 20,
+    height: 40,
   }
 
 });

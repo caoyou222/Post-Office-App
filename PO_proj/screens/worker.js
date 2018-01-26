@@ -10,14 +10,16 @@ export default class worker extends React.Component {
  backgroundColor: 'yellow'
  }; 
  }
+
  static navigationOptions = {
   title: 'Workers',
-  headerRight: <Icon
-                name='home'
-                type='Entypo'
-                color='white'
-                iconStyle={{paddingRight:15}}
-              />,
+  // headerRight: <Icon
+  //               name='home'
+  //               type='Entypo'
+  //               color='white'
+  //               iconStyle={{paddingRight:15}}
+  //               onPress={()=>{this._toHome}}
+  //             />,
   headerStyle: {backgroundColor: '#d69523'},
   headerTitleStyle: {color:'white'}
  }
@@ -48,7 +50,6 @@ export default class worker extends React.Component {
  return (
 
   <View style={styles.container}>
-
     <View style={styles.buttonContainer}>
       <Button
       title = "Search Package"
@@ -64,27 +65,20 @@ export default class worker extends React.Component {
       onPress={()=> navigate('AP')}
       />
     </View>
+
+
+    <View style={styles.bottom}>
+      <Icon large
+      name='home'
+      color = '#D69523'
+      onPress={()=>navigate('HM')}
+      />
+    </View>
  </View>
  );
 }
 } 
-    // <View style={styles.buttonContainer}>
-    //   <Button
-    //   title = "Home"
-    //   color = "black"
-    //   onPress={()=> navigate('HM')}
-    //   />
-    // </View>
 
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
 const styles = StyleSheet.create({
   container: {
@@ -94,6 +88,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     margin: 20
+  },
+  bottom:{
+    height: 50,
+    backgroundColor: 'black',
+    alignItems:'center'
   },
 
 });
