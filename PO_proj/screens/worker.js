@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-<<<<<<< HEAD
-import {Icon, Button} from 'react-native-elements';
-=======
-import { SearchBar, CheckBox, List, ListItem, Icon } from 'react-native-elements';
+import { SearchBar, CheckBox, List, ListItem, Icon, Button } from 'react-native-elements';
 
 export default class worker extends React.Component {
  constructor(props){
@@ -89,10 +86,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white'
   },
-  buttonContainer: {
-    margin: 20
-  },
-<<<<<<< HEAD
   bottomContainer:{
     position:'absolute',
     height: 55,
@@ -101,13 +94,4 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0
   },
-=======
-   bottom:{
-    height: 52,
-    backgroundColor: 'white',
-    alignItems: 'center'
-  },
-
->>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
-
 });

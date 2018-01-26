@@ -29,12 +29,8 @@ export default class student extends Component {
     title: 'Packages',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white'},
-<<<<<<< HEAD
-    headerBackTitleStyle: {color:'white'}
-=======
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
->>>>>>> 55738c70b41e0ad32e6948e32a2ebf159113f4ef
  }
 
     constructor(props) {
@@ -98,7 +94,8 @@ return (
     lightTheme
     placeholderTextColor = '#eae0cd'
     onChangeText={this._changeText.bind(this)}
-    // onClearText={someMethod}
+    returnKeyType="search"
+    onSubmitEditing={this._search.bind(this)}
     icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
     placeholder='Enter tracking number or status to search' />

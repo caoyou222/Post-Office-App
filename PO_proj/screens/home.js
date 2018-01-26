@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
+import {Image, Text, StyleSheet, ImageBackground, View, Dimensions, Vibration, TouchableHighlight} from 'react-native';
 import {StackNavigator, TabNavigator} from 'react-navigation'
 import {Button, Icon} from 'react-native-elements'
 
@@ -12,11 +12,7 @@ export default class home extends React.Component {
  }; 
  }
  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {backgroundColor: '#d69523'},
-    headerTitleStyle: {color:'white'},
-    headerBackTitleStyle: {color: 'white'},
-    headerTintColor: 'white',
+    header: null,
  }
  render(){
  const { navigate } = this.props.navigation;
