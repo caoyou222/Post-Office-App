@@ -12,8 +12,7 @@ import java.lang.*;
 class ExampleRestModel extends RestApiModel {
   Statement st;
   public ExampleRestModel(Statement tmp) {
-    addHandler("/", new CountHandler());
-    addHandler("/names", new NamesHandler());
+    addHandler("/packages", new PackagesHandler());
     st = tmp;
   }
     
@@ -43,7 +42,7 @@ public String verifyUser(HttpParser p) {
         }
         return p.makeJsonReply(200,isWorker);
     }
-}
+
 
   class PackagesHandler extends RestApiHandler{
     public String doGet(HttpParser p){
@@ -77,6 +76,7 @@ public String verifyUser(HttpParser p) {
     jsonStr = jsonStr.substring(0, jsonStr.length()-1) + "\n";
     jsonStr += " ] }";
     return p.makeJsonReply(200, jsonStr);
+}
 }
 }
 
