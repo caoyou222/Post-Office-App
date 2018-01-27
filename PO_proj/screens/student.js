@@ -78,11 +78,11 @@ export default class student extends Component {
       console.log(keywords);
       const { navigate } = this.props.navigation;
       cr = [];
-      cr = sourceData.filter(function(sd){return sd.carrier === keywords;});
+      cr = this.state.sourceData.filter(function(sd){return sd.carrier === keywords;});
       tn = [];
-      tn = sourceData.filter(function(sd){return sd.trackno === keywords;});
+      tn = this.state.sourceData.filter(function(sd){return sd.trackno === keywords;});
       st = [];
-      st = sourceData.filter(function(sd){return sd.status === keywords;});
+      st = this.state.sourceData.filter(function(sd){return sd.status === keywords;});
       if(cr.length === 0 && tn.length === 0 && st.length === 0){
         navigate('NotFound');
       }
@@ -106,7 +106,7 @@ const { navigate } = this.props.navigation;
 if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
-          <Text>sss</Text>
+          <Text>Loading</Text>
         </View>
       );
 }

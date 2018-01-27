@@ -1,14 +1,15 @@
 /** A class for socket client side.
     @author cao1 */
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.nio.charset.*;
+import java.sql.*;
+import java.sql.DriverManager;
+import java.lang.*;
 
 public class Backend {
 	// class variables
-	
   
   	/** A static final int for maxinBuff */
      
@@ -50,7 +51,6 @@ class Worker implements Runnable{
 	/* A Socket*/
 	Socket sock = null;
 	static final int MAXBUFF = 100000;  
-	private static String DEBUG = "DEVEL ";
 
 	//constructors
 	/* A constructor initialzies sock
@@ -62,45 +62,51 @@ class Worker implements Runnable{
 	//methods
 	/* a method for run Threads*/
 	public void run(){
-	ExampleRestModel model = new ExampleRestModel();
 	try {
-	  InputStream inStream = sock.getInputStream();
-	  OutputStream outStream = sock.getOutputStream();
-	  /* assert:  input socket and stream initialized */
+		ResourceBundle bundle = ResourceBundle.getBundle("javaconfig");
+        String user = bundle.getString("jdbc.user");
+        String password = bundle.getString("jdbc.password");
+            
+        String url = bundle.getString("jdbc.url") + bundle.getString("jdbc.dbname");
+        Connection con;
+        Class.forName(bundle.getString("jdbc.driver"));
+        con = DriverManager.getConnection(url,user,password);
+        Statement st = con.createStatement();
+
+        ExampleRestModel model = new ExampleRestModel(st);
+
+	  	InputStream inStream = sock.getInputStream();
+	  	OutputStream outStream = sock.getOutputStream();
+	  	/* assert:  input socket and stream initialized */
 	  
-	  byte[] inBuff = new byte[MAXBUFF];
-	  int count;  // to hold number of bytes of I/O
-	  count = inStream.read(inBuff);  
+	  	byte[] inBuff = new byte[MAXBUFF];
+	  	int count;  // to hold number of bytes of I/O
+	  	count = inStream.read(inBuff);  
 	  // successful read from socket 
 	  
-	  System.out.println("Successfully received the following " 
+	  	System.out.println("Successfully received the following " 
 			     + count + " bytes:");
-	  System.out.write(inBuff, 0, count);
+	  	System.out.write(inBuff, 0, count);
 	  
-	  HttpParser parser = new HttpParser(inBuff, 0, count);  
-	  int code = parser.parseRequest();
+	  	HttpParser parser = new HttpParser(inBuff, 0, count);  
+	  	int code = parser.parseRequest();
+	  
+	  	String reply;
+	  	if (code != 200)
+	    	reply = parser.makeReply(code);
+	  	else {
+	    	reply = model.handle(parser);
+	  	}
 
-
-	  // if (DEBUG != null) 
-	  //   dumpParseResults(parser);	
-	  
-	  String reply;
-	  if (code != 200)
-	    reply = parser.makeReply(code);
-	  else {
-	    reply = model.handle(parser);
-	  }
-	  
-	  if (DEBUG != null) 
-	    System.out.println(DEBUG + "Sending HTTP reply:\n" + reply + 
-			       "\n" + DEBUG + "End of reply");
-	  
-	  
-	  outStream.write(reply.getBytes());
-	  System.out.println("HTTP reply message sent");
-	} catch (IOException e) {
+	  	outStream.write(reply.getBytes());
+	  	System.out.println("HTTP reply message sent");
+	}catch(ClassNotFoundException e){
+		System.err.println("Not found the class: " + e.getMessage());
+	}catch(IOException e) {
 	  System.out.println("client interaction failed.");
 	  System.out.println(e.getMessage());
+	}catch(SQLException e){
+		System.err.println("SQL Problem: " + e.getMessage());
 	} finally {
 	  try{
 	  sock.close();
