@@ -11,17 +11,18 @@ import SignIn from './screens/SignIn';
 import search from './screens/search';
 import NotFound from './screens/NotFound';
 import Tracking from './screens/Tracking';
+import toSign from './screens/toSign';
 
 const Navi = StackNavigator({
-
+  FT: {screen: filter},
   SI: {screen: SignIn},
   AP: {screen: addPack},
   WK: {screen: worker},
   HM: {screen: home},
   ST: {screen: student},
   search: {screen: search}, 
-  FT: {screen: filter},
   
+  TS: {screen:toSign},
   DT: {screen: Detail},
   NotFound: {screen: NotFound},
   TK: {screen: Tracking}

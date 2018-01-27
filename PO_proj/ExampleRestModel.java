@@ -47,7 +47,7 @@ class ExampleRestModel extends RestApiModel {
     public String doGet(HttpParser p) {
       /* Simulates SQL   SELECT val FROM count;   */
       return p.makeJsonReply(200, 
-			     "{ count: " + Integer.toString(count_val) + " }");
+			     "{ \"count\": " + Integer.toString(count_val) + " }");
     }
   }
 

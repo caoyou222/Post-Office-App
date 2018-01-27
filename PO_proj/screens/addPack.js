@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
+import {LayoutAnimation,TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { Icon, Button, Divider, FormLabel, FormInput, FormValidationMessage, Input } from 'react-native-elements'
+import { Icon, Button, Divider, FormLabel, FormInput, Form, FormValidationMessage, Input } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
@@ -25,6 +25,15 @@ export default class addPack extends React.Component {
   headerBackTitleStyle: {color:'white'},
   headerTintColor: 'white'
  }
+
+ validateUsername() {
+    const { username } = this.state
+    const usernameValid = username.length > 0
+    LayoutAnimation.easeInEaseOut()
+    this.setState({ usernameValid })
+    usernameValid || this.usernameInput.shake()
+    return usernameValid
+  }
 
   //  addPackage() {
   //   var pack = {
@@ -53,14 +62,8 @@ export default class addPack extends React.Component {
   //     });
   // }
 
-  focusDayInput() {
-    this.dayInput.focus();
-  }
-
-
  render(){
  const { navigate } = this.props.navigation;
- const {monthText,dayText} = this.state;
  return (
 
   <View style={styles.container}>
@@ -73,20 +76,20 @@ export default class addPack extends React.Component {
     onChangeText={(monthText) => this.setState({monthText})}
     returnKeyType="next"
     errorMessage='This field is required'
-    onSubmitEditing={this.focusDayInput.bind(this)}
+     onSubmitEditing={(event) => { 
+    this.refs.SecondInput.focus(); 
+  }}
     />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Day</FormLabel>
     <FormInput 
+    ref='SecondInput'
     refInput={input => {this.dayInput = input;}}
     onChangeText={(dayText) => this.setState({dayText})}
     returnKeyType="next"
     errorMessage='This field is required'
-    onSubmitEditing={() => {
-                  this.dayInput.focus()
-                }}
     />
     </View>
 
@@ -94,32 +97,54 @@ export default class addPack extends React.Component {
     <FormLabel>Year</FormLabel>
     <FormInput 
     onChangeText={(yearText) => this.setState({yearText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
     />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Traking number</FormLabel>
-    <FormInput onChangeText={(trackText) => this.setState({trackText})}/>
+    <FormInput 
+    onChangeText={(trackText) => this.setState({trackText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Carrier</FormLabel>
-    <FormInput onChangeText={(carrierText) => this.setState({carrierText})}/>
+    <FormInput 
+    onChangeText={(carrierText) => this.setState({carrierText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Last name</FormLabel>
-    <FormInput onChangeText={(lastText) => this.setState({lastText})}/>
+    <FormInput 
+    onChangeText={(lastText) => this.setState({lastText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>First name</FormLabel>
-    <FormInput onChangeText={(firstText) => this.setState({firstText})}/>
+    <FormInput 
+    onChangeText={(firstText) => this.setState({firstText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Signed/Unsigned</FormLabel>
-    <FormInput  onChangeText={(signText) => this.setState({signText})}/>
+    <FormInput  
+    onChangeText={(signText) => this.setState({signText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.buttonContainer}>

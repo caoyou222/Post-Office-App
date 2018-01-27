@@ -1,14 +1,43 @@
 import React, { Component } from 'react';
-import {ScrollView, TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {ScrollView, ListView, TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
+
+let sourceData = [
+    {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '1399674572', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'Signed'},
+    {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'Signed'},
+    {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '5555555555', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '1Z11Y9790211025413', carrier: 'UPS', name:'Annie', year:'2017', month: '12', day:'12', status: 'Signed'},
+    {trackno: '7777777777', carrier: 'DHL', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '9999999999', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Signed'},
+    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
+]
+let keywords = ''
 
 export default class filter extends React.Component {
  constructor(props){
  super(props);
  this.state = {
- backgroundColor: 'yellow'
- }; 
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+                getRowData: (data, sectionID, rowID) => {
+                        return data[sectionID][rowID];
+                },
+                getSectionHeaderData: (data, sectionID) => {
+                    return data[sectionID];
+                }
+            }),
+
+            sourceData: undefined,
+            keywords: '',
+        }
  }
  static navigationOptions = {
  title: 'Search Packages',
@@ -17,6 +46,11 @@ export default class filter extends React.Component {
  headerBackTitleStyle: {color:'white'},
  headerTintColor: 'white'
  }
+
+_changeText(val){
+      keywords = val;
+      //console.log(keywords);
+    }
 
 _search(){
   //comment
@@ -33,7 +67,7 @@ _search(){
   }
   if(cr.length !== 0){
     console.log(cr);
-    navigate('search', {key: keywords, pkg: cr});
+    navigate('TS', {key: keywords, pkg: cr});
   }
   if(tn.length !== 0){
     console.log(tn);
@@ -41,7 +75,7 @@ _search(){
   }
   if(st.length !== 0){
     console.log(st);
-    navigate('search', {key: keywords, pkg: st});
+    navigate('TS', {key: keywords, pkg: st});
   }
 
 }
@@ -69,7 +103,7 @@ _search(){
     inputStyle = {{backgroundColor: 'white'}}
     lightTheme
     placeholderTextColor = '#eae0cd'
-    // onChangeText={this._changeText.bind(this)}
+    onChangeText={this._changeText.bind(this)}
     // onClearText={someMethod}
     icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
@@ -77,17 +111,16 @@ _search(){
     <Button small
       title='Search'
       buttonStyle={{backgroundColor: '#eae0cd'}}
+      onPress={this._search.bind(this)}
       color = "grey"
       />
       </View>
 
     <ScrollView style={styles.buttonContainer}>
     <View style={styles.buttonContainer}>
-      <Button
-      title = "Filter By Carrier"
-      color = "black"
-      onPress={()=> navigate('WK')}
-      />
+      <Text style={{color: "black", fontSize:20}}>
+      Filter by Carrier
+      </Text>
       <ScrollView style={styles.checkContainer}>
       <CheckBox
 		  title='UPS'
@@ -121,11 +154,9 @@ _search(){
     </View>
 
     <View style={styles.buttonContainer}>
-      <Button
-      title = "Filter By Date"
-      color = "black"
-      onPress={()=> navigate('WK')}
-      />
+      <Text style={{color: "black", fontSize:20}}>
+      Filter by Date
+      </Text>
       <ScrollView style={styles.checkContainer}>
       <CheckBox
 		  title='Today'
@@ -159,11 +190,9 @@ _search(){
     </View>
 
     <View style={styles.buttonContainer}>
-      <Button
-      title = "Filter By Status"
-      color = "black"
-      onPress={()=> navigate('WK')}
-      />
+      <Text style={{color: "black", fontSize:20}}>
+      Filter by Status
+      </Text>
       <ScrollView style={styles.checkContainer}>
       <CheckBox
 		  title='Signed'
