@@ -1,13 +1,13 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation'
 import { StyleSheet, Text, TouchableOpacity, View, Linking, ImageBackground } from 'react-native';
-import Expo from 'expo';
-'use strict';
+import Expo, { Permissions, Notifications } from 'expo';
 import { Component } from 'react';
 import { Button } from 'react-native-elements';
 
+const PUSH_ENDPOINT = 'https://rns202-17.cs.stolaf.edu:28491/users/push-token';
 
-var username = '';
+var user_name = '';
 export default class SignIn extends React.Component {
   constructor(props){
     super(props);
@@ -15,7 +15,7 @@ export default class SignIn extends React.Component {
   }
 
   static navigationOptions = {
-    header: null,
+    header: null
   }
 
   _signInWithGoogleAsync = async() => {
@@ -37,13 +37,42 @@ export default class SignIn extends React.Component {
       return {error: true};
     }
   }
-  _onPress = () => { 
+  _check(str){
+    if ( str.length < 12) return false;
+    if (str.slice(str.length-11, str.length) !== "@stolaf.edu") return false;
+    return true;
+  }
+  _isWorker(email){
     const {navigate} = this.props.navigation;
+    let str = 'http://rns202-17.cs.stolaf.edu:28491/user/' + email;
+    console.log("Start fetching" + str);
+    fetch(str)
+    .then( (res) => {
+      console.log("Finish");
+          if (res.ok) {
+            console.log("It worked!");
+            if (JSON.stringify(res._bodyText ) === "\"1\"")
+              navigate('WK', {user:user_name}); /* a worker */
+            else navigate('ST', {user:user_name});
+        }
+      })
+    .catch((error) => {
+      console.error(error);
+    })
+  }
+  _onPress = () => { 
     this._signInWithGoogleAsync().then( (e) =>{
       if (this.isLogin === true){
-        username = e.user.name;
-        console.log( "Welcome " + username);
-        navigate('HM', {user:username});
+        let tmp = e.user.email;
+        if (this._check(tmp) === false){
+          console.log( "This account does not belonged to St. Olaf" );
+        }
+        else{
+          user_name = e.user.name;
+          tmp = e.user.email;
+          console.log( "Welcome " + user_name);
+          this._isWorker( tmp.slice(0, tmp.length - 11));
+        }
       }
     })
     .catch( (e) => {
@@ -123,3 +152,45 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   }
 });
+
+
+async function registerForPushNotificationsAsync() {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== 'granted') {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iOS
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== 'granted') {
+    return;
+  }
+
+  // Get the token that uniquely identifies this device
+  let token = await Notifications.getExpoPushTokenAsync();
+
+  // POST the token to your backend server from where you can retrieve it to send push notifications.
+  return fetch(PUSH_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      token: {
+        value: token,
+      },
+      user: {
+        username: user_name,
+      },
+    }),
+  });
+}

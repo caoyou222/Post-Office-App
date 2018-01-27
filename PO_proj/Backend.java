@@ -1,5 +1,3 @@
-/** A class for socket client side.
-    @author cao1 */
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -9,43 +7,39 @@ import java.sql.DriverManager;
 import java.lang.*;
 
 public class Backend {
-	// class variables
-  
-  	/** A static final int for maxinBuff */
-     
     // methods
-  	/** Main class 
-      @param args arguments for the main function */
+    /** Main class
+     @param args arguments for the main function */
     public static void main(String[] args) {
-
-		try {
-		    int port = Integer.parseInt(args[0]);
-		    System.out.println("Initializing for network communication... ");
-		    ServerSocket servSock = new ServerSocket(port);
-		    /* assert:  ServerSocket successfully created */
-
-		    while(true){
-		    	System.out.println("Waiting for an incoming connection... ");
-		    	Socket inSock = servSock.accept();
-		    	Thread t = new Thread(new Worker(inSock));
-		    	t.start();
-		    }
-		    /* successful read from socket */
-	      
-		    //inSock.close();
-		}
-		catch (IOException e) {
-		    System.err.println("Receiver failed.");
-		    System.err.println(e.getMessage());
-		    System.exit(1);  // an error exit status
-		    return;
-		}
-    
+        
+        try {
+            int port = Integer.parseInt(args[0]);
+            System.out.println("Initializing for network communication... ");
+            ServerSocket servSock = new ServerSocket(port);
+            /* assert:  ServerSocket successfully created */
+            
+            while(true){
+                System.out.println("Waiting for an incoming connection... ");
+                Socket inSock = servSock.accept();
+                Thread t = new Thread(new Worker(inSock));
+                t.start();
+            }
+            /* successful read from socket */
+            
+            //inSock.close();
+        }
+        catch (IOException e) {
+            System.err.println("Receiver failed.");
+            System.err.println(e.getMessage());
+            System.exit(1);  // an error exit status
+            return;
+        }
+        
     }
 }
 
 /** A class for implements runnable.
-    @author cao1 */
+ @author cao1 */
 class Worker implements Runnable{
 	//class variable
 	/* A Socket*/
@@ -95,7 +89,10 @@ class Worker implements Runnable{
 	  	if (code != 200)
 	    	reply = parser.makeReply(code);
 	  	else {
-	    	reply = model.handle(parser);
+	    	if (parser.getRequestURL().substring(0,6).equals("/user/") ){
+                reply = model.verifyUser(parser);
+            }
+            else reply = model.handle(parser);
 	  	}
 
 	  	outStream.write(reply.getBytes());
@@ -117,6 +114,4 @@ class Worker implements Runnable{
 	/***** END section to implement within a Worker thread *****/
 
 	}
-
-
 }

@@ -14,12 +14,36 @@ class ExampleRestModel extends RestApiModel {
   public ExampleRestModel(Statement tmp) {
     addHandler("/", new CountHandler());
     addHandler("/names", new NamesHandler());
-    addHandler("/packages", new PackagesHandler());
     st = tmp;
   }
-  
-
-  /** inner class for implementing API for url "/" (count server) */
+    
+public String verifyUser(HttpParser p) {
+        /* Simulates SQL   SELECT val FROM count;   */
+        int isExist = 0;
+        String isWorker = "0";
+        try{
+            /* ask for verification of user */
+            PreparedStatement ps = st.getConnection().prepareStatement("SELECT isWorker FROM userList WHERE email = ?;");
+            System.out.println( "SQL check: " + p.getRequestURL().substring(6,p.getRequestURL().length()) );
+            ps.setString( 1, p.getRequestURL().substring(6,p.getRequestURL().length() ));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                System.out.println(rs.getString(1));
+                isWorker = rs.getString(1);
+                isExist++;
+                break;
+            }
+        }
+        catch (SQLException e){
+            System.out.println("SQLException caught: " + e.getMessage() );
+        }
+        if ( isExist == 0){
+            // add user
+            
+        }
+        return p.makeJsonReply(200,isWorker);
+    }
+}
 
   class PackagesHandler extends RestApiHandler{
     public String doGet(HttpParser p){
@@ -53,9 +77,6 @@ class ExampleRestModel extends RestApiModel {
     jsonStr = jsonStr.substring(0, jsonStr.length()-1) + "\n";
     jsonStr += " ] }";
     return p.makeJsonReply(200, jsonStr);
-    }
-  }
-
-
-
 }
+}
+
