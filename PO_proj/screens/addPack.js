@@ -76,6 +76,7 @@ export default class addPack extends React.Component {
     // refInput={input => {this.monthInput = input;}}
     onChangeText={(monthText) => this.setState({monthText})}
     returnKeyType="next"
+    keyboardType="numbers-and-punctuation"
     errorMessage='This field is required'
      onSubmitEditing={(event) => { 
      this.refs.dayInput.focus(); 
@@ -90,6 +91,7 @@ export default class addPack extends React.Component {
     // ref={input => {this.dayInput = input;}}
     onChangeText={(dayText) => this.setState({dayText})}
     returnKeyType="next"
+    keyboardType="numbers-and-punctuation"
     errorMessage='This field is required'
     onSubmitEditing={(event) => { 
      this.refs.yearInput.focus(); 
@@ -103,6 +105,7 @@ export default class addPack extends React.Component {
     ref='yearInput'
     onChangeText={(yearText) => this.setState({yearText})}
     returnKeyType="next"
+    keyboardType="numbers-and-punctuation"
     errorMessage='This field is required'
     onSubmitEditing={(event) => { 
      this.refs.trackInput.focus(); 
@@ -116,6 +119,7 @@ export default class addPack extends React.Component {
     ref='trackInput'
     onChangeText={(trackText) => this.setState({trackText})}
     returnKeyType="next"
+    keyboardType="name-phone-pad"
     errorMessage='This field is required'
     onSubmitEditing={(event) => { 
      this.refs.carrierInput.focus(); 
