@@ -18,6 +18,7 @@ export default class addPack extends React.Component {
  lastText: '',
  signText: '',
  behavior: 'padding',
+ errorMessage:'This field is required',
  }; 
  }
 
@@ -34,6 +35,7 @@ export default class addPack extends React.Component {
     const monthValid = monthText.length > 0
     this.setState({ monthValid })
     monthValid || this.refs.monthInput.shake()
+    alert(monthValid)
     return monthValid
   }
 
@@ -70,7 +72,7 @@ export default class addPack extends React.Component {
 
  render(){
  const { navigate } = this.props.navigation;
- const {month,monthValid} = this.state;
+ const {month,monthValid,errorMessage} = this.state;
  return (
 
   <View style={styles.container}>
@@ -90,6 +92,11 @@ export default class addPack extends React.Component {
      this.refs.dayInput.focus(); 
     }}
     />
+    {!monthValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
@@ -105,6 +112,11 @@ export default class addPack extends React.Component {
      this.refs.yearInput.focus(); 
     }}
     />
+    {!dayValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
