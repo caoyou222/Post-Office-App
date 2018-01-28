@@ -49,9 +49,9 @@ export default class student extends Component {
           const { params } = this.props.navigation.state;
           list = [];
           list = this.state.sourceData.filter(function(sd){return sd.name === params.user;});
-          console.log("before sorting");
-          console.log(params.user);
-          console.log(this.state.sourceData);
+          //console.log("before sorting");
+          //console.log(params.user);
+          //console.log(this.state.sourceData);
           this.setState({sourceData: list});
         });
       })
@@ -91,7 +91,7 @@ export default class student extends Component {
 render=()=>{
 const { navigate } = this.props.navigation;
 const { params } = this.props.navigation.state;
-console.log(params.user);
+//console.log(params.user);
 if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -141,7 +141,7 @@ return (
     <Icon large
       name='home'
       color = '#d69523'
-      onPress={()=>navigate('HM')}
+      onPress={()=>navigate('HM2',{user: params.user})}
       />
       </View>
 

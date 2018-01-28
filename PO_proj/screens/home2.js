@@ -3,7 +3,7 @@ import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableHighlight
 import {StackNavigator, TabNavigator} from 'react-navigation';
 import {Button} from 'react-native-elements';
 
-export default class home extends React.Component {
+export default class home2 extends React.Component {
  constructor(props){
  super(props);
  this.state = {
@@ -32,18 +32,6 @@ export default class home extends React.Component {
   {params.user}
   </Text>
   </View>
- 	<View style={styles.buttonContainer}>
-    <Button
-    activeOpacity={0.4}
-    textStyle={{fontSize:25, fontWeight:'bold'}}
-    buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'transparent',borderWidth: 3, borderColor: 'white', borderRadius: 30}}
-    title = "Worker"
-    color = "white"
-    iconRight={{name: 'work', type: 'material-icon', color:'white', size:24}}
-
-    onPress={()=> navigate('WK')}
-    />
-  </View>
 
   <View style={styles.buttonContainer}>
     <Button
@@ -53,7 +41,7 @@ export default class home extends React.Component {
     title = "Student"
     color = "white"
     iconRight={{name: 'user', type: 'font-awesome', color:'white', size:24}}
-    onPress={()=> navigate('ST',{user: params.user})}
+    onPress={()=> navigate('ST',{user:params.user})}
     />
   </View>
   <View style={styles.buttonContainer}>
