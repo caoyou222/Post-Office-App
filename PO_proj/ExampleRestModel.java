@@ -85,8 +85,16 @@ public String verifyUser(HttpParser p) {
 }
     class AddPackagesHandler extends RestApiHandler{
       public String doPost(HttpParser p){
-      System.out.println("OK");
-      return p.makeReply(200, "OK");
+        String month = p.getParam("month");
+        String day = p.getParam("day");
+        String year = p.getParam("year");
+        String track = p.getParam("track");
+        String carrier = p.getParam("carrier");
+        String lname = p.getParam("last");
+        String fname = p.getParam("first");
+        String sign = p.getParam("sign");
+        System.out.println(month+day+year+track+carrier+lname+fname+sign);
+        return p.makeReply(200, "OK");
 
       // try{
       //   JsonObject json = new JsonObject(jsonStr)
