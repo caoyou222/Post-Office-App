@@ -55,7 +55,7 @@ export default class addPack extends React.Component {
     fetch('http://rns202-3.cs.stolaf.edu:28434/addpackages', {
       method: 'POST',
       headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-      body: `'month'=${this.state.monthText},'day'=${this.state.dayText},'year'=${this.state.yearText},'track'=${this.state.trackText},'carrier'=${this.state.carrirText},'lname'=${this.state.lastText},'fname'=${this.state.firstText},'sign'=${this.state.signText},`,
+      body: `packinfo=${this.state.monthText},${this.state.dayText},${this.state.yearText},${this.state.trackText},${this.state.carrierText},${this.state.lastText},${this.state.firstText},`,
     }).then((res) => {
       if (res.ok) {
         console.log("it worked!")
