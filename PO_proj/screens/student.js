@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
-import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
+import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
-
-let sourceData = [
-    {trackno: '0000000000', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1399674572', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '2222222222', carrier: 'UPS', name:'Vo', year:'2018', month: '1', day:'15', status: 'Signed'},
-    {trackno: '1399674570', carrier: 'DHL', name:'Rab', year:'2018', month: '1', day:'24', status: 'Signed'},
-    {trackno: '4444444444', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '5555555555', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z11Y9790211025413', carrier: 'UPS', name:'Annie', year:'2017', month: '12', day:'12', status: 'Signed'},
-    {trackno: '7777777777', carrier: 'DHL', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '9999999999', carrier: 'DHL', name:'Annie', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Signed'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-    {trackno: '1Z9E61W60389597736', carrier: 'UPS', name:'Alina', year:'2018', month: '1', day:'24', status: 'Unsigned'},
-]
 let keywords = ''
 
 export default class student extends Component {
@@ -43,9 +26,8 @@ export default class student extends Component {
                     return data[sectionID];
                 }
             }),
-
+            isLoading: true,
             sourceData: undefined,
-            keywords: '',
         }
     }
 
@@ -54,16 +36,40 @@ export default class student extends Component {
       //console.log(keywords);
     }
 
+
+    componentDidMount=()=> {
+
+    return fetch("http://rns202-5.cs.stolaf.edu:28425/packages")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          isLoading: false,
+          sourceData: data.packages,
+        }, function() {
+          const { params } = this.props.navigation.state;
+          list = [];
+          list = this.state.sourceData.filter(function(sd){return sd.name === params.user;});
+          //console.log("before sorting");
+          //console.log(params.user);
+          //console.log(this.state.sourceData);
+          this.setState({sourceData: list});
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
     _search(){
       //comment
       console.log(keywords);
       const { navigate } = this.props.navigation;
       cr = [];
-      cr = sourceData.filter(function(sd){return sd.carrier === keywords;});
+      cr = this.state.sourceData.filter(function(sd){return sd.carrier === keywords;});
       tn = [];
-      tn = sourceData.filter(function(sd){return sd.trackno === keywords;});
+      tn = this.state.sourceData.filter(function(sd){return sd.trackno === keywords;});
       st = [];
-      st = sourceData.filter(function(sd){return sd.status === keywords;});
+      st = this.state.sourceData.filter(function(sd){return sd.status === keywords;});
       if(cr.length === 0 && tn.length === 0 && st.length === 0){
         navigate('NotFound');
       }
@@ -82,8 +88,19 @@ export default class student extends Component {
 
     }
 
-render(){
+render=()=>{
 const { navigate } = this.props.navigation;
+const { params } = this.props.navigation.state;
+//console.log(params.user);
+if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <Text>Loading</Text>
+        </View>
+      );
+}
+
+console.log(this.state.sourceData);
 return (
  <View style={styles.container}>
   <View style={styles.header}>
@@ -106,7 +123,8 @@ return (
       </View>
 
    <ListView 
-     dataSource = {this.state.dataSource.cloneWithRows(sourceData)}
+    
+     dataSource = {this.state.dataSource.cloneWithRows(this.state.sourceData)}
      renderRow={(rowData, sectionID, rowId)=>{return(
         <TouchableOpacity
               onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
@@ -123,7 +141,7 @@ return (
     <Icon large
       name='home'
       color = '#d69523'
-      onPress={()=>navigate('HM')}
+      onPress={()=>navigate('HM2',{user: params.user})}
       />
       </View>
 
