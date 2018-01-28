@@ -35,39 +35,34 @@ export default class addPack extends React.Component {
     const monthValid = monthText.length > 0
     this.setState({ monthValid })
     monthValid || this.refs.monthInput.shake()
-    alert(monthValid)
     return monthValid
   }
 
 
 
    addPackage() {
-    var pack = {
-      month: this.state.monthText,
-      // day: this.state.dayText,
-      // year: this.state.yearText,
-      // trackingnum: this.state.trackText,
-      // carrier: this.state.carrierText,
-      // first: this.state.firstText,
-      // last: this.state.lastText,
-      // sign: this.state.signText,
-    };
+    // var pack = {
+    //   month: this.state.monthText,
+    //   // day: this.state.dayText,
+    //   // year: this.state.yearText,
+    //   // trackingnum: this.state.trackText,
+    //   // carrier: this.state.carrierText,
+    //   // first: this.state.firstText,
+    //   // last: this.state.lastText,
+    //   // sign: this.state.signText,
+    // };
     
-    fetch('http://rns202-3.cs.stolaf.edu:28434/packages', {
+    fetch('http://rns202-3.cs.stolaf.edu:28434/addpackages', {
       method: 'POST',
-      headers: {
-        'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8"
-      },
-      body: JSON.stringify(pack)
-    }).then((response) => response.json())
-      .then((data) => {
-        console.log('added')
-        return responseJson.Message;
-      })
-      .catch((err) => {
-        alert('error');
-        console.log(error);
-      });
+      headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+      body: `'month'=${this.state.monthText},'day'=${this.state.dayText},'year'=${this.state.yearText},'track'=${this.state.trackText},'carrier'=${this.state.carrirText},'lname'=${this.state.lastText},'fname'=${this.state.firstText},'sign'=${this.state.signText},`,
+    }).then((res) => {
+      if (res.ok) {
+        console.log("it worked!")
+      }else {
+        console.log("nope")
+      }
+    })
   }
 
  render(){
@@ -112,11 +107,6 @@ export default class addPack extends React.Component {
      this.refs.yearInput.focus(); 
     }}
     />
-    {!dayValid &&
-      <FormValidationMessage>
-      {errorMessage}
-      </FormValidationMessage>
-    }
     </View>
 
     <View style={styles.inputContainer}>
@@ -187,7 +177,7 @@ export default class addPack extends React.Component {
     </View>
 
     <View style={styles.inputContainer}>
-    <FormLabel>Signed/Unsigned</FormLabel>
+    <FormLabel>Status/Unsigned</FormLabel>
     <FormInput  
     ref='signInput'
     onChangeText={(signText) => this.setState({signText})}
@@ -203,7 +193,7 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-
+      onPress={this.addPackage.bind(this)}
       />
     </View>
     </ScrollView>

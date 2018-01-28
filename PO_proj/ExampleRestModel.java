@@ -13,6 +13,7 @@ class ExampleRestModel extends RestApiModel {
   Statement st;
   public ExampleRestModel(Statement tmp) {
     addHandler("/packages", new PackagesHandler());
+    addHandler("/addpackages", new AddPackagesHandler());
     st = tmp;
   }
     
@@ -77,11 +78,29 @@ public String verifyUser(HttpParser p) {
     jsonStr += " ] }";
     return p.makeJsonReply(200, jsonStr);
 
-    public String doPost(HttpParser p){
-      String jsonStr = new String("{ \"packages\": ["{\"month\": \"added\"},"]}");
-      System.out.println(jsonStr);
+
+}
+   
+
+}
+    class AddPackagesHandler extends RestApiHandler{
+      public String doPost(HttpParser p){
+      System.out.println("OK");
+      return p.makeReply(200, "OK");
+
+      // try{
+      //   JsonObject json = new JsonObject(jsonStr)
+        
+
+      //   String insert = "INSERT INTO packages VALUES(";
+
+      //   return p.makeReply(200, "OK");
+      // }catch(Exception e){
+      //   System.out.println(e.getMessage());
+      // }
     }
+
 }
-}
+    
 }
 
