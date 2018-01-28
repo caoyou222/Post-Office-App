@@ -9,6 +9,7 @@ export default class addPack extends React.Component {
 
  this.state = {
  monthText: '',
+ monthValid: true,
  dayText: '',
  yearText: '',
  trackText: '',
@@ -28,13 +29,12 @@ export default class addPack extends React.Component {
   headerTintColor: 'white'
  }
 
- validateUsername() {
-    const { username } = this.state
-    const usernameValid = username.length > 0
-    LayoutAnimation.easeInEaseOut()
-    this.setState({ usernameValid })
-    usernameValid || this.usernameInput.shake()
-    return usernameValid
+ validateMonth() {
+    const { monthText } = this.state
+    const monthValid = monthText.length > 0
+    this.setState({ monthValid })
+    monthValid || this.refs.monthInput.shake()
+    return monthValid
   }
 
 
@@ -70,6 +70,7 @@ export default class addPack extends React.Component {
 
  render(){
  const { navigate } = this.props.navigation;
+ const {month,monthValid} = this.state;
  return (
 
   <View style={styles.container}>
@@ -79,12 +80,13 @@ export default class addPack extends React.Component {
     <FormLabel>Month</FormLabel>
     <FormInput 
     ref='monthInput'
-    // refInput={input => {this.monthInput = input;}}
+    refInput={input => {this.monthInput = input;}}
     onChangeText={(monthText) => this.setState({monthText})}
     returnKeyType="next"
     keyboardType="numbers-and-punctuation"
     errorMessage='This field is required'
      onSubmitEditing={(event) => { 
+     this.validateMonth();
      this.refs.dayInput.focus(); 
     }}
     />
@@ -189,7 +191,7 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-      onPress={this.addPackage.bind(this)}
+
       />
     </View>
     </ScrollView>
