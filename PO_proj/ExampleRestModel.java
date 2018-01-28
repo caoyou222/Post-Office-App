@@ -5,6 +5,7 @@
 import java.io.*;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.lang.*;
@@ -121,7 +122,22 @@ class SignatureHandler extends RestApiHandler{
 
     public String doPatch(HttpParser p) {
       System.out.println("patch");
-      
+      try{
+        String name = p.getParam("name");
+        String first = "", last = "";
+        StringTokenizer nm = new StringTokenizer(name, " ");
+        while(nm.hasMoreElements()){
+            first = nm.nextElement().toString();
+            last = nm.nextElement().toString();
+        }
+        PreparedStatement ps = st.getConnection().prepareStatement("UPDATE Packages SET status = 1 WHERE first = ? AND last = ?;");
+        System.out.println(first + " " + last);
+        ps.setString(1,first);
+        ps.setString(2,last);
+        ResultSet rs = ps.executeQuery();
+      }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
       
       return p.makeReply(200, "OK");
     }
