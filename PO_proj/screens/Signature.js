@@ -91,7 +91,8 @@ export default class Signature extends Component {
 
         }, function() {
           list = [];
-          list = this.state.sourceData;
+          if(keywords === '') list = this.state.sourceData;
+          else list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
           console.log(list);
           list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
           this.setState({sourceData: list});
@@ -105,15 +106,15 @@ export default class Signature extends Component {
 
   _mark(){
     return fetch(SERVER_PACKAGES, {
- method: "PATCH", body:`name=${keywords}` ,
- headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
- .then((res) => {
- if (res.ok) {
- console.log("it worked!");
- } else {
- console.log("nope")
- }
- })
+    method: "PATCH", body:`name=${keywords}` ,
+    headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
+    .then((res) => {
+      if (res.ok) {
+        console.log("it worked!");
+      } else {
+        console.log("nope")
+      }
+    })
 
   }
 
