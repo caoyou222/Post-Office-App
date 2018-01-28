@@ -11,10 +11,11 @@ import SignIn from './screens/SignIn';
 import search from './screens/search';
 import NotFound from './screens/NotFound';
 import Tracking from './screens/Tracking';
-import Count from './screens/Count';
 import home2 from './screens/home2';
+import Signature from './screens/Signature';
 
 const Navi = StackNavigator({
+  SG: {screen: Signature},
   SI: {screen: SignIn},
   HM: {screen: home},
   HM2: {screen: home2},
