@@ -49,9 +49,8 @@ export default class student extends Component {
           const { params } = this.props.navigation.state;
           list = [];
           list = this.state.sourceData.filter(function(sd){return sd.name === params.user;});
-          //console.log("before sorting");
-          //console.log(params.user);
-          //console.log(this.state.sourceData);
+          console.log(list);
+          list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
           this.setState({sourceData: list});
         });
       })
