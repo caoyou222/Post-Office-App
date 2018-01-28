@@ -129,7 +129,8 @@ return (
               onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
             >
             <View style={styles.sectionHeader}>
-                <Text>{rowData.trackno}</Text>
+                <Text style={{fontSize: 16}}>{rowData.trackno}</Text>
+                <Text style={{color: '#7e7e7e'}}>{rowData.month}/{rowData.day}/{rowData.year}</Text>
             </View>
             </TouchableOpacity>
         );}
@@ -137,7 +138,8 @@ return (
     />
 
     <View style={styles.bottom}>
-    <Icon large
+    <Icon
+      size={35}
       name='home'
       color = '#d69523'
       onPress={()=>navigate('HM2',{user: params.user})}
