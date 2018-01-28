@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions} from 'react-native';
+import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, ActivityIndicator} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
@@ -28,6 +28,7 @@ export default class student extends Component {
             }),
             isLoading: true,
             sourceData: undefined,
+            refreshing: false,
         }
     }
 
@@ -38,7 +39,6 @@ export default class student extends Component {
 
 
     componentDidMount=()=> {
-
     return fetch("http://rns202-5.cs.stolaf.edu:28425/packages")
       .then((res) => res.json())
       .then((data) => {
@@ -58,6 +58,30 @@ export default class student extends Component {
         console.error(error);
       });
   }
+
+    _onRefresh(){
+      this.setState({refreshing: true});
+      return fetch("http://rns202-5.cs.stolaf.edu:28425/packages")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          refreshing:false,
+          sourceData: data.packages,
+
+        }, function() {
+          const { params } = this.props.navigation.state;
+          list = [];
+          list = this.state.sourceData.filter(function(sd){return sd.name === params.user;});
+          console.log(list);
+          list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+          this.setState({sourceData: list});
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    }
 
     _search(){
       //comment
@@ -94,7 +118,7 @@ const { params } = this.props.navigation.state;
 if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
-          <Text>Loading</Text>
+          <ActivityIndicator />
         </View>
       );
 }
@@ -103,7 +127,7 @@ console.log(this.state.sourceData);
 return (
  <View style={styles.container}>
   <View style={styles.header}>
-    <SearchBar containerStyle={{width: 270, backgroundColor: 'white'}}
+    <SearchBar containerStyle={{width: Dimensions.get('window').width, backgroundColor: 'white'}}
     inputStyle = {{backgroundColor: 'white'}}
     lightTheme
     placeholderTextColor = '#eae0cd'
@@ -113,16 +137,16 @@ return (
     icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
     placeholder='Enter tracking number or status to search' />
-    <Button small
-      title='Search'
-      buttonStyle={{backgroundColor: '#eae0cd'}}
-      color = "grey"
-      onPress={this._search.bind(this)}
-      />
+   
       </View>
 
    <ListView 
-    
+    refreshControl={
+      <RefreshControl
+        refreshing = {this.state.refreshing}
+        onRefresh = {this._onRefresh.bind(this)} 
+        />
+    }
      dataSource = {this.state.dataSource.cloneWithRows(this.state.sourceData)}
      renderRow={(rowData, sectionID, rowId)=>{return(
         <TouchableOpacity
@@ -156,7 +180,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     paddingRight: 10,
-    backgroundColor: '#eae0cd',
+    backgroundColor: 'white',
     alignItems:'center',
   },
 
