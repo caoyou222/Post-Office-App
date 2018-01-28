@@ -1,3 +1,9 @@
+/** Example of implementing REST API handlers.
+    @note  These methods operate on local variables instead 
+    of database tables. In an actual app, the methods of Handler classes 
+    should use JDBC to perform SQL operations instead. */
+import java.io.*;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.sql.*;
 import java.sql.DriverManager;
@@ -74,7 +80,7 @@ public String verifyUser(HttpParser p) {
 }
 }
 
-class SignatureHandler extends RestApiHandler{
+  class SignatureHandler extends RestApiHandler{
     public String doGet(HttpParser p){
       String jsonStr = new String("{ \"packages\": [\n");
       try{
@@ -82,7 +88,7 @@ class SignatureHandler extends RestApiHandler{
         ResultSet rs = st.executeQuery(rows);
         while( rs.next()){
         String trackno = rs.getString("trackno");
-        String first = rs.getString("first") + " " + rs.getString("last");
+        String name = rs.getString("first") + " " + rs.getString("last");
         String carrier = rs.getString("carrier");
         String year = rs.getString("year");
         String month = rs.getString("month");
@@ -94,9 +100,7 @@ class SignatureHandler extends RestApiHandler{
         
         jsonStr += "    ";
         jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
-        
 
-        System.out.println(jsonStr);
       }
          
       }catch(Exception e){

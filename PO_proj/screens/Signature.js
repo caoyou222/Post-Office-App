@@ -104,6 +104,16 @@ export default class Signature extends Component {
     }
 
   _mark(){
+    return fetch(SERVER_PACKAGES, {
+ method: "PATCH", body:`name=${keywords}` ,
+ headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
+ .then((res) => {
+ if (res.ok) {
+ console.log("it worked!");
+ } else {
+ console.log("nope")
+ }
+ })
 
   }
 
