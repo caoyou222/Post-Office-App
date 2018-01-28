@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {LayoutAnimation,TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
+import {KeyboardAvoidingView, LayoutAnimation,TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Icon, Button, Divider, FormLabel, FormInput, Form, FormValidationMessage, Input } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
  super(props);
+
  this.state = {
  monthText: '',
  dayText: '',
@@ -15,6 +16,7 @@ export default class addPack extends React.Component {
  firstText: '',
  lastText: '',
  signText: '',
+ behavior: 'padding',
  }; 
  }
 
@@ -35,30 +37,34 @@ export default class addPack extends React.Component {
     return usernameValid
   }
 
+
+
    addPackage() {
     var pack = {
       month: this.state.monthText,
-      day: this.state.dayText,
-      year: this.state.yearText,
-      trackingnum: this.state.trackText,
-      carrier: this.state.carrierText,
-      first: this.state.firstText,
-      last: this.state.lastText,
-      sign: this.state.signText,
+      // day: this.state.dayText,
+      // year: this.state.yearText,
+      // trackingnum: this.state.trackText,
+      // carrier: this.state.carrierText,
+      // first: this.state.firstText,
+      // last: this.state.lastText,
+      // sign: this.state.signText,
     };
+    
     fetch('http://rns202-3.cs.stolaf.edu:28434/packages', {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8"
       },
       body: JSON.stringify(pack)
     }).then((response) => response.json())
-      .then((responseJson) => {
+      .then((data) => {
+        console.log('added')
         return responseJson.Message;
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((err) => {
+        alert('error');
+        console.log(error);
       });
   }
 
@@ -67,7 +73,7 @@ export default class addPack extends React.Component {
  return (
 
   <View style={styles.container}>
-
+  <KeyboardAvoidingView behavior='padding' style={styles.container}>
     <ScrollView style={styles.inputContainer}>
     <View style={styles.inputContainer}>
     <FormLabel>Month</FormLabel>
@@ -187,6 +193,8 @@ export default class addPack extends React.Component {
       />
     </View>
     </ScrollView>
+
+    </KeyboardAvoidingView>
 
     <View style={styles.bottomContainer}>
       <Icon 

@@ -76,6 +76,11 @@ public String verifyUser(HttpParser p) {
     jsonStr = jsonStr.substring(0, jsonStr.length()-1) + "\n";
     jsonStr += " ] }";
     return p.makeJsonReply(200, jsonStr);
+
+    public String doPost(HttpParser p){
+      String jsonStr = new String("{ \"packages\": ["{\"month\": \"added\"},"]}");
+      System.out.println(jsonStr);
+    }
 }
 }
 }
