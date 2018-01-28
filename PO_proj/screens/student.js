@@ -3,6 +3,7 @@ import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image,
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
+const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/packages'
 let keywords = ''
 
 export default class student extends Component {
@@ -39,7 +40,7 @@ export default class student extends Component {
 
 
     componentDidMount=()=> {
-    return fetch("http://rns202-5.cs.stolaf.edu:28425/packages")
+    return fetch(SERVER_PACKAGES)
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -61,7 +62,7 @@ export default class student extends Component {
 
     _onRefresh(){
       this.setState({refreshing: true});
-      return fetch("http://rns202-5.cs.stolaf.edu:28425/packages")
+      return fetch(SERVER_PACKAGES)
       .then((res) => res.json())
       .then((data) => {
         this.setState({

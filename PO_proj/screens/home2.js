@@ -16,6 +16,7 @@ export default class home2 extends React.Component {
  render(){
  const { navigate } = this.props.navigation;
  const { params } = this.props.navigation.state;
+ const { goBack } = this.props.navigation;
  return (
   <ImageBackground 
     source = {{uri: 'https://wp.stolaf.edu/virtual/files/2013/02/campus_51.jpg'}}
@@ -56,13 +57,13 @@ export default class home2 extends React.Component {
     />
   </View>
   <View style={styles.buttonContainer}>
-    <Button
+    <Button navigator={this.props.navigator}
     activeOpacity={0.4}
     title = "Sign Out"
     buttonStyle={{backgroundColor: 'transparent'}}
     color = "white"
     iconRight={{name: 'log-out', type: 'entypo', color:'white', size:24}}
-    onPress={()=> navigate('SI')}
+    onPress={()=> goBack()}
     />
   </View>
 
