@@ -5,7 +5,7 @@ import Expo, { Permissions, Notifications } from 'expo';
 import { Component } from 'react';
 import { Button } from 'react-native-elements';
 
-const PUSH_ENDPOINT = 'https://rns202-17.cs.stolaf.edu:28491/users/push-token';
+const PUSH_ENDPOINT = 'http://rns202-5.cs.stolaf.edu:28425/users/push-token';
 
 var user_name = '';
 export default class SignIn extends React.Component {
@@ -44,7 +44,7 @@ export default class SignIn extends React.Component {
   }
   _isWorker(email){
     const {navigate} = this.props.navigation;
-    let str = 'http://rns202-17.cs.stolaf.edu:28491/user/' + email;
+    let str = 'http://rns202-5.cs.stolaf.edu:28425/user/' + email;
     console.log("Start fetching" + str);
     fetch(str)
     .then( (res) => {
@@ -52,7 +52,7 @@ export default class SignIn extends React.Component {
           if (res.ok) {
             console.log("It worked!");
             if (JSON.stringify(res._bodyText ) === "\"1\"")
-              navigate('WK', {user:user_name}); /* a worker */
+              navigate('ST', {user:user_name}); /* a worker */
             else navigate('ST', {user:user_name});
         }
       })
