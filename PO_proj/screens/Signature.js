@@ -178,7 +178,7 @@ return (
      dataSource = {this.state.dataSource.cloneWithRows(this.state.sourceData)}
      renderRow={(rowData, sectionID, rowId)=>{return(
         <TouchableOpacity
-              onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
+              onPress={()=>navigate('DT2', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
             >
             <View style={styles.sectionHeader}>
                 <Text style={{fontSize: 16}}>{rowData.trackno}</Text>
