@@ -54,7 +54,7 @@ export default class SignIn extends React.Component {
             console.log("It worked!");
             if (JSON.stringify(res._bodyText ) === "\"1\"")
               navigate('HM', {user:user_name}); /* a worker */
-            else navigate('HM', {user:user_name});
+            else navigate('HM2', {user:user_name});
         }
       })
     .catch((error) => {
