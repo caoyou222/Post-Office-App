@@ -22,7 +22,7 @@ export default class filter extends React.Component {
                     return data[sectionID];
                 }
             }),
-
+            isLoading: true,
             sourceData: undefined,
             keywords: '',
             ups:false,
@@ -71,21 +71,22 @@ _search(){
           }
 
           dt = [];
-          console.log(this.state.d_day);
-          dt = this.state.sourceData.filter(function(pack){return pack.day===this.state.d_day;});
+          dayday = this.state.d_day;
+          dt = this.state.sourceData.filter(function(pack){return pack.day===dayday;});
           
-          // st = [];
+          st = [];
+          if(this.state.sign === true){
+            st = this.state.sourceData.filter(function(pack){return pack.status === "signed";});
+          }else if(this.state.unsign === true){
+            st = this.state.sourceData.filter(function(pack){return pack.status === "unsigned";});
+          }
 
-          // if(this.status.signed === true){
-          //   st = cr.filter(function(sd){return sd.status === "signed";});
-          // }
-
-          if(tn.length === 0 && cr.length === 0 && dt.length === 0){
+          if(tn.length === 0 && cr.length === 0 && dt.length === 0 && st.length === 0){
             navigate('NotFound');
           }
           if(cr.length !== 0){
             console.log(cr);
-            navigate('TS', {key: keywords, pkg: cr});
+            navigate('search', {key: keywords, pkg: cr});
           }
           if(tn.length !== 0){
             console.log(tn);
@@ -93,7 +94,11 @@ _search(){
           }
           if(dt.length !== 0){
             console.log(dt);
-            navigate('TS', {key: keywords, pkg: dt});
+            navigate('search', {key: keywords, pkg: dt});
+          }
+          if(st.length !== 0){
+            console.log(st);
+            navigate('search', {key: keywords, pkg: st});
           }
 
         });
