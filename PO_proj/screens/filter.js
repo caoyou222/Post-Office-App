@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ScrollView, ListView, TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
+import {ScrollView, ListView, TextInput, Image, Text, StyleSheet, Button, View, Dimensions, Vibration, DatePickerIOS} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
@@ -9,6 +9,10 @@ export default class filter extends React.Component {
  constructor(props){
  super(props);
  this.state = {
+            chosenDate: new Date(),
+            d_day: '',
+            d_month: '',
+            d_year: '',
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
                 getRowData: (data, sectionID, rowID) => {
@@ -18,10 +22,17 @@ export default class filter extends React.Component {
                     return data[sectionID];
                 }
             }),
-
+            isLoading: true,
             sourceData: undefined,
             keywords: '',
+            ups:false,
+            usps:false,
+            fedex:false,
+            dhl:false,
+            sign:false,
+            unsign:false,
         }
+  this.setDate = this.setDate.bind(this);
  }
  static navigationOptions = {
  title: 'Search Packages',
@@ -33,37 +44,80 @@ export default class filter extends React.Component {
 
 _changeText(val){
       keywords = val;
-      //console.log(keywords);
     }
 
 _search(){
-  //comment
-  console.log(keywords);
-  const { navigate } = this.props.navigation;
-  cr = [];
-  cr = sourceData.filter(function(sd){return sd.carrier === keywords;});
-  tn = [];
-  tn = sourceData.filter(function(sd){return sd.trackno === keywords;});
-  st = [];
-  st = sourceData.filter(function(sd){return sd.status === keywords;});
-  if(cr.length === 0 && tn.length === 0 && st.length === 0){
-    navigate('NotFound');
-  }
-  if(cr.length !== 0){
-    console.log(cr);
-    navigate('TS', {key: keywords, pkg: cr});
-  }
-  if(tn.length !== 0){
-    console.log(tn);
-    navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
-  }
-  if(st.length !== 0){
-    console.log(st);
-    navigate('TS', {key: keywords, pkg: st});
-  }
+  fetch('http://rns202-3.cs.stolaf.edu:28434/packages')
+  .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          isLoading: false,
+          sourceData: data.packages,
+        }, function() {
+          //comment
+          const { navigate } = this.props.navigation;
+          tn = [];
+          tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
 
+          cr = [];
+          if(this.state.ups === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "UPS";})
+          }else if(this.state.usps === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "USPS";})
+          }else if(this.state.fedex === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "FEDEX";})
+          }else if(this.state.dhl === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "DHL";})
+          }
+
+          dt = [];
+          dayday = this.state.d_day;
+          dt = this.state.sourceData.filter(function(pack){return pack.day===dayday;});
+          
+          st = [];
+          if(this.state.sign === true){
+            st = this.state.sourceData.filter(function(pack){return pack.status === "signed";});
+          }else if(this.state.unsign === true){
+            st = this.state.sourceData.filter(function(pack){return pack.status === "unsigned";});
+          }
+
+          if(tn.length === 0 && cr.length === 0 && dt.length === 0 && st.length === 0){
+            navigate('NotFound');
+          }
+          if(cr.length !== 0){
+            console.log(cr);
+            navigate('search', {key: keywords, pkg: cr});
+          }
+          if(tn.length !== 0){
+            console.log(tn);
+            navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
+          }
+          if(dt.length !== 0){
+            console.log(dt);
+            navigate('search', {key: keywords, pkg: dt});
+          }
+          if(st.length !== 0){
+            console.log(st);
+            navigate('search', {key: keywords, pkg: st});
+          }
+
+        });
+      });
 }
 
+  setDate(newDate) {
+    this.setState({chosenDate: newDate});
+    chosenDate = newDate;
+    year=chosenDate.getFullYear().toString();
+    this.setState({d_year: year});
+    d_year = year
+    month=(chosenDate.getMonth()+1).toString()
+    this.setState({d_month: (chosenDate.getMonth()+1).toString()});
+    d_month = month;
+    day=chosenDate.getDate().toString();
+    this.setState({d_day: chosenDate.getDate().toString()});
+    d_day = day;
+  }
 
 
  render(){
@@ -102,6 +156,20 @@ _search(){
       </View>
 
     <ScrollView style={styles.buttonContainer}>
+
+    <View style={styles.buttonContainer}>
+      <Text style={{color: "black", fontSize:20}}>
+      Filter by Date
+      </Text>
+      <ScrollView style={styles.checkContainer}>
+      <DatePickerIOS
+        date={this.state.chosenDate}
+        mode="date"
+        onDateChange={this.setDate}
+      />
+      </ScrollView>
+    </View>
+
     <View style={styles.buttonContainer}>
       <Text style={{color: "black", fontSize:20}}>
       Filter by Carrier
@@ -113,65 +181,29 @@ _search(){
 		  onPress={(checked)=> this.setState({
 		  	ups: !this.state.ups,
 		  })}
-		/>
-		<CheckBox
-		  title='USPS'
-		  checked={this.state.usps}
-		  onPress={(checked)=> this.setState({
-		  	usps: !this.state.usps,
-		  })}
-		/>
-		<CheckBox
-		  title='Fedex'
-		  checked={this.state.fedex}
-		  onPress={(checked)=> this.setState({
-		  	fedex: !this.state.fedex,
-		  })}
-		/>
-		<CheckBox
-		  title='DHl'
-		  checked={this.state.dhl}
-		  onPress={(checked)=> this.setState({
-		  	dhl: !this.state.dhl,
-		  })}
-		/>
-	  </ScrollView>
-    </View>
-
-    <View style={styles.buttonContainer}>
-      <Text style={{color: "black", fontSize:20}}>
-      Filter by Date
-      </Text>
-      <ScrollView style={styles.checkContainer}>
-      <CheckBox
-		  title='Today'
-		  checked={this.state.today}
-		  onPress={(checked)=> this.setState({
-		  	today: !this.state.today,
-		  })}
-		/>
-		<CheckBox
-		  title='Last week'
-		  checked={this.state.week}
-		  onPress={(checked)=> this.setState({
-		  	week: !this.state.week,
-		  })}
-		/>
-		<CheckBox
-		  title='Last month'
-		  checked={this.state.month}
-		  onPress={(checked)=> this.setState({
-		  	month: !this.state.month,
-		  })}
-		/>
-		<CheckBox
-		  title='Last 3 month'
-		  checked={this.state.tmonth}
-		  onPress={(checked)=> this.setState({
-		  	tmonth: !this.state.tmonth,
-		  })}
-		/>
-	  </ScrollView>
+  		/>
+  		<CheckBox
+  		  title='USPS'
+  		  checked={this.state.usps}
+  		  onPress={(checked)=> this.setState({
+  		  	usps: !this.state.usps,
+  		  })}
+  		/>
+  		<CheckBox
+  		  title='Fedex'
+  		  checked={this.state.fedex}
+  		  onPress={(checked)=> this.setState({
+  		  	fedex: !this.state.fedex,
+  		  })}
+  		/>
+  		<CheckBox
+  		  title='DHl'
+  		  checked={this.state.dhl}
+  		  onPress={(checked)=> this.setState({
+  		  	dhl: !this.state.dhl,
+  		  })}
+  		/>
+  	  </ScrollView>
     </View>
 
     <View style={styles.buttonContainer}>
@@ -185,15 +217,15 @@ _search(){
 		  onPress={(checked)=> this.setState({
 		  	sign: !this.state.sign,
 		  })}
-		/>
-		<CheckBox
-		  title='Unsigned'
-		  checked={this.state.unsign}
-		  onPress={(checked)=> this.setState({
-		  	unsign: !this.state.unsign,
-		  })}
-		/>
-	  </ScrollView>
+  		/>
+  		<CheckBox
+  		  title='Unsigned'
+  		  checked={this.state.unsign}
+  		  onPress={(checked)=> this.setState({
+  		  	unsign: !this.state.unsign,
+  		  })}
+  		/>
+  	  </ScrollView>
     </View>
     </ScrollView>
 
@@ -223,6 +255,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   buttonContainer: {
+    height:200,
     margin: 10,
   },
   checkContainer: {
