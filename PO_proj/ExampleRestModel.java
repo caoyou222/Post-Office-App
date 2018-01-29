@@ -14,6 +14,7 @@ class ExampleRestModel extends RestApiModel {
   Statement st;
   public ExampleRestModel(Statement tmp) {
     addHandler("/packages", new PackagesHandler());
+    addHandler("/addpackages", new AddPackagesHandler());
     addHandler("/signature", new SignatureHandler());
     st = tmp;
   }
@@ -79,8 +80,75 @@ public String verifyUser(HttpParser p) {
     jsonStr += " ] }";
     System.out.println(jsonStr);
     return p.makeJsonReply(200, jsonStr);
+
+
 }
+   
+
 }
+
+    class AddPackagesHandler extends RestApiHandler{
+      public String doPost(HttpParser p){
+        try{
+            String packinfo = p.getParam("packinfo");
+            String month = "";
+            String day = "";
+            String year = "";
+            String track = "";
+            String carrier = "";
+            String lname = "";
+            String fname = "";
+            int status = 0;
+
+            StringTokenizer str = new StringTokenizer(packinfo,",");
+            while(str.hasMoreElements()){
+                month = str.nextElement().toString();
+                day = str.nextElement().toString();
+                year = str.nextElement().toString();
+                track = str.nextElement().toString();
+                carrier = str.nextElement().toString();
+                lname = str.nextElement().toString();
+                fname = str.nextElement().toString();
+            }
+
+            String insert = "INSERT INTO packages VALUES (?,?,?,?,?,?,?,?)";
+
+            PreparedStatement ps = st.getConnection().prepareStatement(insert);
+            ps.setString(1,track);
+            ps.setString(2,carrier);
+            ps.setString(3,fname);
+            ps.setString(4,lname);
+            ps.setString(5,day);
+            ps.setString(6,month);
+            ps.setString(7,year);
+            ps.setInt(8,status);
+
+            ps.executeUpdate();
+            System.out.println(packinfo);
+            System.out.println(insert);
+
+        }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
+
+        return p.makeReply(200, "OK");
+
+      // try{
+      //   JsonObject json = new JsonObject(jsonStr)
+        
+
+      //   String insert = "INSERT INTO packages VALUES(";
+
+      //   return p.makeReply(200, "OK");
+      // }catch(Exception e){
+      //   System.out.println(e.getMessage());
+      // }
+    }
+
+}
+    
+}
+
 
 class SignatureHandler extends RestApiHandler{
     public String doGet(HttpParser p){

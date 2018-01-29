@@ -86,13 +86,15 @@ class Worker implements Runnable{
 	  	int code = parser.parseRequest();
 	  
 	  	String reply;
-	  	if (code != 200)
+	  	if (code != 200){
 	    	reply = parser.makeReply(code);
+	    	System.out.println("pass1");}
 	  	else {
 	    	if (parser.getRequestURL().substring(0,6).equals("/user/") ){
                 reply = model.verifyUser(parser);
             }
             else reply = model.handle(parser);
+            System.out.println("pass2");
 	  	}
 
 	  	outStream.write(reply.getBytes());

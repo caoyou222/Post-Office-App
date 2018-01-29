@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
-import {TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
+import {KeyboardAvoidingView, LayoutAnimation,TextInput, Image, Text, StyleSheet, View, Dimensions, Alert, Vibration, ScrollView} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { Icon, Button, Divider, FormLabel, FormInput, FormValidationMessage, Input } from 'react-native-elements'
+import { Icon, Button, Divider, FormLabel, FormInput, Form, FormValidationMessage, Input } from 'react-native-elements'
 
 export default class addPack extends React.Component {
  constructor(props){
  super(props);
+
  this.state = {
  monthText: '',
+ monthValid: true,
  dayText: '',
+ dayValid: true,
  yearText: '',
+ yearValid: true,
  trackText: '',
+ trackValid: true,
  carrierText: '',
- firstText: '',
- lastText: '',
+ carrierValid: true,
+ fnameText: '',
+ fnameValid: true,
+ lnameText: '',
+ lnameValid: true,
  signText: '',
+ behavior: 'padding',
+ errorMessage:'This field is required',
  }; 
  }
 
@@ -26,101 +36,241 @@ export default class addPack extends React.Component {
   headerTintColor: 'white'
  }
 
-  //  addPackage() {
-  //   var pack = {
-  //     month = this.state.monthText
-  //     day = this.state.dayText
-  //     year = this.state.yearText
-  //     trackingnum = this.state.trackText
-  //     carrier = this.state.carrierText
-  //     first = this.state.firstText
-  //     last = this.state.lastText
-  //     sign = this.state.signText
-  //   };
-  //   fetch('http://rns202-3.cs.stolaf.edu:28434/', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(pack)
-  //   }).then((response) => response.json())
-  //     .then((responseJson) => {
-  //       return responseJson.Message;
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
+  validateMonth() {
+    const { monthText } = this.state
+    const monthValid = monthText.length > 0
+    this.setState({ monthValid })
+    monthValid || this.refs.monthInput.shake()
+    return monthValid
+  }
 
-  focusDayInput() {
-    this.dayInput.focus();
+  validateDay() {
+    const { dayText } = this.state
+    const dayValid = dayText.length > 0
+    this.setState({ dayValid })
+    dayValid || this.refs.dayInput.shake()
+    return dayValid
+  }
+
+  validateYear() {
+    const { yearText } = this.state
+    const yearValid = yearText.length > 0
+    this.setState({ yearValid })
+    yearValid || this.refs.yearInput.shake()
+    return yearValid
+  }
+
+  validateTrack() {
+    const { trackText } = this.state
+    const trackValid = trackText.length > 0
+    this.setState({ trackValid })
+    trackValid || this.refs.trackInput.shake()
+    return trackValid
+  }
+
+  validateCarrier() {
+    const { carrierText } = this.state
+    const carrierValid = carrierText.length > 0
+    this.setState({ carrierValid })
+    carrierValid || this.refs.carrierInput.shake()
+    return carrierValid
+  }
+
+  validateLname() {
+    const { lnameText } = this.state
+    const lnameValid = lnameText.length > 0
+    this.setState({ lnameValid })
+    lnameValid || this.refs.lnameInput.shake()
+    return lnameValid
+  }
+
+  validateFname() {
+    const { fnameText } = this.state
+    const fnameValid = fnameText.length > 0
+    this.setState({ fnameValid })
+    fnameValid || this.refs.fnameInput.shake()
+    return fnameValid
   }
 
 
+
+   addPackage() {
+    fetch('http://rns202-3.cs.stolaf.edu:28434/addpackages', {
+      method: 'POST',
+      headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+      body: `packinfo=${this.state.monthText},${this.state.dayText},${this.state.yearText},${this.state.trackText},${this.state.carrierText},${this.state.lnameText},${this.state.fnameText},`,
+    }).then((res) => {
+      if (res.ok) {
+        console.log("it worked!")
+      }else {
+        console.log("nope")
+      }
+    })
+  }
+
  render(){
  const { navigate } = this.props.navigation;
- const {monthText,dayText} = this.state;
+ const {monthValid,
+        dayValid,
+        yearValid,
+        trackValid,
+        carrierValid,
+        fnameValid,
+        lnameValid,
+        errorMessage} = this.state;
  const { params } = this.props.navigation.state;
  return (
 
   <View style={styles.container}>
-
+  <KeyboardAvoidingView behavior='padding' style={styles.container}>
     <ScrollView style={styles.inputContainer}>
     <View style={styles.inputContainer}>
     <FormLabel>Month</FormLabel>
     <FormInput 
+    ref='monthInput'
     refInput={input => {this.monthInput = input;}}
     onChangeText={(monthText) => this.setState({monthText})}
     returnKeyType="next"
+    keyboardType="numbers-and-punctuation"
     errorMessage='This field is required'
-    onSubmitEditing={this.focusDayInput.bind(this)}
+     onSubmitEditing={(event) => { 
+     this.validateMonth();
+     this.refs.dayInput.focus(); 
+    }}
     />
+    {!monthValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Day</FormLabel>
     <FormInput 
-    refInput={input => {this.dayInput = input;}}
+    ref='dayInput'
+    // ref={input => {this.dayInput = input;}}
     onChangeText={(dayText) => this.setState({dayText})}
     returnKeyType="next"
+    keyboardType="numbers-and-punctuation"
     errorMessage='This field is required'
-    onSubmitEditing={() => {
-                  this.dayInput.focus()
-                }}
+    onSubmitEditing={(event) => { 
+     this.validateDay();
+     this.refs.yearInput.focus(); 
+    }}
     />
+    {!dayValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Year</FormLabel>
     <FormInput 
+    ref='yearInput'
     onChangeText={(yearText) => this.setState({yearText})}
+    returnKeyType="next"
+    keyboardType="numbers-and-punctuation"
+    errorMessage='This field is required'
+    onSubmitEditing={(event) => { 
+     this.validateYear();
+     this.refs.trackInput.focus(); 
+    }}
     />
+    {!yearValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Traking number</FormLabel>
-    <FormInput onChangeText={(trackText) => this.setState({trackText})}/>
+    <FormInput 
+    ref='trackInput'
+    onChangeText={(trackText) => this.setState({trackText})}
+    returnKeyType="next"
+    keyboardType="name-phone-pad"
+    errorMessage='This field is required'
+    onSubmitEditing={(event) => { 
+     this.validateTrack();
+     this.refs.carrierInput.focus(); 
+    }}
+    />
+    {!trackValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Carrier</FormLabel>
-    <FormInput onChangeText={(carrierText) => this.setState({carrierText})}/>
+    <FormInput 
+    ref='carrierInput'
+    onChangeText={(carrierText) => this.setState({carrierText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    onSubmitEditing={(event) => { 
+     this.validateCarrier();
+     this.refs.lnameInput.focus(); 
+    }}
+    />
+    {!carrierValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>Last name</FormLabel>
-    <FormInput onChangeText={(lastText) => this.setState({lastText})}/>
+    <FormInput 
+    ref='lnameInput'
+    onChangeText={(lnameText) => this.setState({lnameText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    onSubmitEditing={(event) => { 
+     this.validateLname();
+     this.refs.fnameInput.focus(); 
+    }}
+    />
+    {!lnameValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
     <FormLabel>First name</FormLabel>
-    <FormInput onChangeText={(firstText) => this.setState({firstText})}/>
+    <FormInput 
+    ref='fnameInput'
+    onChangeText={(fnameText) => this.setState({fnameText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    onSubmitEditing={(event) => { 
+     this.validateFname();
+     this.refs.signInput.focus(); 
+    }}
+    />
+    {!fnameValid &&
+      <FormValidationMessage>
+      {errorMessage}
+      </FormValidationMessage>
+    }
     </View>
 
     <View style={styles.inputContainer}>
-    <FormLabel>Signed/Unsigned</FormLabel>
-    <FormInput  onChangeText={(signText) => this.setState({signText})}/>
+    <FormLabel>Status/Unsigned</FormLabel>
+    <FormInput  
+    ref='signInput'
+    onChangeText={(signText) => this.setState({signText})}
+    returnKeyType="next"
+    errorMessage='This field is required'
+    />
     </View>
 
     <View style={styles.buttonContainer}>
@@ -130,14 +280,12 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-      onPress={ () => {
-        this.addPackage();
-        Alert.alert("Date: "+this.state.monthText+"/"+this.state.dayText+"/"+this.state.yearText+'\n'+"Traking num:"+this.state.trackText);
-      } 
-      }
+      onPress={this.addPackage.bind(this)}
       />
     </View>
     </ScrollView>
+
+    </KeyboardAvoidingView>
 
     <View style={styles.bottomContainer}>
       <Icon 
@@ -164,7 +312,8 @@ const styles = StyleSheet.create({
     marginTop:35
   },
   inputContainer: {
-    margin: 15,
+    margin: 10,
+    marginBottom: 30,
     height: 40,
   },
   bottomContainer:{
