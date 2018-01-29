@@ -1,110 +1,88 @@
-import React, { Component } from 'react';
-import {Keyboard, TouchableOpacity, Platform, AppRegistry, Image, ListView, SectionList, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
-import {StackNavigator} from 'react-navigation'
-import SearchInput, {createFilter} from 'react-native-search-filter';
-import { SearchBar, CheckBox, List, ListItem, Icon, Card } from 'react-native-elements';
+import {StackNavigator} from 'react-navigation';
+ import React, { Component } from 'react';
+ import {
+   StyleSheet,
+   TouchableOpacity,
+   Text,
+   View
+ } from 'react-native';
 
-let sourceData = [{trackno: '', carrier: 'DHL', name:'', year:'', month: '', day:'', status: ''}]
-export default class search extends Component {
-  
+ import SignatureView from 'react-native-signature-view';
+
+export default class toSign extends Component {
   static navigationOptions = {
-    title: 'Sign',
-    headerStyle: {backgroundColor: '#d69523'},
-    headerTitleStyle: {color:'white',fontSize:20},
-    headerBackTitleStyle: {color: 'white'},
-    headerTintColor: 'white',
+    header: null,
  }
 
-    constructor(props) {
-        super(props);
-        const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
-        sourceData = params.pkg;
-        key = params.key;
-        this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-                getRowData: (data, sectionID, rowID) => {
-                        return data[sectionID][rowID];
-                },
-                getSectionHeaderData: (data, sectionID) => {
-                    return data[sectionID];
-                }
-            }),
+   constructor(props) {
+     super(props);
+     this.state = {
+       watermarkString: 'ORDER--12345678',
+       watermarkSize: 14,
+       watermarkColor: '#888888',
+       signatureColor: '#000000',
+       watermarkLineSpacing: 20,
+       watermarkWordSpacing: 10,
+       watermarkAngle: 45,
+     };
+   }
+  render() {
+    const { navigate } = this.props.navigation;
 
-            sourceData: undefined,
-            keywords: '',
-        }
-    }
+     return (
+       <View style={styles.container}>
+           <SignatureView
+             ref={'sign'}
+             style={styles.signatureView}
+             watermarkString={this.state.watermarkString}
+             watermarkSize={this.state.watermarkSize}
+             watermarkColor={this.state.watermarkColor}
+             signatureColor={this.state.signatureColor}
+             watermarkLineSpacing={this.state.watermarkLineSpacing}
+             watermarkWordSpacing={this.state.watermarkWordSpacing}
+             watermarkAngle={this.state.watermarkAngle}
+             onSaveEvent={(msg)=>{
+               console.log('onSaveEvent --->>', msg);
+             }}
+           />
 
-render(){
-const { navigate } = this.props.navigation;
-return (
- <View style={styles.container}>
-  <Card>
-    <Text> {key} </Text>
-  </Card>
-   <ListView 
-     dataSource = {this.state.dataSource.cloneWithRows(sourceData)}
-     renderRow={(rowData, sectionID, rowId)=>{return(
-        <TouchableOpacity
-              onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
-            >
-            <View style={styles.sectionHeader}>
-                <Text>{rowData.trackno}</Text>
-            </View>
-            </TouchableOpacity>
-        );}
-    }
-    />
+           <View style={styles.buttonTab}>
+             <TouchableOpacity style={styles.button} onPress={this._resetSign.bind(this)}>
+               <Text>Redrawed</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.button} onPress={this._saveSign.bind(this)}>
+               <Text>Save</Text>
+             </TouchableOpacity>
+           </View>
+         </View>
+     );
+   }
 
-    <View style={styles.bottom}>
-    <Icon large
-      name='home'
-      color = '#d69523'
-      onPress={()=>navigate('HM')}
-      />
-      </View>
+   _resetSign() {
+     this.refs["sign"]._resetSignature();
+   }
 
- </View>
- );
-}
-} 
+   _saveSign(){
+     this.refs["sign"]._saveSignature();
+   }
+ }
 
+ const styles = StyleSheet.create({
+   container: {
+     flex: 1,
+     backgroundColor: '#F5FCFF'
+   },
+   signatureView: {
+     flex:1
+   },
+   buttonTab: {
+     height: 48,
+     flexDirection: 'row'
+   },
+   button: {
+     flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center'
+   }
+ });
 
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    paddingRight: 10,
-    backgroundColor: '#eae0cd',
-    alignItems:'center',
-  },
-
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'white'
-  },
-
-  bottom:{
-    height: 52,
-    backgroundColor: 'white',
-    alignItems: 'center'
-  },
-
-  buttonContainer: {
-    margin: 10,
-    resizeMode: 'stretch',
-  },
-
-  sectionHeader: {
-    height: 44,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-    borderBottomWidth: 0.5,
-    borderColor: '#d9d9d9'
-  },
-
-});

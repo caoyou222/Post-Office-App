@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, ActivityIndicator} from 'react-native';
-import {StackNavigator} from 'react-navigation'
+import {StackNavigator} from 'react-navigation';
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
 const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/packages'
