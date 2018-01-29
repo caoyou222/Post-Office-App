@@ -57,31 +57,32 @@ _search(){
         }, function() {
           //comment
           const { navigate } = this.props.navigation;
-          tn = [];
-          tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
+          // tn = [];
+          // tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
 
-          cr = [];
-          if(this.state.ups === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "UPS";})
-          }else if(this.state.usps === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "USPS";})
-          }else if(this.state.fedex === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "FEDEX";})
-          }else if(this.state.dhl === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "DHL";})
-          }
+          // cr = [];
+          // if(this.state.ups === true){
+          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "UPS";})
+          // }else if(this.state.usps === true){
+          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "USPS";})
+          // }else if(this.state.fedex === true){
+          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "FEDEX";})
+          // }else if(this.state.dhl === true){
+          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "DHL";})
+          // }
 
-          // dt = [];
-          // dt = tn.filter(function(pack){return pack.date === this.chosenDate;})
+          dt = [];
+          dt = this.state.sourceData.filter(function(pack){return pack.day === this.state.chosenDate;})
           
-          // st = [];
+          // st = [];''
+
           // if(this.status.signed === true){
           //   st = cr.filter(function(sd){return sd.status === "signed";});
           // }
 
-          // if(tn.length === 0 && cr.length === 0 && st.length === 0){
-          //   navigate('NotFound');
-          // }
+          if(tn.length === 0 && cr.length === 0 && dt.length === 0){
+            navigate('NotFound');
+          }
           if(cr.length !== 0){
             console.log(cr);
             navigate('TS', {key: keywords, pkg: cr});
@@ -90,12 +91,11 @@ _search(){
             console.log(tn);
             navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
           }
-          // if(st.length !== 0){
-          //   console.log(st);
-          //   navigate('TS', {key: keywords, pkg: st});
-          // }
+          if(dt.length !== 0){
+            console.log(dt);
+            navigate('TS', {key: keywords, pkg: dt});
+          }
 
-          this.setState({sourceData: tn});
         });
       });
 }
@@ -121,6 +121,10 @@ _search(){
   // }
   setDate(newDate) {
     this.setState({chosenDate: newDate});
+    chosenDate = newDate;
+    d_year = chosenDate.getFullYear();
+    d_month = chosenDate.getMonth()+1;
+    d_day = chosenDate.getDate();
   }
 
 
