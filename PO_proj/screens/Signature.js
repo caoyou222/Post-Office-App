@@ -69,9 +69,21 @@ export default class Signature extends Component {
           //const { params } = this.props.navigation.state;
           list = [];
           list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
-          console.log(list);
-          list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
-          this.setState({sourceData: list});
+          lastl = [];
+          lastl = this.state.sourceData.filter(function(sd){return sd.last === keywords;});
+          if(list.length !== 0) {
+            list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+            this.setState({sourceData: list});
+          }
+          if(lastl.length !== 0) {
+            lastl.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+            this.setState({sourceData: lastl});
+          }
+          if(keywords === ''){
+            list = this.state.sourceData.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+            this.setState({sourceData: list});
+          }
+                    
         });
       })
       .catch((error) => {
@@ -166,7 +178,7 @@ return (
      dataSource = {this.state.dataSource.cloneWithRows(this.state.sourceData)}
      renderRow={(rowData, sectionID, rowId)=>{return(
         <TouchableOpacity
-              onPress={()=>navigate('DT', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
+              onPress={()=>navigate('DT2', {trackno: rowData.trackno, carrier: rowData.carrier, name: rowData.name, year: rowData.year, month: rowData.month, day: rowData.day, status: rowData.status})}
             >
             <View style={styles.sectionHeader}>
                 <Text style={{fontSize: 16}}>{rowData.trackno}</Text>

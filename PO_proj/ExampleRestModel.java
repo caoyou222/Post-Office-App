@@ -16,6 +16,7 @@ class ExampleRestModel extends RestApiModel {
     addHandler("/packages", new PackagesHandler());
     addHandler("/addpackages", new AddPackagesHandler());
     addHandler("/signature", new SignatureHandler());
+    addHandler("/sign", new SignHandler());
     st = tmp;
   }
     
@@ -206,6 +207,27 @@ class SignatureHandler extends RestApiHandler{
       
       return p.makeReply(200, "OK");
     }
+}
+
+class SignHandler extends RestApiHandler{
+    public String doPost(HttpParser p) {
+      return doPatch(p);
+    }
+
+    public String doPatch(HttpParser p) {
+      System.out.println("patch");
+      try{
+        String tk = p.getParam("trackno");
+        PreparedStatement ps = st.getConnection().prepareStatement("UPDATE Packages SET status = 1 WHERE trackno = ?;");
+        ps.setString(1,tk);
+        ResultSet rs = ps.executeQuery();
+      }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
+      
+      return p.makeReply(200, "OK");
+    }
 
 }
+
 }
