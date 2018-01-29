@@ -65,6 +65,27 @@ _search(){
 }
 
 
+  // function getPackage() {
+  //   fetch('url', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //   }).then((response) => response.json())
+  //     .then((data) => {
+  //       let month = data.month;
+  //       let date = data.date;
+  //       let year = data.year;
+  //       alert("Date:" month+date+year);
+  //       // console.log(data)
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
+
+
+
 
  render(){
  const { navigate } = this.props.navigation;
