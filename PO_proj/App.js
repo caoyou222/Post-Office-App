@@ -19,14 +19,12 @@ import Detail2 from './screens/Detail2';
 
 const Navi = StackNavigator({ 
   SI: {screen: SignIn},
+  FT: {screen: filter},
+  SG: {screen: Signature},
   HM: {screen: home},
   HM2: {screen: home2},
   FT: {screen: filter},  
   SG: {screen: Signature},
-  AP: {screen: addPack},
-  
-  
-  
   AP: {screen: addPack},
   WK: {screen: worker},
   ST: {screen: student},

@@ -57,6 +57,7 @@ public String verifyUser(HttpParser p) {
         while( rs.next()){
         String trackno = rs.getString("trackno");
         String name = rs.getString("first") + " " + rs.getString("last");
+        String last = rs.getString("last");
         String carrier = rs.getString("carrier");
         String year = rs.getString("year");
         String month = rs.getString("month");
@@ -67,7 +68,7 @@ public String verifyUser(HttpParser p) {
         else status = "signed";
         
         jsonStr += "    ";
-        jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
+        jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"last\" : \"" + last + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
         
 
         //System.out.println(jsonStr);
@@ -157,6 +158,7 @@ class SignatureHandler extends RestApiHandler{
         while( rs.next()){
         String trackno = rs.getString("trackno");
         String name = rs.getString("first") + " " + rs.getString("last");
+        String last = rs.getString("last");
         String carrier = rs.getString("carrier");
         String year = rs.getString("year");
         String month = rs.getString("month");
@@ -167,7 +169,7 @@ class SignatureHandler extends RestApiHandler{
         else status = "signed";
         
         jsonStr += "    ";
-        jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
+        jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"last\" : \"" + last + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
         
 
         //System.out.println(jsonStr);
