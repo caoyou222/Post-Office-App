@@ -69,9 +69,17 @@ export default class Signature extends Component {
           //const { params } = this.props.navigation.state;
           list = [];
           list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
-          console.log(list);
-          list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
-          this.setState({sourceData: list});
+          lastl = [];
+          lastl = this.state.sourceData.filter(function(sd){return sd.last === keywords;});
+          if(list.length !== 0) {
+            list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+            this.setState({sourceData: list});
+          }
+          if(lastl.length !== 0) {
+            lastl.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+            this.setState({sourceData: lastl});
+          }
+                    
         });
       })
       .catch((error) => {
