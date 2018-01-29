@@ -16,17 +16,16 @@ import home2 from './screens/home2';
 import Signature from './screens/Signature';
 
 const Navi = StackNavigator({
-  AP: {screen: addPack},
+  FT: {screen: filter},
   SG: {screen: Signature},
   SI: {screen: SignIn},
   HM: {screen: home},
   HM2: {screen: home2},
-  
+  AP: {screen: addPack},
   WK: {screen: worker},
   ST: {screen: student},
   search: {screen: search}, 
-  TS: {screen:toSign},
-  FT: {screen: filter},
+  TS: {screen:toSign}, 
   DT: {screen: Detail},
   NotFound: {screen: NotFound},
   TK: {screen: Tracking}
