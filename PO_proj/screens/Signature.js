@@ -59,6 +59,7 @@ export default class Signature extends Component {
     }
 
     _search(){
+      const { navigate } = this.props.navigation;
       return fetch(SERVER_PACKAGES)
       .then((res) => res.json())
       .then((data) => {
@@ -83,6 +84,7 @@ export default class Signature extends Component {
             list = this.state.sourceData.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
             this.setState({sourceData: list});
           }
+          if(list.length === 0 && lastl.length === 0 && keywords !== ''){navigate('NotFound');}
                     
         });
       })

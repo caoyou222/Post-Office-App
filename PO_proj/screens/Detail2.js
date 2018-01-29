@@ -34,6 +34,24 @@ export default class Detail2 extends React.Component {
 
   }
 
+    componentDidMount(){
+      this.setState({refreshing: true});
+      return fetch(SERVER_PACKAGES, {method: "GET", body: `trackno=${params.trackno}`})
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          refreshing:false,
+          sourceData: data.packages,
+
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    }
+
+
   _mark(){
     this._update();
     //console.log(keywords);
@@ -47,7 +65,7 @@ export default class Detail2 extends React.Component {
   <Card title = {params.trackno}>
    <Text style={{height: 20, fontWeight: 'bold', color: '#514e48'}}>Name:                            {params.name}</Text>
    <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Carrier                           {params.carrier}</Text>
-   <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Status:                           {params.status}</Text>
+   <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Status:                           {sourceData}</Text>
    <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Date:                              {params.month}/{params.day}/{params.year}</Text>
    <TouchableOpacity style={styles.buttonContainer} onPress = {this._mark.bind(this)}>
         <Text style={{color: 'grey', marginLeft: 6, fontSize: 15, fontWeight: 'bold'}}> Mark as Signed </Text>
