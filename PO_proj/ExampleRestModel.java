@@ -107,9 +107,20 @@ public String verifyUser(HttpParser p) {
                 lname = str.nextElement().toString();
                 fname = str.nextElement().toString();
             }
-            String insert = "INSERT INTO packages VALUES ('"+track+"','"+carrier+"','"+fname+"','"+lname+"','"+day+"','"+month+"','"+year+"',"+status+")";
 
-            st.executeUpdate(insert);
+            String insert = "INSERT INTO packages VALUES (?,?,?,?,?,?,?,?)";
+
+            PreparedStatement ps = st.getConnection().prepareStatement(insert);
+            ps.setString(1,track);
+            ps.setString(2,carrier);
+            ps.setString(3,fname);
+            ps.setString(4,lname);
+            ps.setString(5,day);
+            ps.setString(6,month);
+            ps.setString(7,year);
+            ps.setInt(8,status);
+
+            ps.executeUpdate();
             System.out.println(packinfo);
             System.out.println(insert);
 
