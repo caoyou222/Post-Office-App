@@ -147,9 +147,6 @@ public String verifyUser(HttpParser p) {
 
 }
     
-}
-
-
 class SignatureHandler extends RestApiHandler{
     public String doGet(HttpParser p){
       String jsonStr = new String("{ \"packages\": [\n");

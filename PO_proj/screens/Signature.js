@@ -79,6 +79,10 @@ export default class Signature extends Component {
             lastl.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
             this.setState({sourceData: lastl});
           }
+          if(keywords === ''){
+            list = this.state.sourceData.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+            this.setState({sourceData: list});
+          }
                     
         });
       })
