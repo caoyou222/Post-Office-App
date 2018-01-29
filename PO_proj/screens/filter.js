@@ -50,6 +50,7 @@ _search(){
 
  render(){
  const { navigate } = this.props.navigation;
+ const { params } = this.props.navigation.state;
  state = {
  	ups:false,
  	usps:false,
@@ -86,7 +87,7 @@ _search(){
       <Button
       title = "Filter By Carrier"
       color = "black"
-      onPress={()=> navigate('WK')}
+      onPress={()=> navigate('WK',{user: params.user})}
       />
       <ScrollView style={styles.checkContainer}>
       <CheckBox
@@ -124,7 +125,7 @@ _search(){
       <Button
       title = "Filter By Date"
       color = "black"
-      onPress={()=> navigate('WK')}
+      onPress={()=> navigate('WK', {user: params.user})}
       />
       <ScrollView style={styles.checkContainer}>
       <CheckBox
@@ -162,7 +163,7 @@ _search(){
       <Button
       title = "Filter By Status"
       color = "black"
-      onPress={()=> navigate('WK')}
+      onPress={()=> navigate('WK', {user: params.user})}
       />
       <ScrollView style={styles.checkContainer}>
       <CheckBox
@@ -188,7 +189,7 @@ _search(){
       size = {35}
       name = 'home'
       color = '#D69523'
-      onPress={()=>navigate('HM')}
+      onPress={()=>navigate('HM', {user: params.user})}
       />
     </View>
 

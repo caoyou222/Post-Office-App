@@ -42,6 +42,7 @@ export default class worker extends React.Component {
 
  render(){
  const { navigate } = this.props.navigation;
+ const { params } = this.props.navigation.state;
  return (
 
   <View style={styles.container}>
@@ -53,7 +54,7 @@ export default class worker extends React.Component {
       buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#f2b243',borderWidth: 2, borderColor: '#f2b243', borderRadius: 30}}
       title = "Search Package"
       color = "white"
-      onPress={()=> navigate('FT')}
+      onPress={()=> navigate('FT', {user: params.user})}
       />
     </View>
 
@@ -65,7 +66,19 @@ export default class worker extends React.Component {
       buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#f2b243',borderWidth: 2, borderColor: '#f2b243', borderRadius: 30}}
       title = "Add Package"
       color = "white"
-      onPress={()=> navigate('AP')}
+      onPress={()=> navigate('AP', {user: params.user})}
+      />
+    </View>
+
+    <View style={styles.buttonContainer}>
+      <Button
+      activeOpacity={0.4}
+      icon={{name:'add-circle-outline', type:'Ionicons', size:26}}
+      textStyle={{fontSize:22, fontWeight:'bold'}}
+      buttonStyle = {{alignSelf: 'center', width: 250, backgroundColor:'#f2b243',borderWidth: 2, borderColor: '#f2b243', borderRadius: 30}}
+      title = "Signature"
+      color = "white"
+      onPress={()=> navigate('SG',{user: params.user})}
       />
     </View>
 
@@ -75,7 +88,7 @@ export default class worker extends React.Component {
       size = {35}
       name = 'home'
       color = '#D69523'
-      onPress={()=>navigate('HM')}
+      onPress={()=>navigate('HM', {user: params.user})}
       />
     </View>
  </View>

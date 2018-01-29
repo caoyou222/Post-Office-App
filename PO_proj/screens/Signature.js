@@ -181,7 +181,7 @@ return (
       size={35}
       name='home'
       color = '#d69523'
-      onPress={()=>navigate('HM2')}
+      onPress={()=>navigate('HM', {user: params.user})}
       />
       </View>
 
@@ -227,6 +227,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-
-AppRegistry.registerComponent('student', () => student);

@@ -51,7 +51,7 @@ export default class home extends React.Component {
     color = "white"
     iconRight={{name: 'work', type: 'material-icon', color:'white', size:24}}
 
-    onPress={()=> navigate('WK')}
+    onPress={()=> navigate('WK',{user:params.user})}
     />
   </View>
 
