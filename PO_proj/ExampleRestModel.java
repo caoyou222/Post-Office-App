@@ -5,6 +5,7 @@
 import java.io.*;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.lang.*;
@@ -87,17 +88,30 @@ public String verifyUser(HttpParser p) {
       public String doPost(HttpParser p){
         try{
             String packinfo = p.getParam("packinfo");
-            // String day = p.getParam("day");
-            // String year = p.getParam("year");
-            // String track = p.getParam("track");
-            // String carrier = p.getParam("carrier");
-            // String lname = p.getParam("last");
-            // String fname = p.getParam("first");
+            String month = "";
+            String day = "";
+            String year = "";
+            String track = "";
+            String carrier = "";
+            String lname = "";
+            String fname = "";
+            int status = 0;
 
-            // String insert = "INSERT INTO packages VALUES ("+ month+day+year+track+carrier+lname+fname+")";
+            StringTokenizer str = new StringTokenizer(packinfo,",");
+            while(str.hasMoreElements()){
+                month = str.nextElement().toString();
+                day = str.nextElement().toString();
+                year = str.nextElement().toString();
+                track = str.nextElement().toString();
+                carrier = str.nextElement().toString();
+                lname = str.nextElement().toString();
+                fname = str.nextElement().toString();
+            }
+            String insert = "INSERT INTO packages VALUES ('"+track+"','"+carrier+"','"+fname+"','"+lname+"','"+day+"','"+month+"','"+year+"',"+status+")";
 
-            // st.executeUpdate();
+            st.executeUpdate(insert);
             System.out.println(packinfo);
+            System.out.println(insert);
 
         }catch(Exception e){
         System.out.println(e.getMessage());
