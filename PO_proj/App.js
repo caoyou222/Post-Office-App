@@ -12,7 +12,6 @@ import search from './screens/search';
 import NotFound from './screens/NotFound';
 import Tracking from './screens/Tracking';
 import toSign from './screens/toSign';
-import Count from './screens/Count';
 import home2 from './screens/home2';
 import Signature from './screens/Signature';
 
