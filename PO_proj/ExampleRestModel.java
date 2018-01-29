@@ -15,6 +15,7 @@ class ExampleRestModel extends RestApiModel {
   public ExampleRestModel(Statement tmp) {
     addHandler("/packages", new PackagesHandler());
     addHandler("/addpackages", new AddPackagesHandler());
+    addHandler("/signature", new SignatureHandler());
     st = tmp;
   }
     
@@ -68,7 +69,7 @@ public String verifyUser(HttpParser p) {
         jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
         
 
-        System.out.println(jsonStr);
+        //System.out.println(jsonStr);
       }
          
       }catch(Exception e){
@@ -77,6 +78,7 @@ public String verifyUser(HttpParser p) {
       
     jsonStr = jsonStr.substring(0, jsonStr.length()-1) + "\n";
     jsonStr += " ] }";
+    System.out.println(jsonStr);
     return p.makeJsonReply(200, jsonStr);
 
 
@@ -84,6 +86,7 @@ public String verifyUser(HttpParser p) {
    
 
 }
+
     class AddPackagesHandler extends RestApiHandler{
       public String doPost(HttpParser p){
         try{
@@ -146,3 +149,66 @@ public String verifyUser(HttpParser p) {
     
 }
 
+
+class SignatureHandler extends RestApiHandler{
+    public String doGet(HttpParser p){
+      String jsonStr = new String("{ \"packages\": [\n");
+      try{
+        String rows = "SELECT * FROM packages";
+        ResultSet rs = st.executeQuery(rows);
+        while( rs.next()){
+        String trackno = rs.getString("trackno");
+        String name = rs.getString("first") + " " + rs.getString("last");
+        String carrier = rs.getString("carrier");
+        String year = rs.getString("year");
+        String month = rs.getString("month");
+        String day = rs.getString("day");
+        int s = rs.getInt("status");
+        String status = "";
+        if(s == 0) status = "unsigned";
+        else status = "signed";
+        
+        jsonStr += "    ";
+        jsonStr += "{\"trackno\": \"" + trackno + "\", \"name\" : \"" + name + "\", \"year\" : \"" + year + "\", \"month\" : \"" + month + "\", \"day\" : \"" + day + "\", \"carrier\" : \"" + carrier + "\", \"status\" : \"" + status + "\"},";
+        
+
+        //System.out.println(jsonStr);
+      }
+         
+      }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
+      
+    jsonStr = jsonStr.substring(0, jsonStr.length()-1) + "\n";
+    jsonStr += " ] }";
+    return p.makeJsonReply(200, jsonStr);
+    }
+
+    public String doPost(HttpParser p) {
+      return doPatch(p);
+    }
+
+    public String doPatch(HttpParser p) {
+      System.out.println("patch");
+      try{
+        String name = p.getParam("name");
+        String first = "", last = "";
+        StringTokenizer nm = new StringTokenizer(name, " ");
+        while(nm.hasMoreElements()){
+            first = nm.nextElement().toString();
+            last = nm.nextElement().toString();
+        }
+        PreparedStatement ps = st.getConnection().prepareStatement("UPDATE Packages SET status = 1 WHERE first = ? AND last = ?;");
+        System.out.println(first + " " + last);
+        ps.setString(1,first);
+        ps.setString(2,last);
+        ResultSet rs = ps.executeQuery();
+      }catch(Exception e){
+        System.out.println(e.getMessage());
+      }
+      
+      return p.makeReply(200, "OK");
+    }
+
+}
+}

@@ -3,12 +3,12 @@ import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image,
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
-const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/packages'
+const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/signature'
 let keywords = ''
 
-export default class student extends Component {
+export default class Signature extends Component {
   static navigationOptions = {
-    title: 'Packages',
+    title: 'Signature',
     headerStyle: {backgroundColor: '#d69523'},
     headerTitleStyle: {color:'white', fontSize:20},
     headerBackTitleStyle: {color: 'white'},
@@ -33,13 +33,7 @@ export default class student extends Component {
         }
     }
 
-    _changeText(val){
-      keywords = val;
-      //console.log(keywords);
-    }
-
-
-    componentDidMount=()=> {
+  componentDidMount=()=> {
     return fetch(SERVER_PACKAGES)
       .then((res) => res.json())
       .then((data) => {
@@ -47,9 +41,8 @@ export default class student extends Component {
           isLoading: false,
           sourceData: data.packages,
         }, function() {
-          const { params } = this.props.navigation.state;
           list = [];
-          list = this.state.sourceData.filter(function(sd){return sd.name === params.user;});
+          list = this.state.sourceData;
           console.log(list);
           list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
           this.setState({sourceData: list});
@@ -59,6 +52,33 @@ export default class student extends Component {
         console.error(error);
       });
   }
+
+    _changeText(val){
+      keywords = val;
+      //console.log(keywords);
+    }
+
+    _search(){
+      return fetch(SERVER_PACKAGES)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          sourceData: data.packages,
+
+        }, function() {
+          //const { params } = this.props.navigation.state;
+          list = [];
+          list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
+          console.log(list);
+          list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
+          this.setState({sourceData: list});
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    }
 
     _onRefresh(){
       this.setState({refreshing: true});
@@ -70,9 +90,9 @@ export default class student extends Component {
           sourceData: data.packages,
 
         }, function() {
-          const { params } = this.props.navigation.state;
           list = [];
-          list = this.state.sourceData.filter(function(sd){return sd.name === params.user;});
+          if(keywords === '') list = this.state.sourceData;
+          else list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
           console.log(list);
           list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
           this.setState({sourceData: list});
@@ -84,33 +104,19 @@ export default class student extends Component {
 
     }
 
-    _search(){
-      //comment
-      console.log(keywords);
-      const { navigate } = this.props.navigation;
-      cr = [];
-      cr = this.state.sourceData.filter(function(sd){return sd.carrier === keywords;});
-      tn = [];
-      tn = this.state.sourceData.filter(function(sd){return sd.trackno === keywords;});
-      st = [];
-      st = this.state.sourceData.filter(function(sd){return sd.status === keywords;});
-      if(cr.length === 0 && tn.length === 0 && st.length === 0){
-        navigate('NotFound');
+  _mark(){
+    return fetch(SERVER_PACKAGES, {
+    method: "PATCH", body:`name=${keywords}` ,
+    headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
+    .then((res) => {
+      if (res.ok) {
+        console.log("it worked!");
+      } else {
+        console.log("nope")
       }
-      if(cr.length !== 0){
-        console.log(cr);
-        navigate('search', {key: keywords, pkg: cr});
-      }
-      if(tn.length !== 0){
-        console.log(tn);
-        navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
-      }
-      if(st.length !== 0){
-        console.log(st);
-        navigate('search', {key: keywords, pkg: st});
-      }
+    })
 
-    }
+  }
 
 render=()=>{
 const { navigate } = this.props.navigation;
@@ -128,7 +134,7 @@ console.log(this.state.sourceData);
 return (
  <View style={styles.container}>
   <View style={styles.header}>
-    <SearchBar containerStyle={{width: Dimensions.get('window').width, backgroundColor: 'white'}}
+    <SearchBar containerStyle={{width: 230, backgroundColor: 'white'}}
     inputStyle = {{backgroundColor: 'white'}}
     lightTheme
     placeholderTextColor = '#eae0cd'
@@ -138,7 +144,10 @@ return (
     icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
     placeholder='Enter tracking number or status to search' />
-   
+
+    <TouchableOpacity style={styles.buttonContainer} onPress = {this._mark.bind(this)}>
+        <Text style={{color: 'grey', marginLeft: 6, fontSize: 15, fontWeight: 'bold'}}> Mark as Signed </Text>
+   </TouchableOpacity>
       </View>
 
    <ListView 
@@ -155,7 +164,7 @@ return (
             >
             <View style={styles.sectionHeader}>
                 <Text style={{fontSize: 16}}>{rowData.trackno}</Text>
-                <Text style={{color: '#7e7e7e'}}>{rowData.month}/{rowData.day}/{rowData.year}</Text>
+                <Text style={{color: '#7e7e7e'}}>{rowData.status}</Text>
             </View>
             </TouchableOpacity>
         );}
@@ -167,7 +176,7 @@ return (
       size={35}
       name='home'
       color = '#d69523'
-      onPress={()=>navigate('HM2',{user: params.user})}
+      onPress={()=>navigate('HM', {user: params.user})}
       />
       </View>
 
@@ -181,7 +190,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     paddingRight: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#eae0cd',
     alignItems:'center',
   },
 
@@ -199,7 +208,6 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     margin: 10,
-    resizeMode: 'stretch',
   },
 
   sectionHeader: {
@@ -213,6 +221,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-
-AppRegistry.registerComponent('student', () => student);

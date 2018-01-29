@@ -68,6 +68,7 @@ export default class addPack extends React.Component {
  render(){
  const { navigate } = this.props.navigation;
  const {month,monthValid,errorMessage} = this.state;
+ const { params } = this.props.navigation.state;
  return (
 
   <View style={styles.container}>
@@ -205,7 +206,7 @@ export default class addPack extends React.Component {
       size = {35}
       name = 'home'
       color = '#D69523'
-      onPress={()=>navigate('HM')}
+      onPress={()=>navigate('HM', {user: params.user})}
       />
     </View>
   </View>

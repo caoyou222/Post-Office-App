@@ -68,6 +68,7 @@ _search(){
 
  render(){
  const { navigate } = this.props.navigation;
+ const { params } = this.props.navigation.state;
  state = {
  	ups:false,
  	usps:false,
@@ -201,7 +202,7 @@ _search(){
       size = {35}
       name = 'home'
       color = '#D69523'
-      onPress={()=>navigate('HM')}
+      onPress={()=>navigate('HM', {user: params.user})}
       />
     </View>
 

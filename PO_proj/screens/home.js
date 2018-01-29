@@ -10,10 +10,20 @@ export default class home extends React.Component {
  // backgroundColor: 'yellow'
  }; 
  }
+ _signOut(){
+    const {goBack} = this.props.navigation;
+    const {navigate} = this.props.navigation;
+    console.log('Signout');
+    this.props.navigator.pop({
+      animated: true,
+      animationType: 'fade',
+    });
+ }
  static navigationOptions = {
     header: null,
  }
  render(){
+ const {goBack} = this.props.navigation;
  const { navigate } = this.props.navigation;
  const { params } = this.props.navigation.state;
  return (
@@ -41,7 +51,7 @@ export default class home extends React.Component {
     color = "white"
     iconRight={{name: 'work', type: 'material-icon', color:'white', size:24}}
 
-    onPress={()=> navigate('WK')}
+    onPress={()=> navigate('WK',{user:params.user})}
     />
   </View>
 
@@ -68,13 +78,13 @@ export default class home extends React.Component {
     />
   </View>
   <View style={styles.buttonContainer}>
-    <Button
+    <Button navigator={this.props.navigator}
     activeOpacity={0.4}
     title = "Sign Out"
     buttonStyle={{backgroundColor: 'transparent'}}
     color = "white"
     iconRight={{name: 'log-out', type: 'entypo', color:'white', size:24}}
-    onPress={()=> navigate('SI')}
+    onPress={()=> goBack()}
     />
   </View>
 
