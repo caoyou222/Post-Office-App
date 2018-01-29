@@ -10,6 +10,9 @@ export default class filter extends React.Component {
  super(props);
  this.state = {
             chosenDate: new Date(),
+            d_day: '',
+            d_month: '',
+            d_year: '',
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
                 getRowData: (data, sectionID, rowID) => {
@@ -26,10 +29,6 @@ export default class filter extends React.Component {
             usps:false,
             fedex:false,
             dhl:false,
-            today:false,
-            week:false,
-            month:false,
-            tmonth:false,
             sign:false,
             unsign:false,
         }
@@ -57,24 +56,25 @@ _search(){
         }, function() {
           //comment
           const { navigate } = this.props.navigation;
-          // tn = [];
-          // tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
+          tn = [];
+          tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
 
-          // cr = [];
-          // if(this.state.ups === true){
-          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "UPS";})
-          // }else if(this.state.usps === true){
-          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "USPS";})
-          // }else if(this.state.fedex === true){
-          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "FEDEX";})
-          // }else if(this.state.dhl === true){
-          //   cr = this.state.sourceData.filter(function(pack){return pack.carrier === "DHL";})
-          // }
+          cr = [];
+          if(this.state.ups === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "UPS";})
+          }else if(this.state.usps === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "USPS";})
+          }else if(this.state.fedex === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "FEDEX";})
+          }else if(this.state.dhl === true){
+            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "DHL";})
+          }
 
           dt = [];
-          dt = this.state.sourceData.filter(function(pack){return pack.day === this.state.chosenDate;})
+          console.log(this.state.d_day);
+          dt = this.state.sourceData.filter(function(pack){return pack.day===this.state.d_day;});
           
-          // st = [];''
+          // st = [];
 
           // if(this.status.signed === true){
           //   st = cr.filter(function(sd){return sd.status === "signed";});
@@ -100,31 +100,18 @@ _search(){
       });
 }
 
-
-  // function getPackage() {
-  //   fetch('url', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //   }).then((response) => response.json())
-  //     .then((data) => {
-  //       let month = data.month;
-  //       let date = data.date;
-  //       let year = data.year;
-  //       alert("Date:" month+date+year);
-  //       // console.log(data)
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
   setDate(newDate) {
     this.setState({chosenDate: newDate});
     chosenDate = newDate;
-    d_year = chosenDate.getFullYear();
-    d_month = chosenDate.getMonth()+1;
-    d_day = chosenDate.getDate();
+    year=chosenDate.getFullYear().toString();
+    this.setState({d_year: year});
+    d_year = year
+    month=(chosenDate.getMonth()+1).toString()
+    this.setState({d_month: (chosenDate.getMonth()+1).toString()});
+    d_month = month;
+    day=chosenDate.getDate().toString();
+    this.setState({d_day: chosenDate.getDate().toString()});
+    d_day = day;
   }
 
 
