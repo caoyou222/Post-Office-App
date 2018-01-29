@@ -104,7 +104,7 @@ export default class Signature extends Component {
 
     }
 
-  _mark(){
+  _update(){
     return fetch(SERVER_PACKAGES, {
     method: "PATCH", body:`name=${keywords}` ,
     headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
@@ -116,6 +116,12 @@ export default class Signature extends Component {
       }
     })
 
+  }
+
+  _mark(){
+    this._update();
+    console.log(keywords);
+    this._onRefresh();
   }
 
 render=()=>{
