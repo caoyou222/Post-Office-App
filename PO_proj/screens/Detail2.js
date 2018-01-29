@@ -3,7 +3,8 @@ import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration, TouchableO
 import {StackNavigator} from 'react-navigation'
 import {Card, ListItem} from 'react-native-elements'
 
-const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/sign'
+const SERVER = 'http://rns202-17.cs.stolaf.edu:28491/'
+const SERVER_PACKAGES = SERVER + 'sign'
 export default class Detail2 extends React.Component {
  constructor(props){
  super(props);

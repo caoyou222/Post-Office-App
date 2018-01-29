@@ -5,8 +5,7 @@ import Expo, { Permissions, Notifications } from 'expo';
 import { Component } from 'react';
 import { Button } from 'react-native-elements';
 
-const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/user/'
-const PUSH_ENDPOINT = SERVER + 'push-token';
+const SERVER = 'http://rns202-17.cs.stolaf.edu:28491/'
 
 var user_name = '';
 export default class SignIn extends React.Component {
@@ -43,18 +42,37 @@ export default class SignIn extends React.Component {
     if (str.slice(str.length-11, str.length) !== "@stolaf.edu") return false;
     return true;
   }
-  _isWorker(email){
+  _isWorker = async(email) => {
+    console.log('Start get permission');
+    const { status: existingStatus } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+    );
+    let finalStatus = existingStatus;
+    // only ask if permissions have not already been determined, because
+    // iOS won't necessarily prompt the user a second time.
+    if (existingStatus !== 'granted') {
+      // Android remote notification permissions are granted during the app
+      // install, so this will only ask on iOS
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+
+    // Stop here if the user did not grant permissions
+    if (finalStatus !== 'granted') {
+      return;
+    }
+    // Get the token that uniquely identifies this device
+    let token = await Notifications.getExpoPushTokenAsync();
+
     const {navigate} = this.props.navigation;
-    let str = SERVER + email;
-    console.log("Start fetching" + str);
-    fetch(str)
+    fetch(SERVER + 'user/' + email + '@' + token)
     .then( (res) => {
       console.log("Finish");
           if (res.ok) {
-            console.log("It worked!");
+            console.log("Verification worker worked!" + JSON.stringify(res._bodyText ) );
             if (JSON.stringify(res._bodyText ) === "\"1\"")
               navigate('HM', {user:user_name}); /* a worker */
-            else navigate('HM2', {user:user_name});
+            else navigate('HM2', {user:user_name}); /* a student */
         }
       })
     .catch((error) => {
@@ -179,7 +197,7 @@ async function registerForPushNotificationsAsync() {
   let token = await Notifications.getExpoPushTokenAsync();
 
   // POST the token to your backend server from where you can retrieve it to send push notifications.
-  return fetch(PUSH_ENDPOINT, {
+  return fetch( SERVER + 'user/push-token', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
