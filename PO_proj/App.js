@@ -15,8 +15,8 @@ import home2 from './screens/home2';
 import Signature from './screens/Signature';
 
 const Navi = StackNavigator({
-  SI: {screen: SignIn},
   SG: {screen: Signature},
+  SI: {screen: SignIn},
   HM: {screen: home},
   HM2: {screen: home2},
 	AP: {screen: addPack},

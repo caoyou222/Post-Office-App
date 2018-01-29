@@ -145,14 +145,9 @@ return (
 
     placeholder='Enter tracking number or status to search' />
 
-    <Button small
-      title='Mark as Signed'
-      buttonStyle={{backgroundColor: '#eae0cd'}}
-      textStyle = {{justifyContent: 'center'}}
-      color = "grey"
-      onPress={this._mark.bind(this)}
-      />
-   
+    <TouchableOpacity style={styles.buttonContainer} onPress = {this._mark.bind(this)}>
+        <Text style={{color: 'grey', marginLeft: 6, fontSize: 15, fontWeight: 'bold'}}> Mark as Signed </Text>
+   </TouchableOpacity>
       </View>
 
    <ListView 
@@ -213,7 +208,6 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     margin: 10,
-    resizeMode: 'stretch',
   },
 
   sectionHeader: {
