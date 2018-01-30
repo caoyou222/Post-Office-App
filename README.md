@@ -23,7 +23,7 @@ Compile and running Backend.java along with the ExampleRestApiModel.java <br />
 Change the server address to where you run the server. In our case, the address is http://rns202-5.cs.stolaf.edu/28425/ <br />
 
 ## Technologies
-We use react-native and expo for the app development and use Rest Api to do the backend server.
+We use react-native and expo for the app development and use Rest Api to do the backend server. Postgresql as database
 
 ## Structure and functions
 ### Home and Home2 page
