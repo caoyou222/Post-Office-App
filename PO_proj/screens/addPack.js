@@ -3,7 +3,7 @@ import {KeyboardAvoidingView, LayoutAnimation,TextInput, Image, Text, StyleSheet
 import {StackNavigator} from 'react-navigation';
 import { Icon, Button, Divider, FormLabel, FormInput, Form, FormValidationMessage, Input } from 'react-native-elements'
 
-const SERVER = 'http://rns202-17.cs.stolaf.edu:28491/'
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
 
 export default class addPack extends React.Component {
  constructor(props){

@@ -4,7 +4,7 @@ import {StackNavigator} from 'react-navigation';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
 let keywords = ''
-const SERVER = 'http://rns202-17.cs.stolaf.edu:28491/'
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
 
 export default class filter extends React.Component {
  constructor(props){
@@ -48,11 +48,7 @@ _changeText(val){
     }
 
 _search(){
-<<<<<<< HEAD
-  fetch('http://rns202-5.cs.stolaf.edu:28425/packages')
-=======
   fetch(SERVER + 'packages')
->>>>>>> vo5
   .then((res) => res.json())
       .then((data) => {
         this.setState({

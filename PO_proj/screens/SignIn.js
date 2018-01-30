@@ -5,7 +5,7 @@ import Expo, { Permissions, Notifications } from 'expo';
 import { Component } from 'react';
 import { Button } from 'react-native-elements';
 
-const SERVER = 'http://rns202-17.cs.stolaf.edu:28491/'
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
 
 var user_name = '';
 export default class SignIn extends React.Component {

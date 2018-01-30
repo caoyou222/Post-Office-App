@@ -4,7 +4,7 @@ import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image,
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
-const SERVER = 'http://rns202-17.cs.stolaf.edu:28491/'
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
 let keywords = ''
 
 export default class Signature extends Component {
@@ -60,12 +60,8 @@ export default class Signature extends Component {
     }
 
     _search(){
-<<<<<<< HEAD
       const { navigate } = this.props.navigation;
-      return fetch(SERVER_PACKAGES)
-=======
       return fetch(SERVER + 'signature')
->>>>>>> vo5
       .then((res) => res.json())
       .then((data) => {
         this.setState({
