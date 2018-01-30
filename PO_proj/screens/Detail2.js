@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration, TouchableOpacity} from 'react-native';
+import {Image, Text, StyleSheet, View, Dimensions, Vibration, TouchableOpacity, TouchableHighlight} from 'react-native';
 import {StackNavigator} from 'react-navigation'
-import {Card, ListItem} from 'react-native-elements'
+import {Card, ListItem, FormInput ,Button} from 'react-native-elements'
 
-const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/signpack'
+const SERVER_PACKAGES = 'http://rns202-3.cs.stolaf.edu:28434/signpack'
 export default class Detail2 extends React.Component {
  constructor(props){
  super(props);
  this.state = {
- backgroundColor: 'yellow'
+ backgroundColor: 'yellow',
+ signText: '',
  }; 
  }
  static navigationOptions = {
@@ -34,24 +35,6 @@ export default class Detail2 extends React.Component {
 
   }
 
-    componentDidMount(){
-      this.setState({refreshing: true});
-      return fetch(SERVER_PACKAGES, {method: "GET", body: `trackno=${params.trackno}`})
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          refreshing:false,
-          sourceData: data.packages,
-
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    }
-
-
   _mark(){
     this._update();
     //console.log(keywords);
@@ -65,11 +48,27 @@ export default class Detail2 extends React.Component {
   <Card title = {params.trackno}>
    <Text style={{height: 20, fontWeight: 'bold', color: '#514e48'}}>Name:                            {params.name}</Text>
    <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Carrier                           {params.carrier}</Text>
-   <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Status:                           {sourceData}</Text>
+   <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Status:                           {params.status}</Text>
    <Text style={{height: 20, fontWeight: 'bold',color: '#514e48'}}>Date:                              {params.month}/{params.day}/{params.year}</Text>
-   <TouchableOpacity style={styles.buttonContainer} onPress = {this._mark.bind(this)}>
-        <Text style={{color: 'grey', marginLeft: 6, fontSize: 15, fontWeight: 'bold'}}> Mark as Signed </Text>
-   </TouchableOpacity>
+   <View style={styles.inputContainer}>
+        <FormInput 
+          ref='signInput'
+          placeholder = "Sign Here"
+          refInput={input => {this.signInput = input;}}
+          onChangeText={(signText) => this.setState({signText})}
+        />
+        <View style={styles.buttonContainer}>
+        <Button
+          small
+          iconRight={{name:'checkbox-marked-circle-outline', type:'material-community', size:26}}
+          textStyle={{fontSize:20}}
+          title = "Sign"
+          color = 'white'
+          backgroundColor = '#f2b243'
+          onPress = {this._mark.bind(this)}
+        />
+        </View>
+   </View>
   </Card>
  
  );
@@ -81,7 +80,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    margin: 20
+    marginTop: 10
+  },
+  inputContainer: {
+    marginTop: 40,
+    margin: 10,
   },
 
 });

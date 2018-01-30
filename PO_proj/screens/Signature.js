@@ -1,9 +1,10 @@
+
 import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, ActivityIndicator} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
-const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/signature'
+const SERVER_PACKAGES = 'http://rns202-3.cs.stolaf.edu:28434/signature'
 let keywords = ''
 
 export default class Signature extends Component {
@@ -166,7 +167,8 @@ return (
     placeholder='Enter tracking number or status to search' />
 
     <TouchableOpacity style={styles.buttonContainer} onPress = {this._mark.bind(this)}>
-        <Text style={{color: 'grey', marginLeft: 6, fontSize: 15, fontWeight: 'bold'}}> Mark as Signed </Text>
+        <Icon name="check-all" type="material-community" color='grey' size={20} />
+        <Text style={{color: 'grey', marginLeft: 6, fontSize: 16, fontWeight: 'bold'}}> Signed All </Text>
    </TouchableOpacity>
       </View>
 
@@ -227,7 +229,10 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    margin: 10,
+    width: 100,
+    marginLeft: 20,
+    alignItems:'center',
+    flexDirection:'row'
   },
 
   sectionHeader: {
