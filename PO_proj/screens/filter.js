@@ -74,8 +74,6 @@ _search(){
             cr = dt.filter(function(pack){return pack.carrier === "DHL";})
           }
 
-
-          
           st = [];
           if(this.state.sign === true){
             st = cr.filter(function(pack){return pack.status === "signed";});
@@ -92,15 +90,15 @@ _search(){
             navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
           }
 
-          if(dt.length !== 0){
-            console.log(dt);
-            navigate('search', {key: keywords, pkg: dt});
-          }
+          // if(dt.length !== 0){
+          //   console.log(dt);
+          //   navigate('search', {key: keywords, pkg: dt});
+          // }
 
-          if(cr.length !== 0){
-            console.log(cr);
-            navigate('search', {key: keywords, pkg: cr});
-          }
+          // if(cr.length !== 0){
+          //   console.log(cr);
+          //   navigate('search', {key: keywords, pkg: cr});
+          // }
          
           if(st.length !== 0){
             console.log(st);
