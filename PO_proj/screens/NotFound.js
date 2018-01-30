@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Image, Text, StyleSheet, Button, View, Dimensions, Vibration} from 'react-native';
-import {StackNavigator} from 'react-navigation'
+import {StackNavigator} from 'react-navigation';
+import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
 export default class NotFound extends React.Component {
  constructor(props){
@@ -12,7 +13,7 @@ export default class NotFound extends React.Component {
  static navigationOptions = {
     title: 'Search Result',
     headerStyle: {backgroundColor: '#d69523'},
-    headerTitleStyle: {color:'white'},
+    headerTitleStyle: {color:'white', fontSize:20},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
  }
@@ -21,7 +22,12 @@ export default class NotFound extends React.Component {
  const { params } = this.props.navigation.state;
  return (
  <View style={styles.container}>
-      <Text style={{fontSize:30}}> Invalid Information </Text>
+ <View style={styles.cardContainer}>
+  <Icon size={30} name='find-in-page' type='material-icons' />
+  <Text style={{fontSize:30}}> Not Found </Text>
+   
+  </View>
+      
  </View>
  );
 }
@@ -30,12 +36,17 @@ export default class NotFound extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'transparent',
+    alignItems: 'center'
   },
-  buttonContainer: {
-    margin: 20
+  cardContainer: {
+    flexDirection: 'row',
+    marginTop: 100,
+    height: 100,
+    width: 250,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
 });
