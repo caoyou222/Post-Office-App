@@ -37,23 +37,6 @@ export default class Detail2 extends React.Component {
 
   }
 
-    // componentDidMount(){
-    //   this.setState({refreshing: true});
-    //   return fetch(SERVER_PACKAGES, {method: "GET", body: `trackno=${params.trackno}`})
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     this.setState({
-    //       refreshing:false,
-    //       sourceData: data.packages,
-
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
-    // }
-
   _mark(){
     this._update();
     //console.log(keywords);
