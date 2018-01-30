@@ -59,43 +59,47 @@ _search(){
           tn = [];
           tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
 
-          cr = [];
-          if(this.state.ups === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "UPS";})
-          }else if(this.state.usps === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "USPS";})
-          }else if(this.state.fedex === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "FEDEX";})
-          }else if(this.state.dhl === true){
-            cr = this.state.sourceData.filter(function(pack){return pack.carrier === "DHL";})
-          }
-
           dt = [];
           dayday = this.state.d_day;
           dt = this.state.sourceData.filter(function(pack){return pack.day===dayday;});
-          
-          st = [];
-          if(this.state.sign === true){
-            st = this.state.sourceData.filter(function(pack){return pack.status === "signed";});
-          }else if(this.state.unsign === true){
-            st = this.state.sourceData.filter(function(pack){return pack.status === "unsigned";});
+
+          cr = [];
+          if(this.state.ups === true){
+            cr = dt.filter(function(pack){return pack.carrier === "UPS";})
+          }else if(this.state.usps === true){
+            cr = dt.filter(function(pack){return pack.carrier === "USPS";})
+          }else if(this.state.fedex === true){
+            cr = dt.filter(function(pack){return pack.carrier === "FEDEX";})
+          }else if(this.state.dhl === true){
+            cr = dt.filter(function(pack){return pack.carrier === "DHL";})
           }
 
-          if(tn.length === 0 && cr.length === 0 && dt.length === 0 && st.length === 0){
+          st = [];
+          if(this.state.sign === true){
+            st = cr.filter(function(pack){return pack.status === "signed";});
+          }else if(this.state.unsign === true){
+            st = cr.filter(function(pack){return pack.status === "unsigned";});
+          }else
+
+          if(tn.length === 0 && dt.length === 0 && cr.length === 0 && st.length === 0){
             navigate('NotFound');
           }
-          if(cr.length !== 0){
-            console.log(cr);
-            navigate('search', {key: keywords, pkg: cr});
-          }
+
           if(tn.length !== 0){
             console.log(tn);
             navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
           }
-          if(dt.length !== 0){
-            console.log(dt);
-            navigate('search', {key: keywords, pkg: dt});
-          }
+
+          // if(dt.length !== 0){
+          //   console.log(dt);
+          //   navigate('search', {key: keywords, pkg: dt});
+          // }
+
+          // if(cr.length !== 0){
+          //   console.log(cr);
+          //   navigate('search', {key: keywords, pkg: cr});
+          // }
+         
           if(st.length !== 0){
             console.log(st);
             navigate('search', {key: keywords, pkg: st});
@@ -139,6 +143,9 @@ _search(){
   <View style={styles.container}>
   	<View style={styles.searchbar}>
 	<SearchBar containerStyle={{width: 270, backgroundColor: 'white'}}
+    showLoading
+    platform="ios"
+    cancelButtonTitle="Cancel"
     inputStyle = {{backgroundColor: 'white'}}
     lightTheme
     placeholderTextColor = '#eae0cd'
