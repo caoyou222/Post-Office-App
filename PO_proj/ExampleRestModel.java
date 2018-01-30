@@ -20,31 +20,75 @@ class ExampleRestModel extends RestApiModel {
     st = tmp;
   }
     
-public String verifyUser(HttpParser p) {
-        /* Simulates SQL   SELECT val FROM count;   */
+    public String verifyUser(HttpParser p) {
         int isExist = 0;
-        String isWorker = "0";
+        /* analyze the request */
+        String request = p.getRequestURL();
+        Integer isWorker = 0;
+        int pos = request.indexOf( (int)'@');
+        String email = request.substring(6,pos);
+        String token = request.substring( pos+ 1, request.length() ), oldToken = null;
+        System.out.println("email " + email + " token " + token);
+        Connection con;
+        PreparedStatement ps;
         try{
             /* ask for verification of user */
-            PreparedStatement ps = st.getConnection().prepareStatement("SELECT isWorker FROM userList WHERE email = ?;");
-            System.out.println( "SQL check: " + p.getRequestURL().substring(6,p.getRequestURL().length()) );
-            ps.setString( 1, p.getRequestURL().substring(6,p.getRequestURL().length() ));
+            System.out.println("Start verification in dtb");
+            con = st.getConnection();
+            ps = con.prepareStatement("SELECT id, email, isWorker, token FROM userList WHERE email = ?;");
+            ps.setString( 1, email );
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                System.out.println(rs.getString(1));
-                isWorker = rs.getString(1);
+                isWorker = rs.getInt(3);
+                oldToken = rs.getString(4);
+                System.out.println(isWorker);
                 isExist++;
-                break;
+            }
+            if ( oldToken == null){
+                // add token
+                System.out.println("Start add token");
+                ps = con.prepareStatement("UPDATE userList SET token = ? WHERE email = ?;");
+                ps.setString(1,token);
+                ps.setString(2,email);
+                ps.executeUpdate();
+                System.out.println("Finish update token for user " + email);
+            }else{ // check token
+                if ( !oldToken.equals(token) ){
+                    // ask for overwritten
+                    
+                    
+                }
             }
         }
         catch (SQLException e){
             System.out.println("SQLException caught: " + e.getMessage() );
         }
-        if ( isExist == 0){
-            // add user
-            
+        return p.makeJsonReply(200,isWorker.toString());
+    }
+    
+    public String getToken(HttpParser p) {
+        String request = p.getRequestURL(), token = "";
+        int pos = request.indexOf( (int)'@');
+        String first = request.substring(15, pos);
+        String last = request.substring(pos+1, request.length() );
+        System.out.println("Try to get token from first and last: " + first + " " + last);
+        Connection con;
+        PreparedStatement ps;
+        try{
+            /* ask for token of user */
+            con = st.getConnection();
+            ps = con.prepareStatement("SELECT token FROM userList WHERE first = ? AND last = ?;");
+            ps.setString( 1, first );
+            ps.setString( 2, last );
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                token = rs.getString(1);
+            }
+        } catch (SQLException e){
+            System.out.println("SQLException caught: " + e.getMessage() );
         }
-        return p.makeJsonReply(200,isWorker);
+        System.out.println("Find out token: " +token);
+        return p.makeJsonReply(200,token);
     }
 
 

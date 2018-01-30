@@ -85,17 +85,21 @@ class Worker implements Runnable{
 	  	HttpParser parser = new HttpParser(inBuff, 0, count);  
 	  	int code = parser.parseRequest();
 	  
-	  	String reply;
-	  	if (code != 200){
-	    	reply = parser.makeReply(code);
-	    	System.out.println("pass1");}
-	  	else {
-	    	if (parser.getRequestURL().substring(0,6).equals("/user/") ){
-                reply = model.verifyUser(parser);
+        String reply;
+        String request = parser.getRequestURL();
+        System.out.println(request);
+        if (code != 200)
+            reply = parser.makeReply(code);
+        else {
+            if ( request.length() >= 6 && request.substring(0,6).equals("/user/") ){
+                System.out.println("Ask for: " + request.substring(6,14) );
+                
+                if ( request.length() >= 14 && request.substring(6,14).equals("getToken") )
+                    reply = model.getToken(parser);
+                else reply = model.verifyUser(parser);
             }
             else reply = model.handle(parser);
-            System.out.println("pass2");
-	  	}
+        }
 
 	  	outStream.write(reply.getBytes());
 	  	System.out.println("HTTP reply message sent");
