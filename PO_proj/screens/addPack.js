@@ -102,6 +102,7 @@ export default class addPack extends React.Component {
     }).then((res) => {
       if (res.ok) {
         console.log("it worked!")
+        Alert.alert("Added!");
       }else {
         console.log("nope")
       }
@@ -280,7 +281,9 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-      onPress={this.addPackage.bind(this)}
+      onPress={
+        this.addPackage.bind(this)
+      }
       />
     </View>
     </ScrollView>
