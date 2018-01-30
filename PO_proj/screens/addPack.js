@@ -151,6 +151,7 @@ export default class addPack extends React.Component {
 
   _add(){
     this.notification();
+    console.log("gmc");
     this.addPackage();
   }
 
@@ -326,12 +327,7 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-<<<<<<< HEAD
-
-      onPress={this._submission.bind(this)}
-=======
       onPress={this._add.bind(this)}
->>>>>>> 5818a3c2aec324e8dba3722db884e807068ce892
       />
     </View>
     </ScrollView>

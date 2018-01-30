@@ -5,7 +5,7 @@ import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
-const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
+const SERVER = 'http://rns202-3.cs.stolaf.edu:28434/'
 let keywords = ''
 
 export default class Signature extends Component {

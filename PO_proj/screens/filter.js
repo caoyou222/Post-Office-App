@@ -4,7 +4,7 @@ import {StackNavigator} from 'react-navigation';
 import { SearchBar, CheckBox, Icon } from 'react-native-elements';
 
 let keywords = ''
-const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
+const SERVER = 'http://rns202-3.cs.stolaf.edu:28434/'
 
 export default class filter extends React.Component {
  constructor(props){
@@ -60,6 +60,7 @@ _search(){
           tn = [];
           tn = this.state.sourceData.filter(function(pack){return pack.trackno === keywords;});
 
+          if(tn.length === 0){
           dt = [];
           dayday = this.state.d_day;
           dt = this.state.sourceData.filter(function(pack){return pack.day === dayday;});
@@ -86,20 +87,26 @@ _search(){
             st = cr;
           }
 
-          if(tn.length === 0 && dt.length === 0 && cr.length === 0 && st.length === 0){
+          if(st.length !== 0){
+            console.log(st);
+            navigate('search', {key: keywords, pkg: st});
+          }
+
+          if(st.length === 0){
             navigate('NotFound');
           }
+
+          }
+
+
+          
 
           if(tn.length !== 0){
             console.log(tn);
             navigate('DT', {key: keywords, trackno: tn[0].trackno, carrier: tn[0].carrier, name: tn[0].name, year: tn[0].year, month: tn[0].month, day: tn[0].day, status: tn[0].status});
           }
 
-          if(st.length !== 0){
-            console.log(st);
-            navigate('search', {key: keywords, pkg: st});
-          }
-
+          
         });
       });
 }
