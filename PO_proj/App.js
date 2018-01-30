@@ -17,9 +17,9 @@ import Detail2 from './screens/Detail2';
 // import signCap from './screen/signCap';
 
 const Navi = StackNavigator({ 
+  SG: {screen: Signature},
   SI: {screen: SignIn},
   FT: {screen: filter},
-  SG: {screen: Signature},
   AP: {screen: addPack},
   HM: {screen: home},
   HM2: {screen: home2},

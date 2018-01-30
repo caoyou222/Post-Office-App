@@ -4,7 +4,7 @@ import {StackNavigator} from 'react-navigation'
 import {Card, ListItem, FormInput ,Button} from 'react-native-elements'
 
 const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
-const SERVER_PACKAGES = SERVER + 'sign'
+const SERVER_PACKAGES = SERVER + 'signpack'
 
 export default class Detail2 extends React.Component {
  constructor(props){

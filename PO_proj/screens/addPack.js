@@ -149,6 +149,11 @@ export default class addPack extends React.Component {
 
   }
 
+  _submission(){
+    this.notification();
+    this.addPackage();
+  }
+
  render(){
  const { navigate } = this.props.navigation;
  const {monthValid,
@@ -322,11 +327,7 @@ export default class addPack extends React.Component {
       color = 'white'
       backgroundColor = '#f2b243'
 
-      onPress={ () => {
-        console.log('Finish adding to dtb and start to notify');
-        this.notification();
-        this.addPackage.bind(this);
-      }}
+      onPress={this._submission.bind(this)}
       />
     </View>
     </ScrollView>
