@@ -11,16 +11,16 @@ You need to setup by installing postgresql first,
 After that: To add database: psql -U <username> <databasename> > po.psql
 
 ## Setting Up
-For developers, please do following commands:
-npm install react-native-elements --save
-npm install react-native-navigation --save
-npm install expo --save
-npm install react-native-router-flux --save
-npm install react-native-slide-view --save
+For developers, please do following commands: <br />
+npm install react-native-elements --save <br />
+npm install react-native-navigation --save <br />
+npm install expo --save <br />
+npm install react-native-router-flux --save <br />
+npm install react-native-slide-view --save <br />
 
-For back-end developers:
-Compile and running Backend.java along with the ExampleRestApiModel.java
-Change the server address to where you run the server. In our case, the address is http://rns202-5.cs.stolaf.edu/28425/
+For back-end developers: <br />
+Compile and running Backend.java along with the ExampleRestApiModel.java <br />
+Change the server address to where you run the server. In our case, the address is http://rns202-5.cs.stolaf.edu/28425/ <br />
 
 ## Structure and functions
 ### Home and Home2 page
