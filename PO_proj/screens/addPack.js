@@ -151,6 +151,7 @@ export default class addPack extends React.Component {
 
   _add(){
     this.notification();
+    console.log("gmc");
     this.addPackage();
   }
 

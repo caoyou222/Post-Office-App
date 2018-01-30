@@ -49,15 +49,6 @@ export default class Tracking extends React.Component {
                 onPress={() => {this._tracking()}}
                 />
                 </View>
-
-                <View style={styles.buttonContainer}>
-                <Button
-                title="Add to Notification"
-                textStyle ={{fontWeight: '500', color: 'grey'}}
-                buttonStyle={{backgroundColor: '#eae0cd', width: 200, height: 45, borderRadius: 30}}
-                onPress={() => {this._stopSound()}}
-                />
-                </View>
                 
                 </View>
                 );
