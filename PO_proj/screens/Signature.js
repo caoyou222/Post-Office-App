@@ -108,7 +108,9 @@ export default class Signature extends Component {
         }, function() {
           list = [];
           if(keywords === '') list = this.state.sourceData;
-          else list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
+          else {
+            list = this.state.sourceData.filter(function(sd){return sd.name === keywords;});
+            if(list.length == 0){list = this.state.sourceData.filter(function(sd){return sd.last === keywords;});}}
           console.log(list);
           list.sort(function(a,b){return parseInt(b.year.concat(b.month, b.day)) - parseInt(a.year.concat(a.month, a.day));});
           this.setState({sourceData: list});
@@ -133,6 +135,11 @@ export default class Signature extends Component {
       }
     })
 
+  }
+
+  _slide = (str) => {
+    this._sign(str);
+    this._onRefresh();
   }
 
   _update(){
@@ -209,7 +216,7 @@ return (
     }
      renderHiddenRow={ rowData => (
         <View style={styles.rowBack}>
-            <TouchableOpacity onPress={() => this._sign(rowData.trackno)}>
+            <TouchableOpacity onPress={() => this._slide(rowData.trackno)}>
               <View style={styles.leftView}>
                 <Text style={{color: 'grey'}}>Sign</Text></View>
                   </TouchableOpacity>
