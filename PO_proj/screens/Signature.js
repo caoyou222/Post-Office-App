@@ -4,7 +4,7 @@ import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image,
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
-const SERVER_PACKAGES = 'http://rns202-3.cs.stolaf.edu:28434/signature'
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
 let keywords = ''
 
 export default class Signature extends Component {
@@ -35,7 +35,7 @@ export default class Signature extends Component {
     }
 
   componentDidMount=()=> {
-    return fetch(SERVER_PACKAGES)
+    return fetch(SERVER + 'signature')
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -60,8 +60,7 @@ export default class Signature extends Component {
     }
 
     _search(){
-      const { navigate } = this.props.navigation;
-      return fetch(SERVER_PACKAGES)
+      return fetch(SERVER + 'signature')
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -97,7 +96,7 @@ export default class Signature extends Component {
 
     _onRefresh(){
       this.setState({refreshing: true});
-      return fetch(SERVER_PACKAGES)
+      return fetch(SERVER + 'signature')
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -120,7 +119,7 @@ export default class Signature extends Component {
     }
 
   _update(){
-    return fetch(SERVER_PACKAGES, {
+    return fetch(SERVER + 'signature', {
     method: "PATCH", body:`name=${keywords}` ,
     headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
     .then((res) => {

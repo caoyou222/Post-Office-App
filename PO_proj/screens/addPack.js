@@ -3,6 +3,8 @@ import {KeyboardAvoidingView, LayoutAnimation,TextInput, Image, Text, StyleSheet
 import {StackNavigator} from 'react-navigation';
 import { Icon, Button, Divider, FormLabel, FormInput, Form, FormValidationMessage, Input } from 'react-native-elements'
 
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
+
 export default class addPack extends React.Component {
  constructor(props){
  super(props);
@@ -92,10 +94,47 @@ export default class addPack extends React.Component {
     return fnameValid
   }
 
-
+  notification = async() =>{
+    console.log("Start");
+    let notifyExpo = (token) =>{
+      console.log('start notifying token: ' + token);
+      var data = {to: token.slice(1,token.length -1), title: 'PO St. Olaf', body: 'Your package arrived'};
+      console.log (JSON.stringify(data) );
+      fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: new Headers({
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'accept-encoding':'gzip, deflate'
+        })
+      }).then((res) => {
+                  if (res.ok) {
+                    console.log("it worked!")
+                  } else {
+                    console.log("nope")
+                  }
+              })
+    }
+    let getToken = () => {
+            fetch(SERVER + 'user/getToken/' + this.state.fnameText + '@' + this.state.lnameText, {
+                  method: "GET"
+                  })
+            .then((res) => {
+                  if (res.ok) {
+                    console.log("The token is: " + JSON.stringify(res._bodyText));
+                    notifyExpo(JSON.stringify(res._bodyText));
+                  } else {
+                  console.log("nope")
+                  }
+              })
+        }
+    getToken();
+  }
 
    addPackage() {
-    fetch('http://rns202-3.cs.stolaf.edu:28434/addpackages', {
+    
+    fetch(SERVER + 'addpackages', {
       method: 'POST',
       headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
       body: `packinfo=${this.state.monthText},${this.state.dayText},${this.state.yearText},${this.state.trackText},${this.state.carrierText},${this.state.lnameText},${this.state.fnameText},`,
@@ -107,6 +146,7 @@ export default class addPack extends React.Component {
         console.log("nope")
       }
     })
+
   }
 
  render(){
@@ -281,9 +321,12 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-      onPress={
-        this.addPackage.bind(this)
-      }
+
+      onPress={ () => {
+        console.log('Finish adding to dtb and start to notify');
+        this.notification();
+        this.addPackage.bind(this);
+      }}
       />
     </View>
     </ScrollView>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Header, Image, Text, StyleSheet, View, Dimensions, Vibration} from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator, TabNavigator} from 'react-navigation';
 import { SearchBar, CheckBox, List, ListItem, Icon, Button } from 'react-native-elements';
 
 export default class worker extends React.Component {
@@ -17,6 +17,7 @@ export default class worker extends React.Component {
   headerTitleStyle: {color:'white', fontSize:20},
   headerBackTitleStyle: {color:'white'},
   headerTintColor: 'white'
+
  }
 
 
