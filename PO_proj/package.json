@@ -30,7 +30,10 @@
     "react-native-signature-capture": "^0.4.9",
     "react-native-signature-view": "^0.3.6",
     "react-native-swipe-list-view": "^1.0.5",
+<<<<<<< HEAD
     "react-native-tab-navigator": "^0.3.4",
+=======
+>>>>>>> 86d025174a99da181c27c1e066d0b0a606393b4b
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27"
   }

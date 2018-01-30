@@ -17,10 +17,10 @@ import Detail2 from './screens/Detail2';
 // import signCap from './screen/signCap';
 
 const Navi = StackNavigator({ 
-  
-  SI: {screen: SignIn},
-  FT: {screen: filter},
+
+  gitSI: {screen: SignIn},
   SG: {screen: Signature},
+  FT: {screen: filter},
   AP: {screen: addPack},
   HM: {screen: home},
   HM2: {screen: home2},

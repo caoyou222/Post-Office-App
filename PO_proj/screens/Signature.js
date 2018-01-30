@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image, ListView, SectionList, Text, StyleSheet, View, Dimensions, ActivityIndicator} from 'react-native';
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
+import {SwipeListView} from 'react-native-swipe-list-view';
 
 const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
 let keywords = ''
@@ -60,6 +61,7 @@ export default class Signature extends Component {
     }
 
     _search(){
+      const { navigate } = this.props.navigation;
       return fetch(SERVER + 'signature')
       .then((res) => res.json())
       .then((data) => {
@@ -118,6 +120,21 @@ export default class Signature extends Component {
 
     }
 
+  _sign = (str) => {
+    const { params } = this.props.navigation.state;
+    return fetch(SERVER + 'signpack', {
+    method: "PATCH", body:`trackno=${str}` ,
+    headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"} })
+    .then((res) => {
+      if (res.ok) {
+        console.log("it worked!");
+      } else {
+        console.log("nope")
+      }
+    })
+
+  }
+
   _update(){
     return fetch(SERVER + 'signature', {
     method: "PATCH", body:`name=${keywords}` ,
@@ -149,7 +166,7 @@ if (this.state.isLoading) {
         </View>
       );
 }
-
+//
 console.log(this.state.sourceData);
 return (
  <View style={styles.container}>
@@ -171,7 +188,7 @@ return (
    </TouchableOpacity>
       </View>
 
-   <ListView 
+   <SwipeListView 
     refreshControl={
       <RefreshControl
         refreshing = {this.state.refreshing}
@@ -190,6 +207,15 @@ return (
             </TouchableOpacity>
         );}
     }
+     renderHiddenRow={ rowData => (
+        <View style={styles.rowBack}>
+            <TouchableOpacity onPress={() => this._sign(rowData.trackno)}>
+              <View style={styles.leftView}>
+                <Text style={{color: 'grey'}}>Sign</Text></View>
+                  </TouchableOpacity>
+                </View>
+        )}
+        leftOpenValue={75}
     />
 
     <View style={styles.bottom}>
@@ -234,8 +260,16 @@ const styles = StyleSheet.create({
     flexDirection:'row'
   },
 
+  rowBack: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1
+    },
+
   sectionHeader: {
     height: 44,
+    backgroundColor: 'white',
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
@@ -243,5 +277,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: '#d9d9d9'
   },
+
+  leftView: {
+        width: 75,
+        alignItems: 'center',
+        backgroundColor: '#eae0cd',
+        height: 50,
+        justifyContent: 'center'
+    }
 
 });

@@ -4,7 +4,7 @@ import {StackNavigator} from 'react-navigation'
 import {Card, ListItem, FormInput ,Button} from 'react-native-elements'
 
 const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
-const SERVER_PACKAGES = SERVER + 'sign'
+const SERVER_PACKAGES = SERVER + 'signpack'
 
 export default class Detail2 extends React.Component {
  constructor(props){
@@ -36,23 +36,6 @@ export default class Detail2 extends React.Component {
     })
 
   }
-
-    // componentDidMount(){
-    //   this.setState({refreshing: true});
-    //   return fetch(SERVER_PACKAGES, {method: "GET", body: `trackno=${params.trackno}`})
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     this.setState({
-    //       refreshing:false,
-    //       sourceData: data.packages,
-
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
-    // }
 
   _mark(){
     this._update();
