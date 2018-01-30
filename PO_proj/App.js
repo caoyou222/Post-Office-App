@@ -17,7 +17,7 @@ import Detail2 from './screens/Detail2';
 // import signCap from './screen/signCap';
 
 const Navi = StackNavigator({ 
-   NotFound: {screen: NotFound},
+
   SI: {screen: SignIn},
   FT: {screen: filter},
   SG: {screen: Signature},
@@ -31,7 +31,7 @@ const Navi = StackNavigator({
   search: {screen: search}, 
   DT: {screen: Detail},
   DT2: {screen: Detail2},
- 
+  NotFound: {screen: NotFound},
   TK: {screen: Tracking}
 })
 

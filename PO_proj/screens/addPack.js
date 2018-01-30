@@ -3,7 +3,7 @@ import {KeyboardAvoidingView, LayoutAnimation,TextInput, Image, Text, StyleSheet
 import {StackNavigator} from 'react-navigation';
 import { Icon, Button, Divider, FormLabel, FormInput, Form, FormValidationMessage, Input } from 'react-native-elements'
 
-const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/'
+const SERVER = 'http://rns202-3.cs.stolaf.edu:28434/'
 
 export default class addPack extends React.Component {
  constructor(props){
@@ -147,6 +147,12 @@ export default class addPack extends React.Component {
       }
     })
 
+  }
+
+  _add(){
+    
+    this.notification();
+    this.addPackage();
   }
 
  render(){
@@ -321,12 +327,7 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
-
-      onPress={ () => {
-        console.log('Finish adding to dtb and start to notify');
-        this.notification();
-        this.addPackage.bind(this);
-      }}
+      onPress={this._add.bind(this)}
       />
     </View>
     </ScrollView>
