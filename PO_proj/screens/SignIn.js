@@ -5,7 +5,7 @@ import Expo, { Permissions, Notifications } from 'expo';
 import { Component } from 'react';
 import { Button } from 'react-native-elements';
 
-const SERVER = 'http://rns202-3.cs.stolaf.edu:28434/user/'
+const SERVER = 'http://rns202-5.cs.stolaf.edu:28425/user/'
 const PUSH_ENDPOINT = SERVER + 'push-token';
 
 var user_name = '';

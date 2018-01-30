@@ -4,7 +4,7 @@ import {Keyboard, TouchableOpacity, Platform, RefreshControl,AppRegistry, Image,
 import {StackNavigator} from 'react-navigation'
 import { SearchBar, Button, Icon} from 'react-native-elements';
 
-const SERVER_PACKAGES = 'http://rns202-3.cs.stolaf.edu:28434/signature'
+const SERVER_PACKAGES = 'http://rns202-5.cs.stolaf.edu:28425/signature'
 let keywords = ''
 
 export default class Signature extends Component {

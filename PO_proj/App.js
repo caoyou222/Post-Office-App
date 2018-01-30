@@ -11,16 +11,15 @@ import SignIn from './screens/SignIn';
 import search from './screens/search';
 import NotFound from './screens/NotFound';
 import Tracking from './screens/Tracking';
-import toSign from './screens/toSign';
 import home2 from './screens/home2';
 import Signature from './screens/Signature';
 import Detail2 from './screens/Detail2';
 // import signCap from './screen/signCap';
 
 const Navi = StackNavigator({ 
+
   FT: {screen: filter},
   SI: {screen: SignIn},
-  
   SG: {screen: Signature},
   HM: {screen: home},
   HM2: {screen: home2},
@@ -30,7 +29,6 @@ const Navi = StackNavigator({
   WK: {screen: worker},
   ST: {screen: student},
   search: {screen: search}, 
-  TS: {screen:toSign}, 
   DT: {screen: Detail},
   DT2: {screen: Detail2},
   NotFound: {screen: NotFound},
