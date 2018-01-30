@@ -180,7 +180,7 @@ return (
     onSubmitEditing={this._search.bind(this)}
     icon={{ type: 'font-awesome', name: 'search' , color: '#d69523'}}
 
-    placeholder='Enter tracking number or status to search' />
+    placeholder='Enter Full Name' />
 
     <TouchableOpacity style={styles.buttonContainer} onPress = {this._mark.bind(this)}>
         <Icon name="check-all" type="material-community" color='grey' size={20} />
