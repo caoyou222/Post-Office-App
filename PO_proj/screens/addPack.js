@@ -141,6 +141,7 @@ export default class addPack extends React.Component {
     }).then((res) => {
       if (res.ok) {
         console.log("it worked!")
+        Alert.alert("Added!");
       }else {
         console.log("nope")
       }
@@ -320,6 +321,7 @@ export default class addPack extends React.Component {
       title = "Submit"
       color = 'white'
       backgroundColor = '#f2b243'
+
       onPress={ () => {
         console.log('Finish adding to dtb and start to notify');
         this.notification();
