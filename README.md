@@ -17,20 +17,45 @@ npm install react-native-navigation --save <br />
 npm install expo --save <br />
 npm install react-native-router-flux --save <br />
 npm install react-native-slide-view --save <br />
+Or just simply: <br />
+npm install <br />
 
 For back-end developers: <br />
-Compile and running Backend.java along with the ExampleRestApiModel.java <br />
-Change the server address to where you run the server. In our case, the address is http://rns202-5.cs.stolaf.edu/28425/ <br />
+Compile and running Backend.java along with the ExampleRestApiModel.java: <br />
+javac Backend.java <br />
+java Backend <portnumber> <br /> 
+Change the server address (of every file .js) to where you run the server: http://<server>/<portnumber>/ <br />
+In our case, the address is http://rns202-5.cs.stolaf.edu/28425/ <br />
 
 ## Technologies
-We use react-native and expo for the app development and use Rest Api to do the backend server. Postgresql as database
+We use react-native and expo for the app development and use Rest Api to do the backend server.
+Postgresql as database. We also use Postman for testing notification
 
 ## Structure and functions
+### SignIn page
+    Views: Has one button 'Sign in'
+    Purposes:
+        Lead to google account. Verify through Google/OAuth authentication
+        Only allow St.Olaf account
+        Connect to the database to verify student/worker in order to open corresponding page (Home2/Home)
+        Check the database to insert the token of the device if necessary
+    Function:
+        _singInWithGoogleAsync: Sign in with google
+        _check: check if it is St.Olaf account
+        _isWorker: send email and token to database to verify account/add token
+        
+    Corresponding backend models:
+        ExampleRestModel: verifyUser
+            retrieve the role of the user
+            check token of that user to the database
+            add token if necessary
+        
 ### Home and Home2 page
     Home: for worker use, has both student page and worker page
     Home2: for student user, only has the student page
     Functionality:   
     Both pages get user information from sign in page, to show Welcome, {user_name}. Also has the sign out feature to go back.
+    
 ### student page and Detail page, NotFound page
     Views: Has a searching bar and hit search on keyboard to search
     Functions:
@@ -75,12 +100,25 @@ We use react-native and expo for the app development and use Rest Api to do the 
     Functionality:
     Showing all results search by a keyword, sended from the student page, signature page and filter page.
     
-## SignIn page
+
 
 ## Tracking page
-
+    Views: Has one box for filling the id tracking and one button 'Track'
+    Purpose: Open google page with that tracking id
+    Functions:
+        _tracking: Open google page with that tracking id
+        
 ## AddPack page
-
+    Views: Has many boxes to fill the information of that packages(day,month,year,name,etc) and one button 'Submit'
+    Purpose: Add information of the packages to database and notify the student
+    Functions:
+        Each validate function for each box in order to check whether the information there is valid
+        notification:
+            notifyExpo: send the token( retrieved from getToken ) to Expo with the message in order to notify the user 
+            getToken: get the token of the student from database 
+        addPackage: add package to the database
+        _add: call function addPackage and notification
+    
 ## worker page
 
 ## filter page
