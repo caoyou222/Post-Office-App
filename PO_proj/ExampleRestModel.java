@@ -20,6 +20,7 @@ class ExampleRestModel extends RestApiModel {
     st = tmp;
   }
     
+    /** verify the user (worker/student) and check/add token of that user to the database */
     public String verifyUser(HttpParser p) {
         int isExist = 0;
         /* analyze the request */
@@ -55,8 +56,6 @@ class ExampleRestModel extends RestApiModel {
             }else{ // check token
                 if ( !oldToken.equals(token) ){
                     // ask for overwritten
-                    
-                    
                 }
             }
         }
@@ -66,6 +65,7 @@ class ExampleRestModel extends RestApiModel {
         return p.makeJsonReply(200,isWorker.toString());
     }
     
+    /** get token of the user from the database */
     public String getToken(HttpParser p) {
         String request = p.getRequestURL(), token = "";
         int pos = request.indexOf( (int)'@');
@@ -93,6 +93,7 @@ class ExampleRestModel extends RestApiModel {
 
 
   class PackagesHandler extends RestApiHandler{
+      /** get packages from the database */
     public String doGet(HttpParser p){
       String jsonStr = new String("{ \"packages\": [\n");
       try{
@@ -132,7 +133,7 @@ class ExampleRestModel extends RestApiModel {
    
 
 }
-
+    /** add package to the database */
     class AddPackagesHandler extends RestApiHandler{
       public String doPost(HttpParser p){
         try{
@@ -192,7 +193,8 @@ class ExampleRestModel extends RestApiModel {
     }
 
 }
-    
+
+/** dealing with signature */
 class SignatureHandler extends RestApiHandler{
     public String doGet(HttpParser p){
       String jsonStr = new String("{ \"packages\": [\n");
