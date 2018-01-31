@@ -143,6 +143,7 @@ Repository: git@stogit.cs.stolaf.edu:mca-i18/po.git
     
      Corresponding backend models:
         AddPackagesHandler: doPost to insert packages to database.
+        ExampleRestModel: getToken to get token of the student in order to notify them.
 
 ### Filter page
     Views: ScrollView with a search bar on the top and three main components(Filter by date, carrier and package status).
