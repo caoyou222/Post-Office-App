@@ -20,6 +20,7 @@ https://docs.google.com/document/d/1x4ajkkesxAFCFDFlh2HI7EPHaFgmnq2lYTTIvUUreI4/
 https://docs.google.com/document/d/1QqsOCVStnS97WUplR70KoeFJw1YMeVP9zVZbXYLcNNI/edit?usp=sharing
 
 ## ER Diagram
+https://docs.google.com/document/d/1B8MmJepryUJjrpg3yOF1nNSKmGUZQy7T1E7RQAn2BYg/edit?usp=sharing
 
 ## Presentation slides
 https://docs.google.com/presentation/d/1wP13iPEVHYkRnpK6GhXjS6K-sKgXOWZ7HRJLGG3msZI/edit?usp=sharing
@@ -120,27 +121,41 @@ Repository: git@stogit.cs.stolaf.edu:mca-i18/po.git
     SignHandler: doPatch to change status with a specific tracking number.
     
 ### Search page
-    Views: ListView with click to jump corresponding detail page
+    Views: ListView with click to jump corresponding detail page.
     Functionality:
     Showing all results search by a keyword, sended from the student page, signature page and filter page.
     
 ### Worker page
+    Views: Has three buttons for adding, searching and signing packages.
+    Fuctionality:
+    When user presses the button, navigate to the corresponding page.
 
 ### AddPack page
-    Views: Has many boxes to fill the information of that packages(day,month,year,name,etc) and one button 'Submit'
-    Purpose: Add information of the packages to database and notify the student
+    Views: ScrollView with a form for the workers to enter the package info and one button 'Submit'.
+    Functionality: Add information of the packages to database and notify the student
     Functions:
         Each validate function for each box in order to check whether the information there is valid
         notification:
             notifyExpo: send the token( retrieved from getToken ) to Expo with the message in order to notify the user 
             getToken: get the token of the student from database 
-        addPackage: add package to the database
-        _add: call function addPackage and notification
+        addPackage: get values from the formInput and use the 'POST' method to send these values to server
+        _add: call functions addPackage and notification
+    
+     Corresponding backend models:
+        AddPackagesHandler: doPost to insert packages to database.
 
 ### Filter page
+    Views: ScrollView with a search bar on the top and three main components(Filter by date, carrier and package status).
+           Has a DatePick for filtering by data and checkboxes for filtering by carrier and status.
+    Functions:
+        _search:  Filtering the already fetched data by tracking number, date, carrier or status. Can be filtered by multiple values. 
+                  Send the list to search page. Filtering by date, carrier and status returns a list view. Searching tracking number 
+                  returns a detail view for the specifc package. Navigate to the Not Found page if entering invalid info.
+    setDate: Get the date object(month,day,year) from the DatePick part.
+    _changeText: Get value from the search bar.
 
 ### Tracking page
-    Views: Has one box for filling the id tracking and one button 'Track'
+    Views: Has one text input box for filling the tracking number and one button 'Track'
     Purpose: Open google page with that tracking id
     Functions:
         _tracking: Open google page with that tracking id
