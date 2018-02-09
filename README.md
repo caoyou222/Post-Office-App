@@ -31,16 +31,6 @@ In our case, the address is http://rns202-5.cs.stolaf.edu/28425/ <br />
 We use react-native and expo for the app development and use Rest Api to do the backend server.
 Postgresql as database. We also use Postman for testing notification
 
-## Branch information
-Repository: git@stogit.cs.stolaf.edu:mca-i18/po.git
-    Branch master: main repository for the project which contains the correct and final version
-        vo1-5: repositories for testing and adding function:
-        vo4: add tracking feature
-        vo1: add verification feature
-        vo2: one version of the app
-        vo3: add notification and insert token, modify database, add communication between Server and front end
-        vo5: debug and test the final version
-
 ## Structure and functions
 ### SignIn page
     Views: Has one button 'Sign in'
