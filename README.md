@@ -1,6 +1,6 @@
 # Team POST OFFICE APP
 ### You Cao, Muchen Ge, Thong Vo
-
+https://img.shields.io/badge/npm-4.6.1-green.svg
 ## Overview
 Our project is developed for the Post Office in St. Olaf. Now, the Post Office write all the package informations manually. Each carrier has a notebook,
 Student needs to sign each row for packages. Our app is aimed to create a management system for both PO workers and students.
